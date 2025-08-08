@@ -1,32 +1,85 @@
 .container {
-  background: #f5f7fa;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf0 100%);
   min-height: 100vh;
-  padding-bottom: 40px;
 }
 
-.content-wrapper {
+.searchArea {
+  position: relative;
+  width: 100%;
+  // background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf0 100%);
+}
+
+.resultsContainer {
   max-width: 1400px;
-  margin: 40px auto 0;
+  margin: 0 auto;
   padding: 0 24px;
+  margin-top: -80px;
+  position: relative;
+  z-index: 10;
+  padding-bottom: 40px;
+  background: transparent;
+}
+
+.quickFilterCard {
+  margin-bottom: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e8ef;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.quickFilterContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.resultSummary {
+  color: #86909c;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.searchKeywordDisplay {
+  margin-top: 16px;
+  padding: 12px;
+  background: linear-gradient(90deg, #f0f8ff 0%, #e6f3ff 100%);
+  border-radius: 8px;
+  border: 1px solid #b3d8ff;
+}
+
+.resultsContent {
+  background: transparent;
 }
 
 // 响应式设计
-@media (max-width: 1440px) {
-  .content-wrapper {
-    max-width: 1200px;
-  }
-}
-
 @media (max-width: 768px) {
-  .content-wrapper {
+  .resultsContainer {
     padding: 0 20px;
-    margin-top: 20px;
+    margin-top: -40px;
     max-width: 100%;
+    padding-bottom: 30px;
+  }
+
+  .quickFilterContent {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .resultSummary {
+    align-self: center;
   }
 }
 
 @media (max-width: 480px) {
-  .content-wrapper {
+  .resultsContainer {
     padding: 0 16px;
+    margin-top: -30px;
+    padding-bottom: 20px;
   }
 }

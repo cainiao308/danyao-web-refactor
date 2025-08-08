@@ -1,9 +1,3 @@
-import React from 'react';
-import { Space, Tag, Typography } from '@arco-design/web-react';
-import { SearchColumn } from '@/components/UniversalSearch';
-
-const { Text } = Typography;
-
 // 国家数据
 export const countryData = [
   {
@@ -69,55 +63,6 @@ export const countryData = [
     region: '亚洲',
     products: ['K9雷鸣自行榴弹炮', 'K2黑豹坦克', '玄武导弹'],
     manufacturers: ['韩华系统', '现代重工'],
-  },
-];
-
-// 国家检索列配置
-export const countryColumns: SearchColumn[] = [
-  {
-    title: '国家',
-    dataIndex: 'name',
-    width: 120,
-    render: (value, record) => (
-      <Space>
-        <Text strong>{value}</Text>
-        <Text type="secondary">({record.nameEn})</Text>
-      </Space>
-    ),
-  },
-  {
-    title: '地区',
-    dataIndex: 'region',
-    width: 100,
-    render: value => <Tag color="orange">{value}</Tag>,
-  },
-  {
-    title: '主要产品',
-    dataIndex: 'products',
-    render: products => (
-      <Space wrap>
-        {products.slice(0, 3).map((product, index) => (
-          <Tag key={index} color="blue" size="small">
-            {product}
-          </Tag>
-        ))}
-        {products.length > 3 && <Text type="secondary">+{products.length - 3}个</Text>}
-      </Space>
-    ),
-  },
-  {
-    title: '主要厂商',
-    dataIndex: 'manufacturers',
-    render: manufacturers => (
-      <Space direction="vertical" size="mini">
-        {manufacturers.slice(0, 2).map((manufacturer, index) => (
-          <Text key={index} type="secondary" style={{ fontSize: '12px' }}>
-            {manufacturer}
-          </Text>
-        ))}
-        {manufacturers.length > 2 && <Text type="secondary">+{manufacturers.length - 2}个</Text>}
-      </Space>
-    ),
   },
 ];
 

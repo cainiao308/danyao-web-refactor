@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Input, Button, Space, Typography, Card, Divider, Tag } from '@arco-design/web-react';
-import { IconSearch, IconClose, IconHistory, IconFire } from '@arco-design/web-react/icon';
-import { getSearchHistory, getHotKeywords } from '@/api/search';
+import { getSearchHistory } from '@/api/search';
+import { Card, Divider, Input, Tag, Typography } from '@arco-design/web-react';
+import { IconClose, IconHistory, IconSearch } from '@arco-design/web-react/icon';
+import React, { useEffect, useState } from 'react';
 import styles from './style/index.module.less';
 
 const { Title, Text } = Typography;
@@ -26,15 +26,13 @@ function SearchBox({
   const [searchValue, setSearchValue] = useState(initialValue);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
-  const [hotKeywords, setHotKeywords] = useState<string[]>([]);
 
   // 加载搜索历史和热门关键词
   useEffect(() => {
     const loadData = async () => {
       try {
-        const [history, hot] = await Promise.all([getSearchHistory(), getHotKeywords()]);
+        const [history] = await Promise.all([getSearchHistory()]);
         setSearchHistory(history);
-        setHotKeywords(hot);
       } catch (error) {
         console.error('加载搜索数据失败:', error);
       }
@@ -87,92 +85,65 @@ function SearchBox({
           {title}
         </Title>
 
-        <div className={styles.searchContainer}>
-          <div className={styles.searchBox}>
-            <Input
-              value={searchValue}
-              onChange={setSearchValue}
-              onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
-              onKeyPress={handleKeyPress}
-              placeholder={placeholder}
-              className={styles.searchInput}
-              prefix={<IconSearch className={styles.searchIcon} />}
-              suffix={
-                searchValue && <IconClose className={styles.clearIcon} onClick={clearInput} />
-              }
-            />
+        <div style={{ position: 'relative' }}>
+          <Input
+            value={searchValue}
+            onChange={setSearchValue}
+            onFocus={handleInputFocus}
+            onBlur={handleInputBlur}
+            onKeyPress={handleKeyPress}
+            placeholder={placeholder}
+            className={styles.searchInput}
+            prefix={<IconSearch className={styles.searchIcon} />}
+            suffix={searchValue && <IconClose className={styles.clearIcon} onClick={clearInput} />}
+          />
 
-            <Button className={styles.searchButton} onClick={handleSearch}>
-              搜索
-            </Button>
+          {/* <Button className={styles.searchButton} onClick={handleSearch}>
+            搜索
+          </Button>
 
-            <Button className={styles.clearButton} onClick={clearInput}>
-              清除
-            </Button>
+          <Button className={styles.clearButton} onClick={clearInput}>
+            清除
+          </Button> */}
 
-            {true && (
-              <Card className={styles.suggestions}>
-                {/* 搜索建议 */}
-                {suggestions.length > 0 && (
-                  <>
-                    <div className={styles.suggestionSection}>
-                      <Text className={styles.sectionTitle}>
-                        <IconSearch className={styles.sectionIcon} />
-                        搜索建议
-                      </Text>
-                      {suggestions.map((suggestion, index) => (
-                        <div
-                          key={`suggestion-${index}`}
-                          className={styles.suggestionItem}
-                          onClick={() => handleSuggestionClick(suggestion)}
-                        >
-                          <IconSearch className={styles.suggestionIcon} />
-                          {suggestion}
-                        </div>
-                      ))}
-                    </div>
-                    <Divider style={{ margin: '8px 0' }} />
-                  </>
-                )}
-
-                {/* 搜索历史 */}
-                {searchHistory.length > 0 && (
-                  <>
-                    <div className={styles.suggestionSection}>
-                      <Text className={styles.sectionTitle}>
-                        <IconHistory className={styles.sectionIcon} />
-                        搜索历史
-                      </Text>
-                      <div className={styles.tagContainer}>
-                        {searchHistory.slice(0, 5).map((item, index) => (
-                          <Tag
-                            key={`history-${index}`}
-                            className={styles.historyTag}
-                            onClick={() => handleSuggestionClick(item)}
-                          >
-                            {item}
-                          </Tag>
-                        ))}
-                      </div>
-                    </div>
-                    <Divider style={{ margin: '8px 0' }} />
-                  </>
-                )}
-
-                {/* 热门搜索 */}
-                {hotKeywords.length > 0 && (
+          {showSuggestions && (
+            <Card className={styles.suggestions}>
+              {/* 搜索建议 */}
+              {suggestions.length > 0 && (
+                <>
                   <div className={styles.suggestionSection}>
                     <Text className={styles.sectionTitle}>
-                      <IconFire className={styles.sectionIcon} />
-                      热门搜索
+                      <IconSearch className={styles.sectionIcon} />
+                      搜索建议
+                    </Text>
+                    {suggestions.map((suggestion, index) => (
+                      <div
+                        key={`suggestion-${index}`}
+                        className={styles.suggestionItem}
+                        onClick={() => handleSuggestionClick(suggestion)}
+                      >
+                        <IconSearch className={styles.suggestionIcon} />
+                        {suggestion}
+                      </div>
+                    ))}
+                  </div>
+                  <Divider style={{ margin: '8px 0' }} />
+                </>
+              )}
+
+              {/* 搜索历史 */}
+              {searchHistory.length > 0 && (
+                <>
+                  <div className={styles.suggestionSection}>
+                    <Text className={styles.sectionTitle}>
+                      <IconHistory className={styles.sectionIcon} />
+                      搜索历史
                     </Text>
                     <div className={styles.tagContainer}>
-                      {hotKeywords.slice(0, 8).map((item, index) => (
+                      {searchHistory.slice(0, 5).map((item, index) => (
                         <Tag
-                          key={`hot-${index}`}
-                          color="red"
-                          className={styles.hotTag}
+                          key={`history-${index}`}
+                          className={styles.historyTag}
                           onClick={() => handleSuggestionClick(item)}
                         >
                           {item}
@@ -180,10 +151,11 @@ function SearchBox({
                       ))}
                     </div>
                   </div>
-                )}
-              </Card>
-            )}
-          </div>
+                  <Divider style={{ margin: '8px 0' }} />
+                </>
+              )}
+            </Card>
+          )}
         </div>
       </div>
     </div>

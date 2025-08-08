@@ -1,31 +1,24 @@
 import React from 'react';
-import { Card, Typography, Table, Space, Tag, Input, Button, Spin } from '@arco-design/web-react';
-import { IconSearch, IconFilter } from '@arco-design/web-react/icon';
-import { countryColumns } from '@/config/searchConfigs/countryConfig';
+import { Button, Card, Grid, Space, Spin, Typography } from '@arco-design/web-react';
 
 const { Title, Text } = Typography;
+const { Row, Col } = Grid;
 
 interface CountryResultsProps {
-  searchValue: string;
   searchResults: Record<string, unknown>[];
   loading: boolean;
   error: string | null;
   total: number;
   hasSearched: boolean;
-  onSearchChange: (value: string) => void;
-  onClear: () => void;
   onRetry: () => void;
 }
 
 function CountryResults({
-  searchValue,
   searchResults,
   loading,
   error,
   total,
   hasSearched,
-  onSearchChange,
-  onClear,
   onRetry,
 }: CountryResultsProps) {
   return (
@@ -51,52 +44,7 @@ function CountryResults({
           <Title heading={5} style={{ margin: 0, color: '#1d2129' }}>
             🌍 搜索结果 ({hasSearched ? searchResults.length : 0}个国家)
           </Title>
-
-          <Space wrap>
-            <Input
-              value={searchValue}
-              onChange={onSearchChange}
-              onPressEnter={() => onSearchChange(searchValue)}
-              placeholder="快速筛选..."
-              prefix={<IconSearch />}
-              style={{ width: 240, borderRadius: '8px' }}
-              allowClear
-              onClear={onClear}
-            />
-            <Button
-              type="primary"
-              icon={<IconFilter />}
-              onClick={() => onSearchChange(searchValue)}
-              style={{ borderRadius: '8px' }}
-            >
-              筛选
-            </Button>
-            {searchValue && (
-              <Button onClick={onClear} style={{ borderRadius: '8px' }}>
-                清除
-              </Button>
-            )}
-          </Space>
         </div>
-
-        {searchValue && (
-          <div
-            style={{
-              marginBottom: '20px',
-              padding: '16px',
-              background: 'linear-gradient(90deg, #f0f8ff 0%, #e6f3ff 100%)',
-              borderRadius: '8px',
-              border: '1px solid #b3d8ff',
-            }}
-          >
-            <Space>
-              <span style={{ color: '#0066cc', fontWeight: 500 }}>当前搜索：</span>
-              <Tag color="blue" closable onClose={onClear} style={{ borderRadius: '6px' }}>
-                {searchValue}
-              </Tag>
-            </Space>
-          </div>
-        )}
 
         <div style={{ borderRadius: '8px', overflow: 'hidden' }}>
           {error ? (
@@ -127,45 +75,93 @@ function CountryResults({
             <div
               style={{
                 textAlign: 'center',
-                padding: '60px',
+                padding: '40px',
               }}
             >
-              <Spin size={40} />
-              <div style={{ marginTop: '16px', color: '#86909c' }}>正在搜索中...</div>
+              <Spin size={20} />
+              <Text style={{ marginLeft: '12px', color: '#86909c' }}>搜索中...</Text>
             </div>
           ) : searchResults.length === 0 ? (
             <div
               style={{
                 textAlign: 'center',
-                padding: '60px',
+                padding: '40px',
                 color: '#86909c',
               }}
             >
-              <Text>未找到相关结果</Text>
-              <br />
-              <Text type="secondary">尝试使用其他关键词搜索</Text>
+              <Text>没有找到相关国家，请尝试其他关键词</Text>
             </div>
           ) : (
-            <Table
-              columns={countryColumns}
-              data={searchResults}
-              pagination={{
-                pageSize: 8,
-                showTotal: true,
-                showJumper: true,
-                sizeCanChange: true,
-                size: 'default',
-              }}
-              rowKey="id"
-              borderCell={false}
-              stripe
-              scroll={{ x: 800 }}
-              style={
-                {
-                  '--arco-table-border-radius': '8px',
-                } as React.CSSProperties
-              }
-            />
+            <div>
+              <Row gutter={[16, 16]}>
+                {searchResults.map((country: any, index: number) => (
+                  <Col xs={24} sm={12} md={8} lg={6} key={country.id || index}>
+                    <Card
+                      hoverable
+                      style={{
+                        borderRadius: '8px',
+                        transition: 'all 0.3s ease',
+                        height: '100%',
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
+                        <span style={{ fontSize: '24px', marginRight: '8px' }}>
+                          {country.flag || '🏳️'}
+                        </span>
+                        <Text style={{ fontWeight: 500, fontSize: '16px' }}>{country.name}</Text>
+                      </div>
+
+                      <Space direction="vertical" size="small" style={{ width: '100%' }}>
+                        {country.region && (
+                          <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <Text type="secondary" style={{ fontSize: '12px', width: '50px' }}>
+                              地区:
+                            </Text>
+                            <Text style={{ fontSize: '12px' }}>{country.region}</Text>
+                          </div>
+                        )}
+
+                        {country.capital && (
+                          <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <Text type="secondary" style={{ fontSize: '12px', width: '50px' }}>
+                              首都:
+                            </Text>
+                            <Text style={{ fontSize: '12px' }}>{country.capital}</Text>
+                          </div>
+                        )}
+
+                        {country.population && (
+                          <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <Text type="secondary" style={{ fontSize: '12px', width: '50px' }}>
+                              人口:
+                            </Text>
+                            <Text style={{ fontSize: '12px' }}>
+                              {(country.population / 1000000).toFixed(1)}M
+                            </Text>
+                          </div>
+                        )}
+                      </Space>
+                    </Card>
+                  </Col>
+                ))}
+              </Row>
+
+              {searchResults.length > 0 && (
+                <div
+                  style={{
+                    marginTop: '24px',
+                    padding: '16px',
+                    background: '#fafafa',
+                    borderRadius: '8px',
+                    textAlign: 'center',
+                  }}
+                >
+                  <Text type="secondary">
+                    显示了 {searchResults.length} 个结果，共找到 {total} 条记录
+                  </Text>
+                </div>
+              )}
+            </div>
           )}
         </div>
       </Card>

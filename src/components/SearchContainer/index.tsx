@@ -1,13 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Card, Typography, Space, Input, Button, Tag, Spin, Message } from '@arco-design/web-react';
-import { IconSearch, IconFilter, IconLoading } from '@arco-design/web-react/icon';
-import { useLocation } from 'react-router-dom';
-import SearchBox from '@/components/SearchBox';
 import { saveSearchHistory } from '@/api/search';
+import SearchBox from '@/components/SearchBox';
+import { Button, Card, Input, Message, Space, Tag } from '@arco-design/web-react';
+import { IconFilter, IconLoading, IconSearch } from '@arco-design/web-react/icon';
 import qs from 'query-string';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import styles from './style/index.module.less';
-
-const { Title } = Typography;
 
 export interface SearchResult {
   data: Record<string, unknown>[];
@@ -26,14 +24,11 @@ export interface SearchContainerProps {
   showQuickFilter?: boolean;
   className?: string;
   children: (props: {
-    searchValue: string;
     searchResults: Record<string, unknown>[];
     loading: boolean;
     error: string | null;
     total: number;
     hasSearched: boolean;
-    onSearchChange: (value: string) => void;
-    onClear: () => void;
     onRetry: () => void;
   }) => React.ReactNode;
 }
@@ -133,117 +128,102 @@ function SearchContainer({
 
   return (
     <div className={`${styles.container} ${className || ''}`}>
-      <SearchBox
-        title={title}
-        placeholder={placeholder}
-        onSearch={handleSearchSubmit}
-        suggestions={currentSuggestions}
-        initialValue={searchValue}
-      />
+      {/* 统一的搜索区域 */}
+      <div className={styles.searchArea}>
+        <SearchBox
+          title={title}
+          placeholder={placeholder}
+          onSearch={handleSearchSubmit}
+          suggestions={currentSuggestions}
+          initialValue={searchValue}
+        />
 
-      <div className={styles.contentWrapper}>
-        {showQuickFilter && hasSearched && (
-          <Card style={{ marginBottom: '20px' }}>
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                flexWrap: 'wrap',
-                gap: '16px',
-              }}
-            >
-              <div>
-                <Space>
-                  <Input
-                    value={searchValue}
-                    onChange={handleSearchChange}
-                    onPressEnter={() => handleSearchSubmit(searchValue)}
-                    placeholder="修改搜索关键词..."
-                    prefix={<IconSearch />}
-                    style={{ width: 240, borderRadius: '8px' }}
-                    allowClear
-                    onClear={handleClear}
-                  />
-                  <Button
-                    type="primary"
-                    icon={loading ? <IconLoading /> : <IconFilter />}
-                    onClick={() => handleSearchSubmit(searchValue)}
-                    loading={loading}
-                    style={{ borderRadius: '8px' }}
-                  >
-                    {loading ? '搜索中...' : '搜索'}
-                  </Button>
-                  {searchValue && (
-                    <Button onClick={handleClear} style={{ borderRadius: '8px' }}>
-                      清除
+        {/* 搜索结果直接显示在搜索框下方 */}
+        {hasSearched && (
+          <div className={styles.resultsContainer}>
+            {showQuickFilter && (
+              <Card className={styles.quickFilterCard}>
+                <div className={styles.quickFilterContent}>
+                  <Space wrap>
+                    <Input
+                      value={searchValue}
+                      onChange={handleSearchChange}
+                      onPressEnter={() => handleSearchSubmit(searchValue)}
+                      placeholder="修改搜索关键词..."
+                      prefix={<IconSearch />}
+                      style={{ width: 240, borderRadius: '8px' }}
+                      allowClear
+                      onClear={handleClear}
+                    />
+                    <Button
+                      type="primary"
+                      icon={loading ? <IconLoading /> : <IconFilter />}
+                      onClick={() => handleSearchSubmit(searchValue)}
+                      loading={loading}
+                      style={{ borderRadius: '8px' }}
+                    >
+                      {loading ? '搜索中...' : '搜索'}
                     </Button>
-                  )}
-                </Space>
-              </div>
-
-              {!loading && hasSearched && (
-                <div
-                  style={{
-                    color: '#86909c',
-                    fontSize: '14px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                  }}
-                >
-                  {error ? (
-                    <Space>
-                      <span style={{ color: '#f5222d' }}>搜索失败</span>
-                      <Button size="mini" type="text" onClick={handleRetry}>
-                        重试
+                    {searchValue && (
+                      <Button onClick={handleClear} style={{ borderRadius: '8px' }}>
+                        清除
                       </Button>
-                    </Space>
-                  ) : (
-                    <span>找到 {total} 条结果</span>
+                    )}
+                  </Space>
+
+                  {!loading && (
+                    <div className={styles.resultSummary}>
+                      {error ? (
+                        <Space>
+                          <span style={{ color: '#f5222d' }}>搜索失败</span>
+                          <Button size="mini" type="text" onClick={handleRetry}>
+                            重试
+                          </Button>
+                        </Space>
+                      ) : (
+                        <span>找到 {total} 条结果</span>
+                      )}
+                    </div>
                   )}
                 </div>
-              )}
-            </div>
 
-            {searchValue && !error && (
-              <div
-                style={{
-                  marginTop: '16px',
-                  padding: '12px',
-                  background: 'linear-gradient(90deg, #f0f8ff 0%, #e6f3ff 100%)',
-                  borderRadius: '8px',
-                  border: '1px solid #b3d8ff',
-                }}
-              >
-                <Space>
-                  <span style={{ color: '#0066cc', fontWeight: 500 }}>搜索关键词：</span>
-                  <Tag color="blue" closable onClose={handleClear} style={{ borderRadius: '6px' }}>
-                    {searchValue}
-                  </Tag>
-                  {loading && (
-                    <span style={{ color: '#165dff' }}>
-                      <IconLoading style={{ marginRight: '4px' }} />
-                      搜索中...
-                    </span>
-                  )}
-                </Space>
-              </div>
+                {searchValue && !error && (
+                  <div className={styles.searchKeywordDisplay}>
+                    <Space>
+                      <span style={{ color: '#0066cc', fontWeight: 500 }}>搜索关键词：</span>
+                      <Tag
+                        color="blue"
+                        closable
+                        onClose={handleClear}
+                        style={{ borderRadius: '6px' }}
+                      >
+                        {searchValue}
+                      </Tag>
+                      {loading && (
+                        <span style={{ color: '#165dff' }}>
+                          <IconLoading style={{ marginRight: '4px' }} />
+                          搜索中...
+                        </span>
+                      )}
+                    </Space>
+                  </div>
+                )}
+              </Card>
             )}
-          </Card>
-        )}
 
-        {children({
-          searchValue,
-          searchResults,
-          loading,
-          error,
-          total,
-          hasSearched,
-          onSearchChange: handleSearchChange,
-          onClear: handleClear,
-          onRetry: handleRetry,
-        })}
+            {/* 搜索结果内容 */}
+            <div className={styles.resultsContent}>
+              {children({
+                searchResults,
+                loading,
+                error,
+                total,
+                hasSearched,
+                onRetry: handleRetry,
+              })}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

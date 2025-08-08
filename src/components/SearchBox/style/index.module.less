@@ -1,36 +1,12 @@
 .container {
   display: flex;
-  align-items: center;
+  // align-items: center;
   justify-content: center;
-  min-height: 60vh;
+  min-height: 30vh; /* 减少最小高度，避免过多留白 */
   padding: 40px 20px;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf0 100%);
+  // background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf0 100%);
   position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 20% 80%, rgba(165, 177, 194, 15%) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 80%) 0%, transparent 50%),
-      radial-gradient(circle at 40% 40%, rgba(165, 177, 194, 10%) 0%, transparent 50%);
-    pointer-events: none;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 30%);
-    pointer-events: none;
-  }
+  padding-top: 200px;
 }
 
 .content {
@@ -84,46 +60,17 @@
   margin-right: auto;
 }
 
-.search-input {
-  flex: 1;
-
-  :global(.arco-input) {
-    height: 48px;
-    border-radius: 8px;
-    border: 1px solid #d9d9d9;
-    font-size: 15px;
-    padding: 0 16px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 6%);
-    transition: all 0.3s ease;
-    background: white;
-
-    &::placeholder {
-      color: #999;
-      font-weight: 400;
-    }
-
-    &:hover {
-      border-color: #40a9ff;
-      box-shadow: 0 2px 8px rgba(64, 169, 255, 20%);
-    }
-
-    &:focus {
-      border-color: #1890ff;
-      box-shadow: 0 0 0 2px rgba(24, 144, 255, 20%);
-      outline: none;
-    }
-  }
-
-  :global(.arco-input-prefix) {
-    margin-right: 8px;
-  }
-
-  :global(.arco-input-suffix) {
-    margin-left: 8px;
-  }
+.searchInput {
+  height: 48px;
+  // border-radius: 8px;
+  border: 1px solid #d9d9d9;
+  font-size: 15px;
+  // padding: 0 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 6%);
+  transition: all 0.3s ease;
 }
 
-.search-icon {
+.searchIcon {
   color: #8c8c8c;
   font-size: 16px;
   transition: all 0.3s ease;
@@ -269,13 +216,6 @@
   }
 }
 
-.tagContainer {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 4px;
-}
-
 .historyTag {
   cursor: pointer;
   border-radius: 12px;
@@ -298,87 +238,6 @@
   }
 }
 
-.hotTag {
-  cursor: pointer;
-  border-radius: 12px;
-  padding: 4px 12px;
-  font-size: 12px;
-  font-weight: 400;
-  background: #ff4d4f;
-  border: 1px solid #ff4d4f;
-  color: white;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background: #ff7875;
-    border-color: #ff7875;
-  }
-
-  &:active {
-    background: #f5222d;
-    border-color: #f5222d;
-  }
-}
-
 .buttons {
   display: none; /* 按钮现在在搜索框同一行，不再使用这个样式 */
-}
-
-// 响应式设计
-@media (max-width: 768px) {
-  .container {
-    min-height: 50vh;
-    padding: 20px 16px;
-  }
-
-  .title {
-    margin-bottom: 30px;
-
-    :global(.arco-typography) {
-      font-size: 24px !important;
-    }
-  }
-
-  .search-input {
-    :global(.arco-input) {
-      height: 44px;
-      font-size: 14px;
-    }
-  }
-
-  .buttons {
-    flex-direction: column;
-    align-items: center;
-
-    :global(.arco-btn) {
-      width: 200px;
-    }
-  }
-}
-
-@media (max-width: 480px) {
-  .content {
-    max-width: 100%;
-  }
-
-  .title {
-    :global(.arco-typography) {
-      font-size: 20px !important;
-    }
-  }
-
-  .search-input {
-    :global(.arco-input) {
-      height: 40px;
-      padding: 0 16px;
-    }
-  }
-
-  .buttons {
-    :global(.arco-btn) {
-      width: 160px;
-      height: 36px;
-      padding: 0 24px;
-    }
-  }
 }

@@ -1,6 +1,5 @@
-import React from 'react';
-import { Space, Tag, Typography } from '@arco-design/web-react';
 import { SearchColumn } from '@/components/UniversalSearch';
+import { Tag, Typography } from '@arco-design/web-react';
 
 const { Text } = Typography;
 
@@ -140,47 +139,47 @@ export const artilleryColumns: SearchColumn[] = [
     title: '火炮名称',
     dataIndex: 'name',
     width: 200,
-    render: value => <Text strong>{value}</Text>,
+    render: value => <Text bold>{value}</Text>,
   },
   {
     title: '口径',
     dataIndex: 'caliber',
     width: 80,
     render: value => `${value}mm`,
-    sorter: (a, b) => a.caliber - b.caliber,
+    sorter: (a: any, b: any) => a.caliber - b.caliber,
   },
   {
     title: '类型',
     dataIndex: 'type',
     width: 120,
-    render: value => <Tag color={getTypeColor(value)}>{value}</Tag>,
+    render: (value: string) => <Tag color={getTypeColor(value)}>{value}</Tag>,
   },
   {
     title: '运动方式',
     dataIndex: 'mobility',
     width: 100,
-    render: value => <Tag color={getMobilityColor(value)}>{value}</Tag>,
+    render: (value: string) => <Tag color={getMobilityColor(value)}>{value}</Tag>,
   },
   {
     title: '初速',
     dataIndex: 'muzzleVelocity',
     width: 100,
     render: value => `${value}m/s`,
-    sorter: (a, b) => a.muzzleVelocity - b.muzzleVelocity,
+    sorter: (a: any, b: any) => a.muzzleVelocity - b.muzzleVelocity,
   },
   {
     title: '射程',
     dataIndex: 'range',
     width: 80,
     render: value => `${value}km`,
-    sorter: (a, b) => a.range - b.range,
+    sorter: (a: any, b: any) => a.range - b.range,
   },
   {
     title: '身管长度',
     dataIndex: 'barrelLength',
     width: 100,
     render: value => `${value}m`,
-    sorter: (a, b) => a.barrelLength - b.barrelLength,
+    sorter: (a: any, b: any) => a.barrelLength - b.barrelLength,
   },
   {
     title: '厂商',

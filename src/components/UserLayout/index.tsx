@@ -86,26 +86,22 @@ function UserLayout() {
       >
         <Navbar show={true} Menus={UserMenus} />
       </div>
-      <Layout>
-        <Layout className={styles['layout-content']} style={{ paddingTop: '60px' }}>
-          <Content className={styles.content}>
-            <Switch>
-              <Route exact path="/user/home" component={Home} />
-              <Route exact path="/user/country-search" component={CountrySearch} />
-              <Route exact path="/user/ammunition-search" component={AmmunitionSearch} />
-              <Route exact path="/user/artillery-search" component={ArtillerySearch} />
-              <Route exact path="/user/product-compare" component={ProductCompare} />
-              <Route exact path="/user/ai-chat" component={AIChat} />
-              <Route exact path="/user">
-                <Redirect to="/user/home" />
-              </Route>
-              <Route path="/user">
-                <Redirect to="/user/home" />
-              </Route>
-            </Switch>
-          </Content>
-        </Layout>
-      </Layout>
+      <Content className={styles.content}>
+        <Switch>
+          <Route exact path="/user/home" component={Home} />
+          <Route exact path="/user/country-search" component={CountrySearch} />
+          <Route exact path="/user/ammunition-search" component={AmmunitionSearch} />
+          <Route exact path="/user/artillery-search" component={ArtillerySearch} />
+          <Route exact path="/user/product-compare" component={ProductCompare} />
+          <Route exact path="/user/ai-chat" component={AIChat} />
+          <Route exact path="/user">
+            <Redirect to="/user/home" />
+          </Route>
+          <Route path="/user">
+            <Redirect to="/user/home" />
+          </Route>
+        </Switch>
+      </Content>
     </Layout>
   );
 }

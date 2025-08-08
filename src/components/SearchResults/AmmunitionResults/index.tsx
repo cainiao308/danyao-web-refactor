@@ -1,41 +1,34 @@
 import React from 'react';
-import {
-  Card,
-  Typography,
-  Table,
-  Space,
-  Tag,
-  Input,
-  Button,
-  Descriptions,
-  Spin,
-} from '@arco-design/web-react';
-import { IconSearch, IconFilter, IconInfoCircle } from '@arco-design/web-react/icon';
 import { ammunitionColumns } from '@/config/searchConfigs/ammunitionConfig';
+import {
+  Button,
+  Card,
+  Descriptions,
+  Space,
+  Spin,
+  Table,
+  Tag,
+  Typography,
+} from '@arco-design/web-react';
+import { IconInfoCircle } from '@arco-design/web-react/icon';
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 interface AmmunitionResultsProps {
-  searchValue: string;
   searchResults: Record<string, unknown>[];
   loading: boolean;
   error: string | null;
   total: number;
   hasSearched: boolean;
-  onSearchChange: (value: string) => void;
-  onClear: () => void;
   onRetry: () => void;
 }
 
 function AmmunitionResults({
-  searchValue,
   searchResults,
   loading,
   error,
   total,
   hasSearched,
-  onSearchChange,
-  onClear,
   onRetry,
 }: AmmunitionResultsProps) {
   // 计算统计信息
@@ -46,11 +39,12 @@ function AmmunitionResults({
 
     const types = searchResults.reduce((acc, item) => {
       const type = item.type as string;
-      acc[type] = (acc[type] || 0) + 1;
+      const prev = typeof acc[type] === 'number' ? acc[type] : 0;
+      acc[type] = prev + 1;
       return acc;
     }, {} as Record<string, number>);
 
-    const countries = [...new Set(searchResults.map(item => item.country))].length;
+    const countries = Array.from(new Set(searchResults.map(item => String(item.country)))).length;
     const avgRange =
       searchResults.length > 0
         ? (
@@ -105,11 +99,11 @@ function AmmunitionResults({
                   ),
                 },
                 {
-                  label: '类型分布',
+                  label: '弹药类型',
                   value: (
                     <Space wrap>
                       {Object.entries(stats.types).map(([type, count]) => (
-                        <Tag key={type} color="blue" style={{ borderRadius: '6px' }}>
+                        <Tag key={type} color="blue">
                           {type}: {count}
                         </Tag>
                       ))}
@@ -118,12 +112,12 @@ function AmmunitionResults({
                 },
               ]}
               column={2}
-              layout="inline-horizontal"
+              style={{ marginTop: '16px' }}
             />
           </Card>
         )}
 
-        {/* 搜索结果表格 */}
+        {/* 搜索结果 */}
         <Card
           style={{
             borderRadius: '12px',
@@ -145,52 +139,7 @@ function AmmunitionResults({
             <Title heading={5} style={{ margin: 0, color: '#1d2129' }}>
               🚀 弹药列表 ({hasSearched ? searchResults.length : 0}个结果)
             </Title>
-
-            <Space wrap>
-              <Input
-                value={searchValue}
-                onChange={onSearchChange}
-                onPressEnter={() => onSearchChange(searchValue)}
-                placeholder="快速筛选..."
-                prefix={<IconSearch />}
-                style={{ width: 240, borderRadius: '8px' }}
-                allowClear
-                onClear={onClear}
-              />
-              <Button
-                type="primary"
-                icon={<IconFilter />}
-                onClick={() => onSearchChange(searchValue)}
-                style={{ borderRadius: '8px' }}
-              >
-                筛选
-              </Button>
-              {searchValue && (
-                <Button onClick={onClear} style={{ borderRadius: '8px' }}>
-                  清除
-                </Button>
-              )}
-            </Space>
           </div>
-
-          {searchValue && (
-            <div
-              style={{
-                marginBottom: '20px',
-                padding: '16px',
-                background: 'linear-gradient(90deg, #f0f8ff 0%, #e6f3ff 100%)',
-                borderRadius: '8px',
-                border: '1px solid #b3d8ff',
-              }}
-            >
-              <Space>
-                <span style={{ color: '#0066cc', fontWeight: 500 }}>当前搜索：</span>
-                <Tag color="blue" closable onClose={onClear} style={{ borderRadius: '6px' }}>
-                  {searchValue}
-                </Tag>
-              </Space>
-            </div>
-          )}
 
           <div style={{ borderRadius: '8px', overflow: 'hidden' }}>
             {error ? (
@@ -201,7 +150,7 @@ function AmmunitionResults({
                   color: '#f5222d',
                 }}
               >
-                <Typography.Text>搜索出错了，请重试</Typography.Text>
+                <Text>搜索出错了，请重试</Text>
                 <br />
                 <Button type="primary" style={{ marginTop: '16px' }} onClick={onRetry}>
                   重新搜索
@@ -215,29 +164,27 @@ function AmmunitionResults({
                   color: '#86909c',
                 }}
               >
-                <Typography.Text>请输入关键词开始搜索</Typography.Text>
+                <Text>请输入关键词开始搜索</Text>
               </div>
             ) : loading ? (
               <div
                 style={{
                   textAlign: 'center',
-                  padding: '60px',
+                  padding: '40px',
                 }}
               >
-                <Spin size={40} />
-                <div style={{ marginTop: '16px', color: '#86909c' }}>正在搜索弹药数据...</div>
+                <Spin size={20} />
+                <Text style={{ marginLeft: '12px', color: '#86909c' }}>搜索中...</Text>
               </div>
             ) : searchResults.length === 0 ? (
               <div
                 style={{
                   textAlign: 'center',
-                  padding: '60px',
+                  padding: '40px',
                   color: '#86909c',
                 }}
               >
-                <Typography.Text>未找到相关弹药</Typography.Text>
-                <br />
-                <Typography.Text type="secondary">尝试使用其他关键词搜索</Typography.Text>
+                <Text>没有找到相关弹药，请尝试其他关键词</Text>
               </div>
             ) : (
               <Table
@@ -253,7 +200,7 @@ function AmmunitionResults({
                 rowKey="id"
                 borderCell={false}
                 stripe
-                scroll={{ x: 1200 }}
+                scroll={{ x: 1000 }}
                 style={
                   {
                     '--arco-table-border-radius': '8px',
@@ -262,6 +209,22 @@ function AmmunitionResults({
               />
             )}
           </div>
+
+          {searchResults.length > 0 && !loading && (
+            <div
+              style={{
+                marginTop: '24px',
+                padding: '16px',
+                background: '#fafafa',
+                borderRadius: '8px',
+                textAlign: 'center',
+              }}
+            >
+              <Text type="secondary">
+                显示了 {searchResults.length} 个结果，共找到 {total} 条记录
+              </Text>
+            </div>
+          )}
         </Card>
       </Space>
     </div>

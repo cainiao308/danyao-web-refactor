@@ -110,9 +110,9 @@ export const ammunitionColumns: SearchColumn[] = [
     title: '弹药名称',
     dataIndex: 'name',
     width: 200,
-    render: (value, record) => (
+    render: (value, record: any) => (
       <Space direction="vertical" size="mini">
-        <Text strong>{value}</Text>
+        <Text bold>{value}</Text>
         <Text type="secondary" style={{ fontSize: '12px' }}>
           {record.abbreviation}
         </Text>
@@ -124,7 +124,7 @@ export const ammunitionColumns: SearchColumn[] = [
     dataIndex: 'caliber',
     width: 80,
     render: value => `${value}mm`,
-    sorter: (a, b) => a.caliber - b.caliber,
+    sorter: (a: any, b: any) => a.caliber - b.caliber,
   },
   {
     title: '类型',
@@ -137,14 +137,14 @@ export const ammunitionColumns: SearchColumn[] = [
     dataIndex: 'weight',
     width: 80,
     render: value => `${value}kg`,
-    sorter: (a, b) => a.weight - b.weight,
+    sorter: (a: any, b: any) => a.weight - b.weight,
   },
   {
     title: '射程',
     dataIndex: 'maxRange',
     width: 100,
-    render: (value, record) => `${record.minRange}-${value}km`,
-    sorter: (a, b) => a.maxRange - b.maxRange,
+    render: (value, record: any) => `${record.minRange}-${value}km`,
+    sorter: (a: any, b: any) => a.maxRange - b.maxRange,
   },
   {
     title: '制导方式',
