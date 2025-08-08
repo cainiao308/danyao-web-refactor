@@ -15,9 +15,7 @@ function MyTeam() {
   const [loading, setLoading] = useState(true);
 
   const getData = async () => {
-    const { data } = await axios
-      .get('/api/users/teamList')
-      .finally(() => setLoading(false));
+    const { data } = await axios.get('/api/users/teamList').finally(() => setLoading(false));
     setData(data);
   };
 
@@ -33,9 +31,7 @@ function MyTeam() {
           <List.Item
             key={index}
             style={
-              index !== data.length - 1
-                ? { padding: '8px 0px' }
-                : { padding: '8px 0px 0px 0px' }
+              index !== data.length - 1 ? { padding: '8px 0px' } : { padding: '8px 0px 0px 0px' }
             }
           >
             {loading ? (

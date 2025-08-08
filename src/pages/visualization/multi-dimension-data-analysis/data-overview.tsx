@@ -1,19 +1,8 @@
 // 数据总览
 import React, { useEffect, useState, useMemo } from 'react';
-import {
-  Card,
-  Typography,
-  Grid,
-  Statistic,
-  Skeleton,
-} from '@arco-design/web-react';
+import { Card, Typography, Grid, Statistic, Skeleton } from '@arco-design/web-react';
 import axios from 'axios';
-import {
-  IconUser,
-  IconEdit,
-  IconHeart,
-  IconThumbUp,
-} from '@arco-design/web-react/icon';
+import { IconUser, IconEdit, IconHeart, IconThumbUp } from '@arco-design/web-react/icon';
 import useLocale from '@/utils/useLocale';
 import locale from './locale';
 import styles from './style/data-overview.module.less';

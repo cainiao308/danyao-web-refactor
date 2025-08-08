@@ -1,13 +1,6 @@
 import React, { useContext } from 'react';
 import dayjs from 'dayjs';
-import {
-  Form,
-  Input,
-  Select,
-  DatePicker,
-  Button,
-  Grid,
-} from '@arco-design/web-react';
+import { Form, Input, Select, DatePicker, Button, Grid } from '@arco-design/web-react';
 import { GlobalContext } from '@/context';
 import locale from './locale';
 import useLocale from '@/utils/useLocale';
@@ -18,9 +11,7 @@ import styles from './style/index.module.less';
 const { Row, Col } = Grid;
 const { useForm } = Form;
 
-function SearchForm(props: {
-  onSearch: (values: Record<string, any>) => void;
-}) {
+function SearchForm(props: { onSearch: (values: Record<string, any>) => void }) {
   const { lang } = useContext(GlobalContext);
 
   const t = useLocale(locale);
@@ -55,17 +46,11 @@ function SearchForm(props: {
           </Col>
           <Col span={colSpan}>
             <Form.Item label={t['searchTable.columns.name']} field="name">
-              <Input
-                allowClear
-                placeholder={t['searchForm.name.placeholder']}
-              />
+              <Input allowClear placeholder={t['searchForm.name.placeholder']} />
             </Form.Item>
           </Col>
           <Col span={colSpan}>
-            <Form.Item
-              label={t['searchTable.columns.contentType']}
-              field="contentType"
-            >
+            <Form.Item label={t['searchTable.columns.contentType']} field="contentType">
               <Select
                 placeholder={t['searchForm.all.placeholder']}
                 options={ContentType.map((item, index) => ({
@@ -78,10 +63,7 @@ function SearchForm(props: {
             </Form.Item>
           </Col>
           <Col span={colSpan}>
-            <Form.Item
-              label={t['searchTable.columns.filterType']}
-              field="filterType"
-            >
+            <Form.Item label={t['searchTable.columns.filterType']} field="filterType">
               <Select
                 placeholder={t['searchForm.all.placeholder']}
                 options={FilterType.map((item, index) => ({
@@ -94,14 +76,11 @@ function SearchForm(props: {
             </Form.Item>
           </Col>
           <Col span={colSpan}>
-            <Form.Item
-              label={t['searchTable.columns.createdTime']}
-              field="createdTime"
-            >
+            <Form.Item label={t['searchTable.columns.createdTime']} field="createdTime">
               <DatePicker.RangePicker
                 allowClear
                 style={{ width: '100%' }}
-                disabledDate={(date) => dayjs(date).isAfter(dayjs())}
+                disabledDate={date => dayjs(date).isAfter(dayjs())}
               />
             </Form.Item>
           </Col>

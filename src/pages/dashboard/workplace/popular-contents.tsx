@@ -17,10 +17,8 @@ function PopularContent() {
   const fetchData = useCallback(() => {
     setLoading(true);
     axios
-      .get(
-        `/api/workplace/popular-contents?page=${page}&pageSize=5&category=${type}`
-      )
-      .then((res) => {
+      .get(`/api/workplace/popular-contents?page=${page}&pageSize=5&category=${type}`)
+      .then(res => {
         setData(res.data.list);
         setTotal(res.data.total);
       })
@@ -42,7 +40,7 @@ function PopularContent() {
     {
       title: t['workplace.column.title'],
       dataIndex: 'title',
-      render: (x) => (
+      render: x => (
         <Typography.Paragraph style={{ margin: 0 }} ellipsis>
           {x}
         </Typography.Paragraph>
@@ -52,7 +50,7 @@ function PopularContent() {
       title: t['workplace.column.pv'],
       dataIndex: 'pv',
       width: 100,
-      render: (text) => {
+      render: text => {
         return `${text / 1000}k`;
       },
     },
@@ -61,7 +59,7 @@ function PopularContent() {
       dataIndex: 'increase',
       sorter: (a, b) => a.increase - b.increase,
       width: 110,
-      render: (text) => {
+      render: text => {
         return (
           <span>
             {`${(text * 100).toFixed(2)}%`}
@@ -81,9 +79,7 @@ function PopularContent() {
   return (
     <Card>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Typography.Title heading={6}>
-          {t['workplace.popularContents']}
-        </Typography.Title>
+        <Typography.Title heading={6}>{t['workplace.popularContents']}</Typography.Title>
         <Link>{t['workplace.seeMore']}</Link>
       </div>
       <Radio.Group
@@ -103,7 +99,7 @@ function PopularContent() {
         data={data}
         loading={loading}
         tableLayoutFixed
-        onChange={(pagination) => {
+        onChange={pagination => {
           setPage(pagination.current);
         }}
         pagination={{ total, current: page, pageSize: 5, simple: true }}

@@ -1,12 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import {
-  Table,
-  Card,
-  PaginationProps,
-  Button,
-  Space,
-  Typography,
-} from '@arco-design/web-react';
+import { Table, Card, PaginationProps, Button, Space, Typography } from '@arco-design/web-react';
 import PermissionWrapper from '@/components/PermissionWrapper';
 import { IconDownload, IconPlus } from '@arco-design/web-react/icon';
 import axios from 'axios';
@@ -57,7 +50,7 @@ function SearchTable() {
           ...formParams,
         },
       })
-      .then((res) => {
+      .then(res => {
         setData(res.data.list);
         setPatination({
           ...pagination,
@@ -87,9 +80,7 @@ function SearchTable() {
       <Title heading={6}>{t['menu.list.searchTable']}</Title>
       <SearchForm onSearch={handleSearch} />
       <PermissionWrapper
-        requiredPermissions={[
-          { resource: 'menu.list.searchTable', actions: ['write'] },
-        ]}
+        requiredPermissions={[{ resource: 'menu.list.searchTable', actions: ['write'] }]}
       >
         <div className={styles['button-group']}>
           <Space>
@@ -99,9 +90,7 @@ function SearchTable() {
             <Button>{t['searchTable.operations.upload']}</Button>
           </Space>
           <Space>
-            <Button icon={<IconDownload />}>
-              {t['searchTable.operation.download']}
-            </Button>
+            <Button icon={<IconDownload />}>{t['searchTable.operation.download']}</Button>
           </Space>
         </div>
       </PermissionWrapper>

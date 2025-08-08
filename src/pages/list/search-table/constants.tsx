@@ -26,7 +26,7 @@ export function getColumns(
     {
       title: t['searchTable.columns.id'],
       dataIndex: 'id',
-      render: (value) => <Text copyable>{value}</Text>,
+      render: value => <Text copyable>{value}</Text>,
     },
     {
       title: t['searchTable.columns.name'],
@@ -35,7 +35,7 @@ export function getColumns(
     {
       title: t['searchTable.columns.contentType'],
       dataIndex: 'contentType',
-      render: (value) => (
+      render: value => (
         <div className={styles['content-type']}>
           {ContentIcon[value]}
           {ContentType[value]}
@@ -45,7 +45,7 @@ export function getColumns(
     {
       title: t['searchTable.columns.filterType'],
       dataIndex: 'filterType',
-      render: (value) => FilterType[value],
+      render: value => FilterType[value],
     },
     {
       title: t['searchTable.columns.contentNum'],
@@ -58,13 +58,13 @@ export function getColumns(
     {
       title: t['searchTable.columns.createdTime'],
       dataIndex: 'createdTime',
-      render: (x) => dayjs().subtract(x, 'days').format('YYYY-MM-DD HH:mm:ss'),
+      render: x => dayjs().subtract(x, 'days').format('YYYY-MM-DD HH:mm:ss'),
       sorter: (a, b) => b.createdTime - a.createdTime,
     },
     {
       title: t['searchTable.columns.status'],
       dataIndex: 'status',
-      render: (x) => {
+      render: x => {
         if (x === 0) {
           return <Badge status="error" text={Status[x]}></Badge>;
         }
@@ -76,11 +76,7 @@ export function getColumns(
       dataIndex: 'operations',
       headerCellStyle: { paddingLeft: '15px' },
       render: (_, record) => (
-        <Button
-          type="text"
-          size="small"
-          onClick={() => callback(record, 'view')}
-        >
+        <Button type="text" size="small" onClick={() => callback(record, 'view')}>
           {t['searchTable.columns.operations.view']}
         </Button>
       ),

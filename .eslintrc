@@ -23,12 +23,13 @@
   },
   "settings": {
     "react": {
-      "version": "16.8"
+      "version": "17.0"
     }
   },
   "plugins": ["react", "babel", "@typescript-eslint/eslint-plugin"],
   "rules": {
     "react/display-name": 0,
-    "react/prop-types": 0
+    "react/prop-types": 0,
+    "react/react-in-jsx-scope": "off"
   }
 }

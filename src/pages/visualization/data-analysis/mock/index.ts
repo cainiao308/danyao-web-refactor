@@ -2,7 +2,7 @@ import Mock from 'mockjs';
 import qs from 'query-string';
 import setupMock from '@/utils/setupMock';
 
-const mockLine = (name) => {
+const mockLine = name => {
   const result = new Array(12).fill(0).map(() => ({
     y: Mock.Random.natural(20, 100),
   }));
@@ -22,7 +22,7 @@ const mockPie = () => {
 
 setupMock({
   setup: () => {
-    Mock.mock(new RegExp('/api/data-analysis/overview'), (params) => {
+    Mock.mock(new RegExp('/api/data-analysis/overview'), params => {
       const { type } = qs.parseUrl(params.url).query;
       return Mock.mock({
         count: () => Mock.Random.natural(1000, 10000),
@@ -40,7 +40,7 @@ setupMock({
       });
     });
 
-    const getTimeLine = (name) => {
+    const getTimeLine = name => {
       const timeArr = new Array(12).fill(0).map((_, index) => {
         const time = index * 2;
         return time < 9 ? `0${time}:00` : `${time}:00`;
@@ -54,11 +54,7 @@ setupMock({
     };
 
     Mock.mock(new RegExp('/api/data-analysis/content-publishing'), () => {
-      return [
-        ...getTimeLine('纯文本'),
-        ...getTimeLine('视频类'),
-        ...getTimeLine('图文类'),
-      ];
+      return [...getTimeLine('纯文本'), ...getTimeLine('视频类'), ...getTimeLine('图文类')];
     });
 
     Mock.mock(new RegExp('/api/data-analysis/author-list'), () => {

@@ -27,7 +27,7 @@ export default function ListCard() {
   const getData = () => {
     axios
       .get('/api/cardList')
-      .then((res) => {
+      .then(res => {
         setData(res.data);
       })
       .finally(() => setLoading(false));
@@ -37,10 +37,7 @@ export default function ListCard() {
     getData();
   }, []);
   7;
-  const getCardList = (
-    list: Array<BasicCard & QualityInspection>,
-    type: keyof typeof data
-  ) => {
+  const getCardList = (list: Array<BasicCard & QualityInspection>, type: keyof typeof data) => {
     return (
       <Row gutter={24} className={styles['card-content']}>
         {type === 'quality' && (

@@ -1,0 +1,32 @@
+.container {
+  background: #f5f7fa;
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+.content-wrapper {
+  max-width: 1400px;
+  margin: 40px auto 0;
+  padding: 0 24px;
+}
+
+// 响应式设计
+@media (max-width: 1440px) {
+  .content-wrapper {
+    max-width: 1200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .content-wrapper {
+    padding: 0 20px;
+    margin-top: 20px;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-wrapper {
+    padding: 0 16px;
+  }
+}

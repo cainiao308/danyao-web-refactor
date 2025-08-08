@@ -20,8 +20,7 @@ const i18n = {
     'stepForm.basicInfo.time': 'Promotion time',
     'stepForm.basicInfo.time.required': 'Please select the promotion time',
     'stepForm.basicInfo.link': 'Promotion URL',
-    'stepForm.basicInfo.link.placeholder':
-      'Please enter the promotion page address',
+    'stepForm.basicInfo.link.placeholder': 'Please enter the promotion page address',
     'stepForm.basicInfo.link.tips':
       'Such as Android or iOS download address, intermediate redirect URL, the URL must start with http:// or https://',
     'stepForm.channel.source': 'Advertising source',
@@ -78,8 +77,7 @@ const i18n = {
     'stepForm.channel.remind': '推送提醒',
     'stepForm.channel.content': '广告内容',
     'stepForm.channel.content.required': '请输入广告内容',
-    'stepForm.channel.content.placeholder':
-      '请输入广告内容介绍，最多不超过200字',
+    'stepForm.channel.content.placeholder': '请输入广告内容介绍，最多不超过200字',
     'stepForm.created.success.title': '创建成功',
     'stepForm.created.success.desc': '表单创建成功',
     'stepForm.created.success.view': '查看表单',

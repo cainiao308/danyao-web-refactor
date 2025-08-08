@@ -12,8 +12,7 @@ const i18n = {
     'welcome.step.content.install':
       'After getting the package name, you can install the material through the following command.',
     'welcome.step.content.result': 'Then, you get a workplace page easily.',
-    'welcome.title.material':
-      'For more materials, please check the following link',
+    'welcome.title.material': 'For more materials, please check the following link',
     'welcome.link.material-pro': 'Arco Design Pro material collection',
     'welcome.link.material-all': 'All materials',
   },
@@ -26,8 +25,7 @@ const i18n = {
     'welcome.step.title.result': '成果',
     'welcome.step.content.pickup':
       '例如您看中了 pro 的 workplace 页面，可以从物料详情中获得该物料的包名',
-    'welcome.step.content.install':
-      '得到包名后，您就可以通过如下命令安装该物料',
+    'welcome.step.content.install': '得到包名后，您就可以通过如下命令安装该物料',
     'welcome.step.content.result': '这样您就能轻松获得一个 workplace 页面',
     'welcome.title.material': '更多物料请查看以下链接',
     'welcome.link.material-pro': 'Arco Design Pro 物料合集',

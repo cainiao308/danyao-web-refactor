@@ -28,6 +28,9 @@ const i18n = {
     'menu.user.role.admin': 'Admin',
     'menu.user.role.user': 'General User',
     'menu.dashboard.workplace': 'Workplace',
+    'menu.weapons': 'Weapons',
+    'menu.weapons.ammunition': 'Ammunition List',
+    'menu.weapons.artillery': 'Artillery List',
     'navbar.logout': 'Logout',
     'settings.title': 'Settings',
     'settings.themeColor': 'Theme Color',
@@ -43,11 +46,9 @@ const i18n = {
     'settings.alertContent':
       'After the configuration is only temporarily effective, if you want to really affect the project, click the "Copy Settings" button below and replace the configuration in settings.json.',
     'settings.copySettings': 'Copy Settings',
-    'settings.copySettings.message':
-      'Copy succeeded, please paste to file src/settings.json.',
+    'settings.copySettings.message': 'Copy succeeded, please paste to file src/settings.json.',
     'settings.close': 'Close',
-    'settings.color.tooltip':
-      '10 gradient colors generated according to the theme color',
+    'settings.color.tooltip': '10 gradient colors generated according to the theme color',
     'message.tab.title.message': 'Message',
     'message.tab.title.notice': 'Notice',
     'message.tab.title.todo': 'ToDo',
@@ -86,6 +87,9 @@ const i18n = {
     'menu.user.role.admin': '管理员',
     'menu.user.role.user': '普通用户',
     'menu.dashboard.workplace': '工作台',
+    'menu.weapons': '武器装备',
+    'menu.weapons.ammunition': '弹药列表',
+    'menu.weapons.artillery': '火炮列表',
     'navbar.logout': '退出登录',
     'settings.title': '页面配置',
     'settings.themeColor': '主题色',
@@ -101,8 +105,7 @@ const i18n = {
     'settings.alertContent':
       '配置之后仅是临时生效，要想真正作用于项目，点击下方的 "复制配置" 按钮，将配置替换到 settings.json 中即可。',
     'settings.copySettings': '复制配置',
-    'settings.copySettings.message':
-      '复制成功，请粘贴到 src/settings.json 文件中',
+    'settings.copySettings.message': '复制成功，请粘贴到 src/settings.json 文件中',
     'settings.close': '关闭',
     'settings.color.tooltip':
       '根据主题颜色生成的 10 个梯度色（将配置复制到项目中，主题色才能对亮色 / 暗黑模式同时生效）',

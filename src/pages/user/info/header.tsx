@@ -1,11 +1,6 @@
 import React from 'react';
 import { Avatar, Space, Skeleton } from '@arco-design/web-react';
-import {
-  IconCamera,
-  IconLocation,
-  IconUser,
-  IconHome,
-} from '@arco-design/web-react/icon';
+import { IconCamera, IconLocation, IconUser, IconHome } from '@arco-design/web-react/icon';
 import styles from './style/index.module.less';
 
 interface HeaderProps {
@@ -41,12 +36,7 @@ function UserInfoHeader(props: HeaderProps) {
   );
   return (
     <div className={styles.header}>
-      <Space
-        size={8}
-        direction="vertical"
-        align="center"
-        className={styles['header-content']}
-      >
+      <Space size={8} direction="vertical" align="center" className={styles['header-content']}>
         {loading ? (
           loadingImgNode
         ) : (
@@ -54,9 +44,7 @@ function UserInfoHeader(props: HeaderProps) {
             <img src={userInfo.avatar} />
           </Avatar>
         )}
-        <div className={styles.username}>
-          {loading ? loadingNode : userInfo.name}
-        </div>
+        <div className={styles.username}>{loading ? loadingNode : userInfo.name}</div>
         <div className={styles['user-msg']}>
           <Space size={18}>
             <div>

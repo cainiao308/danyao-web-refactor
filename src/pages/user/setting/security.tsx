@@ -52,9 +52,7 @@ function Security() {
 
             <span>
               <Button type="text">
-                {item.value
-                  ? t['userSetting.btn.edit']
-                  : t['userSetting.btn.set']}
+                {item.value ? t['userSetting.btn.edit'] : t['userSetting.btn.set']}
               </Button>
             </span>
           </div>

@@ -59,11 +59,7 @@ function InfoForm({ loading }: { loading?: boolean }) {
           },
         ]}
       >
-        {loading ? (
-          loadingNode()
-        ) : (
-          <Input placeholder={t['userSetting.info.email.placeholder']} />
-        )}
+        {loading ? loadingNode() : <Input placeholder={t['userSetting.info.email.placeholder']} />}
       </Form.Item>
       <Form.Item
         label={t['userSetting.info.nickName']}
@@ -84,17 +80,12 @@ function InfoForm({ loading }: { loading?: boolean }) {
       <Form.Item
         label={t['userSetting.info.area']}
         field="rangeArea"
-        rules={[
-          { required: true, message: t['userSetting.info.area.placeholder'] },
-        ]}
+        rules={[{ required: true, message: t['userSetting.info.area.placeholder'] }]}
       >
         {loading ? (
           loadingNode()
         ) : (
-          <Select
-            options={['中国']}
-            placeholder={t['userSetting.info.area.placeholder']}
-          />
+          <Select options={['中国']} placeholder={t['userSetting.info.area.placeholder']} />
         )}
       </Form.Item>
       <Form.Item
@@ -155,9 +146,7 @@ function InfoForm({ loading }: { loading?: boolean }) {
         {loading ? (
           loadingNode(3)
         ) : (
-          <Input.TextArea
-            placeholder={t['userSetting.info.profile.placeholder']}
-          />
+          <Input.TextArea placeholder={t['userSetting.info.profile.placeholder']} />
         )}
       </Form.Item>
 

@@ -11,8 +11,7 @@ const i18n = {
     'login.form.login': 'login',
     'login.form.register': 'register account',
     'login.banner.slogan1': 'Out-of-the-box high-quality template',
-    'login.banner.subSlogan1':
-      'Rich page templates, covering most typical business scenarios',
+    'login.banner.subSlogan1': 'Rich page templates, covering most typical business scenarios',
     'login.banner.slogan2': 'Built-in solutions to common problems',
     'login.banner.subSlogan2':
       'Internationalization, routing configuration, state management everything',

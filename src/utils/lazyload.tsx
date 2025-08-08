@@ -12,11 +12,7 @@ function load(fn, options) {
   return Component;
 }
 
-function LoadingComponent(props: {
-  error: boolean;
-  timedOut: boolean;
-  pastDelay: boolean;
-}) {
+function LoadingComponent(props: { error: boolean; timedOut: boolean; pastDelay: boolean }) {
   if (props.error) {
     console.error(props.error);
     return null;
@@ -28,7 +24,7 @@ function LoadingComponent(props: {
   );
 }
 
-export default (loader) =>
+export default loader =>
   load(loader, {
     fallback: LoadingComponent({
       pastDelay: true,

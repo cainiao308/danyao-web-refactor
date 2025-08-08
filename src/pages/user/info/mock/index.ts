@@ -63,12 +63,9 @@ setupMock({
     // 我的团队
     Mock.mock(new RegExp('/api/users/teamList'), () => {
       return new Array(4).fill(null).map((_, index) => ({
-        name: [
-          '火山引擎智能应用团队',
-          '企业级产品设计团队',
-          '前端/UE小分队',
-          '内容识别插件小分队',
-        ][index],
+        name: ['火山引擎智能应用团队', '企业级产品设计团队', '前端/UE小分队', '内容识别插件小分队'][
+          index
+        ],
         avatar: [
           '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/a8c8cdb109cb051163646151a4a5083b.png~tplv-uwbnlip3yd-webp.webp',
           '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',

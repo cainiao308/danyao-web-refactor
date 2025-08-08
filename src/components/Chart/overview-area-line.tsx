@@ -70,7 +70,7 @@ function OverviewAreaLine({
                 data={items}
                 color={color}
                 name={name}
-                formatter={(value) => Number(value).toLocaleString()}
+                formatter={value => Number(value).toLocaleString()}
               />
             );
           }}

@@ -1,43 +1,40 @@
-import React, { useContext, useEffect } from 'react';
-import {
-  Tooltip,
-  Input,
-  Avatar,
-  Select,
-  Dropdown,
-  Menu,
-  Divider,
-  Message,
-  Button,
-} from '@arco-design/web-react';
-import {
-  IconLanguage,
-  IconNotification,
-  IconSunFill,
-  IconMoonFill,
-  IconUser,
-  IconSettings,
-  IconPoweroff,
-  IconExperiment,
-  IconDashboard,
-  IconInteraction,
-  IconTag,
-  IconLoading,
-} from '@arco-design/web-react/icon';
-import { useSelector, useDispatch } from 'react-redux';
-import { GlobalState } from '@/store';
-import { GlobalContext } from '@/context';
-import useLocale from '@/utils/useLocale';
 import Logo from '@/assets/logo.svg';
 import MessageBox from '@/components/MessageBox';
-import IconButton from './IconButton';
-import Settings from '../Settings';
-import styles from './style/index.module.less';
-import defaultLocale from '@/locale';
-import useStorage from '@/utils/useStorage';
+import { GlobalContext } from '@/context';
 import { generatePermission } from '@/routes';
+import { GlobalState } from '@/store';
+import useLocale from '@/utils/useLocale';
+import useStorage from '@/utils/useStorage';
+import {
+  Avatar,
+  Button,
+  Divider,
+  Dropdown,
+  Input,
+  Menu,
+  Message,
+  Tooltip,
+} from '@arco-design/web-react';
+import {
+  IconDashboard,
+  IconExperiment,
+  IconInteraction,
+  IconLoading,
+  IconMoonFill,
+  IconNotification,
+  IconPoweroff,
+  IconSettings,
+  IconSunFill,
+  IconTag,
+  IconUser,
+} from '@arco-design/web-react/icon';
+import { useContext, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Settings from '../Settings';
+import IconButton from './IconButton';
+import styles from './style/index.module.less';
 
-function Navbar({ show }: { show: boolean }) {
+function Navbar({ show, Menus }: { show: boolean; Menus?: any }) {
   const t = useLocale();
   const { userInfo, userLoading } = useSelector((state: GlobalState) => state);
   const dispatch = useDispatch();
@@ -45,7 +42,7 @@ function Navbar({ show }: { show: boolean }) {
   const [_, setUserStatus] = useStorage('userStatus');
   const [role, setRole] = useStorage('userRole', 'admin');
 
-  const { setLang, lang, theme, setTheme } = useContext(GlobalContext);
+  const { theme, setTheme } = useContext(GlobalContext);
 
   function logout() {
     setUserStatus('logout');
@@ -75,11 +72,7 @@ function Navbar({ show }: { show: boolean }) {
   if (!show) {
     return (
       <div className={styles['fixed-settings']}>
-        <Settings
-          trigger={
-            <Button icon={<IconSettings />} type="primary" size="large" />
-          }
-        />
+        <Settings trigger={<Button icon={<IconSettings />} type="primary" size="large" />} />
       </div>
     );
   }
@@ -97,9 +90,7 @@ function Navbar({ show }: { show: boolean }) {
           <>
             <IconUser className={styles['dropdown-icon']} />
             <span className={styles['user-role']}>
-              {role === 'admin'
-                ? t['menu.user.role.admin']
-                : t['menu.user.role.user']}
+              {role === 'admin' ? t['menu.user.role.admin'] : t['menu.user.role.user']}
             </span>
           </>
         }
@@ -145,69 +136,58 @@ function Navbar({ show }: { show: boolean }) {
       <div className={styles.left}>
         <div className={styles.logo}>
           <Logo />
-          <div className={styles['logo-name']}>Arco Pro</div>
+          <div className={styles['logo-name']}>军贸产品管理系统</div>
         </div>
       </div>
       <ul className={styles.right}>
-        <li>
-          <Input.Search
-            className={styles.round}
-            placeholder={t['navbar.search.placeholder']}
-          />
-        </li>
-        <li>
-          <Select
-            triggerElement={<IconButton icon={<IconLanguage />} />}
-            options={[
-              { label: '中文', value: 'zh-CN' },
-              { label: 'English', value: 'en-US' },
-            ]}
-            value={lang}
-            triggerProps={{
-              autoAlignPopupWidth: false,
-              autoAlignPopupMinWidth: true,
-              position: 'br',
-            }}
-            trigger="hover"
-            onChange={(value) => {
-              setLang(value);
-              const nextLang = defaultLocale[value];
-              Message.info(`${nextLang['message.lang.tips']}${value}`);
-            }}
-          />
-        </li>
-        <li>
-          <MessageBox>
-            <IconButton icon={<IconNotification />} />
-          </MessageBox>
-        </li>
-        <li>
-          <Tooltip
-            content={
-              theme === 'light'
-                ? t['settings.navbar.theme.toDark']
-                : t['settings.navbar.theme.toLight']
-            }
-          >
-            <IconButton
-              icon={theme !== 'dark' ? <IconMoonFill /> : <IconSunFill />}
-              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-            />
-          </Tooltip>
-        </li>
-        <Settings />
-        {userInfo && (
-          <li>
-            <Dropdown droplist={droplist} position="br" disabled={userLoading}>
-              <Avatar size={32} style={{ cursor: 'pointer' }}>
-                {userLoading ? (
-                  <IconLoading />
-                ) : (
-                  <img alt="avatar" src={userInfo.avatar} />
-                )}
-              </Avatar>
-            </Dropdown>
-          </li>
+        {Menus ? (
+          <>
+            <Menus />
+            {userInfo && (
+              <li>
+                <Dropdown droplist={droplist} position="br" disabled={userLoading}>
+                  <Avatar size={32} style={{ cursor: 'pointer' }}>
+                    {userLoading ? <IconLoading /> : <img alt="avatar" src={userInfo.avatar} />}
+                  </Avatar>
+                </Dropdown>
+              </li>
+            )}
+          </>
+        ) : (
+          <>
+            <li>
+              <Input.Search className={styles.round} placeholder={t['navbar.search.placeholder']} />
+            </li>
+            <li>
+              <MessageBox>
+                <IconButton icon={<IconNotification />} />
+              </MessageBox>
+            </li>
+            <li>
+              <Tooltip
+                content={
+                  theme === 'light'
+                    ? t['settings.navbar.theme.toDark']
+                    : t['settings.navbar.theme.toLight']
+                }
+              >
+                <IconButton
+                  icon={theme !== 'dark' ? <IconMoonFill /> : <IconSunFill />}
+                  onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+                />
+              </Tooltip>
+            </li>
+            <Settings />
+            {userInfo && (
+              <li>
+                <Dropdown droplist={droplist} position="br" disabled={userLoading}>
+                  <Avatar size={32} style={{ cursor: 'pointer' }}>
+                    {userLoading ? <IconLoading /> : <img alt="avatar" src={userInfo.avatar} />}
+                  </Avatar>
+                </Dropdown>
+              </li>
+            )}
+          </>
         )}
       </ul>
     </div>

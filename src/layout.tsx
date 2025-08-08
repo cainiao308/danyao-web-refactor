@@ -13,6 +13,7 @@ import {
   IconUser,
   IconMenuFold,
   IconMenuUnfold,
+  IconThunderbolt,
 } from '@arco-design/web-react/icon';
 import { useSelector } from 'react-redux';
 import qs from 'query-string';
@@ -51,6 +52,8 @@ function getIconFromKey(key) {
       return <IconExclamationCircle className={styles.icon} />;
     case 'user':
       return <IconUser className={styles.icon} />;
+    case 'weapons':
+      return <IconThunderbolt className={styles.icon} />;
     default:
       return <div className={styles['icon-empty']} />;
   }
@@ -60,10 +63,8 @@ function getFlattenRoutes(routes) {
   const mod = import.meta.glob('./pages/**/[a-z[]*.tsx');
   const res = [];
   function travel(_routes) {
-    _routes.forEach((route) => {
-      const visibleChildren = (route.children || []).filter(
-        (child) => !child.ignore
-      );
+    _routes.forEach(route => {
+      const visibleChildren = (route.children || []).filter(child => !child.ignore);
       if (route.key && (!route.children || !visibleChildren.length)) {
         try {
           route.component = lazyload(mod[`./pages/${route.key}/index.tsx`]);
@@ -89,9 +90,7 @@ function PageLayout() {
   const pathname = history.location.pathname;
   const currentComponent = qs.parseUrl(pathname).url.slice(1);
   const locale = useLocale();
-  const { settings, userLoading, userInfo } = useSelector(
-    (state: GlobalState) => state
-  );
+  const { settings, userLoading, userInfo } = useSelector((state: GlobalState) => state);
 
   const [routes, defaultRoute] = useRoute(userInfo?.permissions);
   const defaultSelectedKeys = [currentComponent || defaultRoute];
@@ -100,14 +99,11 @@ function PageLayout() {
 
   const [breadcrumb, setBreadCrumb] = useState([]);
   const [collapsed, setCollapsed] = useState<boolean>(false);
-  const [selectedKeys, setSelectedKeys] =
-    useState<string[]>(defaultSelectedKeys);
+  const [selectedKeys, setSelectedKeys] = useState<string[]>(defaultSelectedKeys);
   const [openKeys, setOpenKeys] = useState<string[]>(defaultOpenKeys);
 
   const routeMap = useRef<Map<string, React.ReactNode[]>>(new Map());
-  const menuMap = useRef<
-    Map<string, { menuItem?: boolean; subMenu?: boolean }>
-  >(new Map());
+  const menuMap = useRef<Map<string, { menuItem?: boolean; subMenu?: boolean }>>(new Map());
 
   const navbarHeight = 60;
   const menuWidth = collapsed ? 48 : settings.menuWidth;
@@ -119,7 +115,7 @@ function PageLayout() {
   const flattenRoutes = useMemo(() => getFlattenRoutes(routes) || [], [routes]);
 
   function onClickMenuItem(key) {
-    const currentRoute = flattenRoutes.find((r) => r.key === key);
+    const currentRoute = flattenRoutes.find(r => r.key === key);
     const component = currentRoute.component;
     const preload = component.preload();
     NProgress.start();
@@ -130,7 +126,7 @@ function PageLayout() {
   }
 
   function toggleCollapse() {
-    setCollapsed((collapsed) => !collapsed);
+    setCollapsed(collapsed => !collapsed);
   }
 
   const paddingLeft = showMenu ? { paddingLeft: menuWidth } : {};
@@ -140,7 +136,7 @@ function PageLayout() {
   function renderRoutes(locale) {
     routeMap.current.clear();
     return function travel(_routes: IRoute[], level, parentNode = []) {
-      return _routes.map((route) => {
+      return _routes.map(route => {
         const { breadcrumb = true, ignore } = route;
         const iconDom = getIconFromKey(route.key);
         const titleDom = (
@@ -149,12 +145,9 @@ function PageLayout() {
           </>
         );
 
-        routeMap.current.set(
-          `/${route.key}`,
-          breadcrumb ? [...parentNode, route.name] : []
-        );
+        routeMap.current.set(`/${route.key}`, breadcrumb ? [...parentNode, route.name] : []);
 
-        const visibleChildren = (route.children || []).filter((child) => {
+        const visibleChildren = (route.children || []).filter(child => {
           const { ignore, breadcrumb = true } = child;
           if (ignore || route.ignore) {
             routeMap.current.set(
@@ -267,21 +260,12 @@ function PageLayout() {
               <Content>
                 <Switch>
                   {flattenRoutes.map((route, index) => {
-                    return (
-                      <Route
-                        key={index}
-                        path={`/${route.key}`}
-                        component={route.component}
-                      />
-                    );
+                    return <Route key={index} path={`/${route.key}`} component={route.component} />;
                   })}
                   <Route exact path="/">
                     <Redirect to={`/${defaultRoute}`} />
                   </Route>
-                  <Route
-                    path="*"
-                    component={lazyload(() => import('./pages/exception/403'))}
-                  />
+                  <Route path="*" component={lazyload(() => import('./pages/exception/403'))} />
                 </Switch>
               </Content>
             </div>

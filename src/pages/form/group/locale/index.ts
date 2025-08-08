@@ -6,10 +6,8 @@ const i18n = {
     'groupForm.title.audio': 'Audio Parameters',
     'groupForm.title.explanation': 'Enter Explanation',
     'groupForm.form.label.video.mode': 'Match Mode',
-    'groupForm.form.label.video.acquisition.resolution':
-      'Acquisition Resolution',
-    'groupForm.form.label.video.acquisition.frameRate':
-      'Acquisition Frame Rate',
+    'groupForm.form.label.video.acquisition.resolution': 'Acquisition Resolution',
+    'groupForm.form.label.video.acquisition.frameRate': 'Acquisition Frame Rate',
     'groupForm.form.label.video.encoding.resolution': 'Encoding Resolution',
     'groupForm.form.label.video.encoding.rate.min': 'Encoding Min Rate',
     'groupForm.form.label.video.encoding.rate.max': 'Encoding Max Rate',
@@ -22,8 +20,7 @@ const i18n = {
     'groupForm.placeholder.video.encoding.resolution': 'Please Select',
     'groupForm.placeholder.video.encoding.rate.min': 'Enter Range [150, 1800]',
     'groupForm.placeholder.video.encoding.rate.max': 'Enter Range [150, 1800]',
-    'groupForm.placeholder.video.encoding.rate.default':
-      'Enter Range [150, 1800]',
+    'groupForm.placeholder.video.encoding.rate.default': 'Enter Range [150, 1800]',
     'groupForm.placeholder.video.encoding.frameRate': 'Enter Range [1, 30]',
     'groupForm.placeholder.video.encoding.profile': 'Enter Range [150, 1800]',
     'groupForm.form.label.audio.mode': 'Match Mode',

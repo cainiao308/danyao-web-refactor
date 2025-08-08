@@ -71,9 +71,7 @@ function DataAnalysis() {
   return (
     <Space size={16} direction="vertical" style={{ width: '100%' }}>
       <Card>
-        <Typography.Title heading={6}>
-          {t['dataAnalysis.title.publicOpinion']}
-        </Typography.Title>
+        <Typography.Title heading={6}>{t['dataAnalysis.title.publicOpinion']}</Typography.Title>
         <PublicOpinion />
       </Card>
       <Row gutter={16}>
@@ -87,9 +85,7 @@ function DataAnalysis() {
         </Col>
         <Col span={10}>
           <Card>
-            <Typography.Title heading={6}>
-              {t['dataAnalysis.title.authorsList']}
-            </Typography.Title>
+            <Typography.Title heading={6}>{t['dataAnalysis.title.authorsList']}</Typography.Title>
             <div style={{ height: '370px' }}>
               <Table
                 rowKey="id"

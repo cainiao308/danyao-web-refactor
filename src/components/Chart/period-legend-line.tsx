@@ -51,7 +51,7 @@ function PeriodLine({ data, loading }: { data: any[]; loading: boolean }) {
             opacity: 0.3,
           }}
           trendCfg={{
-            data: data.map((item) => item.rate),
+            data: data.map(item => item.rate),
             isArea: true,
             areaStyle: {
               fill: 'rgba(4, 135, 255, 0.15)',

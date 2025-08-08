@@ -15,9 +15,7 @@ function LatestNews() {
   const [loading, setLoading] = useState(true);
 
   const getData = async () => {
-    const { data } = await axios
-      .get('/api/user/latestNews')
-      .finally(() => setLoading(false));
+    const { data } = await axios.get('/api/user/latestNews').finally(() => setLoading(false));
     setData(data);
   };
 

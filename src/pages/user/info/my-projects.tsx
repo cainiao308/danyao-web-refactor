@@ -27,11 +27,7 @@ function MyProject() {
         <Col
           key={index}
           span={8}
-          style={
-            index > data.length - 4 && index < data.length
-              ? { marginTop: '16px' }
-              : {}
-          }
+          style={index > data.length - 4 && index < data.length ? { marginTop: '16px' } : {}}
         >
           <ProjectCard {...item} loading={loading} />
         </Col>

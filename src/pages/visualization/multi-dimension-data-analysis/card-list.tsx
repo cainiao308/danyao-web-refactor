@@ -1,12 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import {
-  Statistic,
-  Typography,
-  Spin,
-  Grid,
-  Card,
-  Skeleton,
-} from '@arco-design/web-react';
+import { Statistic, Typography, Spin, Grid, Card, Skeleton } from '@arco-design/web-react';
 import cs from 'classnames';
 import { Chart, Line, Interval, Tooltip, Interaction } from 'bizcharts';
 import axios from 'axios';
@@ -72,7 +65,7 @@ function SimpleInterval(props: { chartData: any[] }) {
         position="x*y"
         color={[
           'x',
-          (xVal) => {
+          xVal => {
             if (Number(xVal) % 2 === 0) {
               return '#86DF6C';
             }
@@ -80,17 +73,14 @@ function SimpleInterval(props: { chartData: any[] }) {
           },
         ]}
       />
-      <Tooltip shared={false}>
-        {(_, items) => <CustomTooltip items={items} />}
-      </Tooltip>
+      <Tooltip shared={false}>{(_, items) => <CustomTooltip items={items} />}</Tooltip>
       <Interaction type="active-region" />
     </Chart>
   );
 }
 
 function CardBlock(props: CardProps) {
-  const { chartType, title, count, increment, diff, chartData, loading } =
-    props;
+  const { chartType, title, count, increment, diff, chartData, loading } = props;
 
   return (
     <Card className={styles.card}>
@@ -106,11 +96,7 @@ function CardBlock(props: CardProps) {
           extra={
             <div className={styles['compare-yesterday']}>
               {loading ? (
-                <Skeleton
-                  text={{ rows: 1 }}
-                  style={{ width: '100px' }}
-                  animation
-                />
+                <Skeleton text={{ rows: 1 }} style={{ width: '100px' }} animation />
               ) : (
                 <span
                   className={cs(styles['diff'], {
@@ -158,14 +144,14 @@ function CardList() {
   const t = useLocale(locale);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(
-    cardInfo.map((item) => ({
+    cardInfo.map(item => ({
       ...item,
       chartType: item.type,
     }))
   );
 
   const getData = async () => {
-    const requestList = cardInfo.map(async (info) => {
+    const requestList = cardInfo.map(async info => {
       const { data } = await axios
         .get(`/api/multi-dimension/card?type=${info.type}`)
         .catch(() => ({ data: {} }));
@@ -177,9 +163,7 @@ function CardList() {
     });
 
     setLoading(true);
-    const result = await Promise.all(requestList).finally(() =>
-      setLoading(false)
-    );
+    const result = await Promise.all(requestList).finally(() => setLoading(false));
     setData(result);
   };
 
@@ -188,7 +172,7 @@ function CardList() {
   }, []);
 
   const formatData = useMemo(() => {
-    return data.map((item) => ({
+    return data.map(item => ({
       ...item,
       title: t[`multiDAnalysis.cardList.${item.key}`],
     }));

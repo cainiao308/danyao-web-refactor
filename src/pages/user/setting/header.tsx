@@ -1,25 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Button,
-  Avatar,
-  Upload,
-  Descriptions,
-  Tag,
-  Skeleton,
-  Link,
-} from '@arco-design/web-react';
+import { Button, Avatar, Upload, Descriptions, Tag, Skeleton, Link } from '@arco-design/web-react';
 import { IconCamera, IconPlus } from '@arco-design/web-react/icon';
 import useLocale from '@/utils/useLocale';
 import locale from './locale';
 import styles from './style/header.module.less';
 
-export default function Info({
-  userInfo = {},
-  loading,
-}: {
-  userInfo: any;
-  loading: boolean;
-}) {
+export default function Info({ userInfo = {}, loading }: { userInfo: any; loading: boolean }) {
   const t = useLocale(locale);
 
   const [avatar, setAvatar] = useState('');
@@ -33,11 +19,7 @@ export default function Info({
   }, [userInfo]);
 
   const loadingImg = (
-    <Skeleton
-      text={{ rows: 0 }}
-      style={{ width: '100px', height: '100px' }}
-      animation
-    />
+    <Skeleton text={{ rows: 0 }} style={{ width: '100px', height: '100px' }} animation />
   );
 
   const loadingNode = <Skeleton text={{ rows: 1 }} animation />;
@@ -47,11 +29,7 @@ export default function Info({
         {loading ? (
           loadingImg
         ) : (
-          <Avatar
-            size={100}
-            triggerIcon={<IconCamera />}
-            className={styles['info-avatar']}
-          >
+          <Avatar size={100} triggerIcon={<IconCamera />} className={styles['info-avatar']}>
             {avatar ? <img src={avatar} /> : <IconPlus />}
           </Avatar>
         )}

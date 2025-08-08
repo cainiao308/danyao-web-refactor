@@ -46,7 +46,7 @@ setupMock({
     const listPic = getList();
     const listVideo = getList();
 
-    Mock.mock(new RegExp('/api/workplace/popular-contents'), (params) => {
+    Mock.mock(new RegExp('/api/workplace/popular-contents'), params => {
       const {
         page = 1,
         pageSize = 5,

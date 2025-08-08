@@ -19,13 +19,13 @@ const getLineData = (name, index) => {
       },
     ],
   });
-  return list.map((item) => {
+  return list.map(item => {
     delete item.id;
     return item;
   });
 };
 
-const mockLine = (name) => {
+const mockLine = name => {
   const result = new Array(12).fill(0).map(() => ({
     y: Mock.Random.natural(1000, 10000),
   }));
@@ -38,10 +38,10 @@ const mockLine = (name) => {
     }));
 };
 
-const getContentSource = (name) => {
+const getContentSource = name => {
   const typeList = ['UGC原创', '国外网站', '转载文章', '行业报告', '其他'];
   const result = [];
-  typeList.forEach((type) => {
+  typeList.forEach(type => {
     result.push({
       type,
       value: Mock.Random.natural(100, 10000),
@@ -49,7 +49,7 @@ const getContentSource = (name) => {
     });
   });
   const total = result.reduce((a, b) => a + b.value, 0);
-  return result.map((item) => ({
+  return result.map(item => ({
     ...item,
     value: Number((item.value / total).toFixed(2)),
   }));
@@ -66,9 +66,7 @@ setupMock({
         ],
       });
       let list = [];
-      legend.forEach(
-        (name, index) => (list = list.concat(getLineData(name, index)))
-      );
+      legend.forEach((name, index) => (list = list.concat(getLineData(name, index))));
       return {
         overviewData,
         chartData: list,
@@ -92,7 +90,7 @@ setupMock({
 
       const getCategoryCount = () => {
         const result = {};
-        category.forEach((name) => {
+        category.forEach(name => {
           result[name] = Mock.Random.natural(0, 100);
         });
 
@@ -100,7 +98,7 @@ setupMock({
       };
 
       return {
-        list: items.map((item) => ({
+        list: items.map(item => ({
           item,
           ...getCategoryCount(),
         })),
@@ -108,7 +106,7 @@ setupMock({
       };
     });
 
-    Mock.mock(new RegExp('/api/multi-dimension/card'), (params) => {
+    Mock.mock(new RegExp('/api/multi-dimension/card'), params => {
       const { type } = qs.parseUrl(params.url).query;
       return Mock.mock({
         count: () => Mock.Random.natural(1000, 10000),
@@ -122,8 +120,8 @@ setupMock({
     });
 
     Mock.mock(new RegExp('/api/multi-dimension/content-source'), () => {
-      const allList = category.map((name) => {
-        return getContentSource(name).map((item) => ({
+      const allList = category.map(name => {
+        return getContentSource(name).map(item => ({
           ...item,
           category: name,
         }));

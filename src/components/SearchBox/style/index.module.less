@@ -1,0 +1,384 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf0 100%);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 80%, rgba(165, 177, 194, 15%) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 80%) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(165, 177, 194, 10%) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 30%);
+    pointer-events: none;
+  }
+}
+
+.content {
+  text-align: center;
+  max-width: 700px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  margin-bottom: 40px;
+  color: #1d2129;
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 10%);
+  position: relative;
+
+  :global(.arco-typography) {
+    margin: 0;
+    font-size: 36px !important;
+    color: #1d2129;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: #165dff;
+    border-radius: 1px;
+  }
+}
+
+.search-container {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.search-box {
+  position: relative;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-input {
+  flex: 1;
+
+  :global(.arco-input) {
+    height: 48px;
+    border-radius: 8px;
+    border: 1px solid #d9d9d9;
+    font-size: 15px;
+    padding: 0 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 6%);
+    transition: all 0.3s ease;
+    background: white;
+
+    &::placeholder {
+      color: #999;
+      font-weight: 400;
+    }
+
+    &:hover {
+      border-color: #40a9ff;
+      box-shadow: 0 2px 8px rgba(64, 169, 255, 20%);
+    }
+
+    &:focus {
+      border-color: #1890ff;
+      box-shadow: 0 0 0 2px rgba(24, 144, 255, 20%);
+      outline: none;
+    }
+  }
+
+  :global(.arco-input-prefix) {
+    margin-right: 8px;
+  }
+
+  :global(.arco-input-suffix) {
+    margin-left: 8px;
+  }
+}
+
+.search-icon {
+  color: #8c8c8c;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.clear-icon {
+  color: #bfbfbf;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 2px;
+  border-radius: 50%;
+  font-size: 14px;
+
+  &:hover {
+    color: #ff4d4f;
+    background: rgba(255, 77, 79, 10%);
+  }
+}
+
+.search-button {
+  height: 48px;
+  padding: 0 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 15px;
+  border: none;
+  background: #1890ff;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 80px;
+
+  &:hover {
+    background: #40a9ff;
+    box-shadow: 0 2px 8px rgba(24, 144, 255, 30%);
+  }
+
+  &:active {
+    background: #096dd9;
+  }
+}
+
+.clear-button {
+  height: 48px;
+  padding: 0 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 15px;
+  border: 1px solid #d9d9d9;
+  background: white;
+  color: #595959;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 70px;
+
+  &:hover {
+    border-color: #40a9ff;
+    color: #1890ff;
+  }
+
+  &:active {
+    border-color: #096dd9;
+    color: #096dd9;
+  }
+}
+
+.suggestions {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 15%);
+  max-height: 360px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #e8e8e8;
+  min-width: 400px;
+  width: 100%;
+
+  :global(.arco-card-body) {
+    padding: 16px;
+  }
+}
+
+.suggestionSection {
+  margin-bottom: 16px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: #8c8c8c;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #f0f0f0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sectionIcon {
+  margin-right: 6px;
+  font-size: 14px;
+  color: #1890ff;
+}
+
+.suggestionItem {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  color: #262626;
+  margin-bottom: 2px;
+
+  &:hover {
+    background: #f5f5f5;
+    color: #1890ff;
+  }
+
+  &:active {
+    background: #e6f7ff;
+  }
+}
+
+.suggestionIcon {
+  margin-right: 8px;
+  color: #bfbfbf;
+  font-size: 14px;
+  transition: color 0.2s;
+
+  .suggestionItem:hover & {
+    color: #1890ff;
+  }
+}
+
+.tagContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.historyTag {
+  cursor: pointer;
+  border-radius: 12px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 400;
+  background: #fafafa;
+  border: 1px solid #e8e8e8;
+  color: #595959;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #e6f7ff;
+    border-color: #91d5ff;
+    color: #1890ff;
+  }
+
+  &:active {
+    background: #bae7ff;
+  }
+}
+
+.hotTag {
+  cursor: pointer;
+  border-radius: 12px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 400;
+  background: #ff4d4f;
+  border: 1px solid #ff4d4f;
+  color: white;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #ff7875;
+    border-color: #ff7875;
+  }
+
+  &:active {
+    background: #f5222d;
+    border-color: #f5222d;
+  }
+}
+
+.buttons {
+  display: none; /* 按钮现在在搜索框同一行，不再使用这个样式 */
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .container {
+    min-height: 50vh;
+    padding: 20px 16px;
+  }
+
+  .title {
+    margin-bottom: 30px;
+
+    :global(.arco-typography) {
+      font-size: 24px !important;
+    }
+  }
+
+  .search-input {
+    :global(.arco-input) {
+      height: 44px;
+      font-size: 14px;
+    }
+  }
+
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+
+    :global(.arco-btn) {
+      width: 200px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    max-width: 100%;
+  }
+
+  .title {
+    :global(.arco-typography) {
+      font-size: 20px !important;
+    }
+  }
+
+  .search-input {
+    :global(.arco-input) {
+      height: 40px;
+      padding: 0 16px;
+    }
+  }
+
+  .buttons {
+    :global(.arco-btn) {
+      width: 160px;
+      height: 36px;
+      padding: 0 24px;
+    }
+  }
+}

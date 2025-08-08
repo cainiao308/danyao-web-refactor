@@ -21,8 +21,7 @@ const getMessageList = () => {
       subTitle: '的回复',
       avatar:
         '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
-      content:
-        '此处 bug 已经修复，如有问题请查阅文档或者继续 github 提 issue～',
+      content: '此处 bug 已经修复，如有问题请查阅文档或者继续 github 提 issue～',
       time: '今天 12:30:01',
     },
     {
@@ -78,7 +77,7 @@ const getMessageList = () => {
         color: 'green',
       },
     },
-  ].map((item) => ({
+  ].map(item => ({
     ...item,
     status: haveReadIds.indexOf(item.id) === -1 ? 0 : 1,
   }));
@@ -90,7 +89,7 @@ setupMock({
       return getMessageList();
     });
 
-    Mock.mock(new RegExp('/api/message/read'), (params) => {
+    Mock.mock(new RegExp('/api/message/read'), params => {
       const { ids } = JSON.parse(params.body);
       haveReadIds.push(...(ids || []));
       return true;

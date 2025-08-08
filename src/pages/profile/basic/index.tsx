@@ -1,14 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Card,
-  Steps,
-  Typography,
-  Grid,
-  Space,
-  Button,
-  Table,
-  Badge,
-} from '@arco-design/web-react';
+import { Card, Steps, Typography, Grid, Space, Button, Table, Badge } from '@arco-design/web-react';
 import axios from 'axios';
 import useLocale from '@/utils/useLocale';
 import locale from './locale';
@@ -29,7 +20,7 @@ function BasicProfile() {
     setLoading(true);
     axios
       .get('/api/basicProfile')
-      .then((res) => {
+      .then(res => {
         setData(res.data || {});
       })
       .finally(() => {
@@ -41,7 +32,7 @@ function BasicProfile() {
     setPreLoading(true);
     axios
       .get('/api/basicProfile')
-      .then((res) => {
+      .then(res => {
         setPreData(res.data || {});
       })
       .finally(() => {
@@ -53,7 +44,7 @@ function BasicProfile() {
     setTableLoading(true);
     axios
       .get('/api/adjustment')
-      .then((res) => {
+      .then(res => {
         setTableData(res.data);
       })
       .finally(() => {
@@ -71,9 +62,7 @@ function BasicProfile() {
       <Card>
         <Grid.Row justify="space-between" align="center">
           <Grid.Col span={16}>
-            <Typography.Title heading={6}>
-              {t['basicProfile.title.form']}
-            </Typography.Title>
+            <Typography.Title heading={6}>{t['basicProfile.title.form']}</Typography.Title>
           </Grid.Col>
           <Grid.Col span={8} style={{ textAlign: 'right' }}>
             <Space>
@@ -103,9 +92,7 @@ function BasicProfile() {
         loading={preLoading}
       />
       <Card>
-        <Typography.Title heading={6}>
-          {t['basicProfile.adjustment.record']}
-        </Typography.Title>
+        <Typography.Title heading={6}>{t['basicProfile.adjustment.record']}</Typography.Title>
         <Table
           loading={tableLoading}
           data={tableData}
@@ -121,22 +108,12 @@ function BasicProfile() {
             {
               dataIndex: 'status',
               title: t['basicProfile.adjustment.status'],
-              render: (status) => {
+              render: status => {
                 if (status) {
-                  return (
-                    <Badge
-                      status="success"
-                      text={t['basicProfile.adjustment.success']}
-                    />
-                  );
+                  return <Badge status="success" text={t['basicProfile.adjustment.success']} />;
                 }
 
-                return (
-                  <Badge
-                    status="processing"
-                    text={t['basicProfile.adjustment.waiting']}
-                  />
-                );
+                return <Badge status="processing" text={t['basicProfile.adjustment.waiting']} />;
               },
             },
             {
@@ -147,11 +124,7 @@ function BasicProfile() {
               title: t['basicProfile.adjustment.operation'],
               headerCellStyle: { paddingLeft: '15px' },
               render() {
-                return (
-                  <Button type="text">
-                    {t['basicProfile.adjustment.operation.view']}
-                  </Button>
-                );
+                return <Button type="text">{t['basicProfile.adjustment.operation.view']}</Button>;
               },
             },
           ]}

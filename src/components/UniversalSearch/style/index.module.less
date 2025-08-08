@@ -1,0 +1,86 @@
+.container {
+  background: #f5f7fa;
+  min-height: 100vh;
+}
+
+.content-wrapper {
+  max-width: 1200px;
+  margin: 40px auto 0;
+  padding: 0 20px;
+}
+
+.result-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 10%);
+}
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+.search-info {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: #f7f8fa;
+  border-radius: 6px;
+  border-left: 3px solid #165dff;
+}
+
+.result-table {
+  :global(.arco-table-th) {
+    background-color: #fafbfc;
+    font-weight: 600;
+  }
+
+  :global(.arco-table-td) {
+    padding: 12px 16px;
+  }
+
+  :global(.arco-table-row:hover) {
+    background-color: #f7f8fa;
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .content-wrapper {
+    padding: 0 16px;
+    margin-top: 20px;
+  }
+
+  .result-header {
+    :global(.arco-space) {
+      width: 100%;
+
+      :global(.arco-input) {
+        width: 150px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .result-header {
+    :global(.arco-space) {
+      flex-direction: column;
+      width: 100%;
+
+      :global(.arco-input) {
+        width: 100%;
+      }
+
+      :global(.arco-btn) {
+        width: 100%;
+      }
+    }
+  }
+}

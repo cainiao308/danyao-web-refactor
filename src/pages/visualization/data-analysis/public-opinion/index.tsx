@@ -30,7 +30,7 @@ function PublicOpinion() {
   const t = useLocale(locale);
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<PublicOpinionCardProps[]>(
-    cardInfo.map((item) => ({
+    cardInfo.map(item => ({
       ...item,
       chartType: item.type as 'line' | 'pie' | 'interval',
       title: t[`dataAnalysis.publicOpinion.${item.key}`],
@@ -38,7 +38,7 @@ function PublicOpinion() {
   );
 
   const getData = async () => {
-    const requestList = cardInfo.map(async (info) => {
+    const requestList = cardInfo.map(async info => {
       const { data } = await axios
         .get(`/api/data-analysis/overview?type=${info.type}`)
         .catch(() => ({ data: {} }));
@@ -48,9 +48,7 @@ function PublicOpinion() {
         chartType: info.type,
       };
     });
-    const result = await Promise.all(requestList).finally(() =>
-      setLoading(false)
-    );
+    const result = await Promise.all(requestList).finally(() => setLoading(false));
     setData(result);
   };
 
@@ -59,7 +57,7 @@ function PublicOpinion() {
   }, []);
 
   const formatData = useMemo(() => {
-    return data.map((item) => ({
+    return data.map(item => ({
       ...item,
       title: t[`dataAnalysis.publicOpinion.${item.key}`],
     }));

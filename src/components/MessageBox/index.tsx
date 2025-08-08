@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import groupBy from 'lodash/groupBy';
-import {
-  Trigger,
-  Badge,
-  Tabs,
-  Avatar,
-  Spin,
-  Button,
-} from '@arco-design/web-react';
+import { Trigger, Badge, Tabs, Avatar, Spin, Button } from '@arco-design/web-react';
 import {
   IconMessage,
   IconCustomerService,
@@ -31,7 +24,7 @@ function DropContent() {
     showLoading && setLoading(true);
     axios
       .get('/api/message/list')
-      .then((res) => {
+      .then(res => {
         setSourceData(res.data);
       })
       .finally(() => {
@@ -40,7 +33,7 @@ function DropContent() {
   }
 
   function readMessage(data: MessageListType) {
-    const ids = data.map((item) => item.id);
+    const ids = data.map(item => item.id);
     axios
       .post('/api/message/read', {
         ids,
@@ -55,10 +48,7 @@ function DropContent() {
   }, []);
 
   useEffect(() => {
-    const groupData: { [key: string]: MessageListType } = groupBy(
-      sourceData,
-      'type'
-    );
+    const groupData: { [key: string]: MessageListType } = groupBy(sourceData, 'type');
     setGroupData(groupData);
   }, [sourceData]);
 
@@ -99,10 +89,10 @@ function DropContent() {
             </Button>
           }
         >
-          {tabList.map((item) => {
+          {tabList.map(item => {
             const { key, title, avatar } = item;
             const data = groupData[key] || [];
-            const unReadData = data.filter((item) => !item.status);
+            const unReadData = data.filter(item => !item.status);
             return (
               <Tabs.TabPane
                 key={key}
@@ -116,10 +106,10 @@ function DropContent() {
                 <MessageList
                   data={data}
                   unReadData={unReadData}
-                  onItemClick={(item) => {
+                  onItemClick={item => {
                     readMessage([item]);
                   }}
-                  onAllBtnClick={(unReadData) => {
+                  onAllBtnClick={unReadData => {
                     readMessage(unReadData);
                   }}
                 />

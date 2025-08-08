@@ -33,13 +33,9 @@ interface CardBlockType {
   loading?: boolean;
 }
 
-const IconList = [
-  IconStarFill,
-  IconThumbUpFill,
-  IconSunFill,
-  IconFaceSmileFill,
-  IconPenFill,
-].map((Tag, index) => <Tag key={index} />);
+const IconList = [IconStarFill, IconThumbUpFill, IconSunFill, IconFaceSmileFill, IconPenFill].map(
+  (Tag, index) => <Tag key={index} />
+);
 
 const { Paragraph } = Typography;
 
@@ -52,7 +48,7 @@ function CardBlock(props: CardBlockType) {
   const t = useLocale(locale);
   const changeStatus = async () => {
     setLoading(true);
-    await new Promise((resolve) =>
+    await new Promise(resolve =>
       setTimeout(() => {
         setStatus(status !== 1 ? 1 : 0);
         resolve(null);
@@ -72,11 +68,7 @@ function CardBlock(props: CardBlockType) {
 
   const getTitleIcon = () => {
     if (type === 'service' && typeof card.icon === 'number') {
-      return (
-        <div className={styles.icon}>
-          {IconList[card.icon % IconList.length]}
-        </div>
-      );
+      return <div className={styles.icon}>{IconList[card.icon % IconList.length]}</div>;
     }
     return null;
   };
@@ -86,23 +78,15 @@ function CardBlock(props: CardBlockType) {
       return (
         <>
           <PermissionWrapper
-            requiredPermissions={[
-              { resource: /^menu.list.*/, actions: ['read'] },
-            ]}
+            requiredPermissions={[{ resource: /^menu.list.*/, actions: ['read'] }]}
           >
-            <Button
-              type="primary"
-              style={{ marginLeft: '12px' }}
-              loading={loading}
-            >
+            <Button type="primary" style={{ marginLeft: '12px' }} loading={loading}>
               {t['cardList.options.qualityInspection']}
             </Button>
           </PermissionWrapper>
 
           <PermissionWrapper
-            requiredPermissions={[
-              { resource: /^menu.list.*/, actions: ['write'] },
-            ]}
+            requiredPermissions={[{ resource: /^menu.list.*/, actions: ['write'] }]}
           >
             <Button loading={loading}>{t['cardList.options.remove']}</Button>
           </PermissionWrapper>
@@ -119,29 +103,20 @@ function CardBlock(props: CardBlockType) {
             </Button>
           ) : (
             <Button type="outline" loading={loading} onClick={changeStatus}>
-              {status === 0
-                ? t['cardList.options.subscribe']
-                : t['cardList.options.renewal']}
+              {status === 0 ? t['cardList.options.subscribe'] : t['cardList.options.renewal']}
             </Button>
           )}
         </>
       );
     }
 
-    return (
-      <Switch checked={!!status} loading={loading} onChange={changeStatus} />
-    );
+    return <Switch checked={!!status} loading={loading} onChange={changeStatus} />;
   };
 
   const getStatus = () => {
     if (type === 'rules' && status) {
       return (
-        <Tag
-          color="green"
-          icon={<IconCheckCircleFill />}
-          className={styles.status}
-          size="small"
-        >
+        <Tag color="green" icon={<IconCheckCircleFill />} className={styles.status} size="small">
           {t['cardList.tag.activated']}
         </Tag>
       );
@@ -149,23 +124,13 @@ function CardBlock(props: CardBlockType) {
     switch (status) {
       case 1:
         return (
-          <Tag
-            color="green"
-            icon={<IconCheckCircleFill />}
-            className={styles.status}
-            size="small"
-          >
+          <Tag color="green" icon={<IconCheckCircleFill />} className={styles.status} size="small">
             {t['cardList.tag.opened']}
           </Tag>
         );
       case 2:
         return (
-          <Tag
-            color="red"
-            icon={<IconCloseCircleFill />}
-            className={styles.status}
-            size="small"
-          >
+          <Tag color="red" icon={<IconCloseCircleFill />} className={styles.status} size="small">
             {t['cardList.tag.expired']}
           </Tag>
         );

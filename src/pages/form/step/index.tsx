@@ -81,9 +81,7 @@ function StepForm() {
                     },
                   ]}
                 >
-                  <Input
-                    placeholder={t['stepForm.basicInfo.name.placeholder']}
-                  />
+                  <Input placeholder={t['stepForm.basicInfo.name.placeholder']} />
                 </Form.Item>
                 <Form.Item
                   label={t['stepForm.basicInfo.channelType']}
@@ -124,9 +122,7 @@ function StepForm() {
                   initialValue={'https://arco.design'}
                   rules={[{ required: true }]}
                 >
-                  <Input
-                    placeholder={t['stepForm.basicInfo.link.placeholder']}
-                  />
+                  <Input placeholder={t['stepForm.basicInfo.link.placeholder']} />
                 </Form.Item>
               </Form.Item>
             )}
@@ -143,9 +139,7 @@ function StepForm() {
                     },
                   ]}
                 >
-                  <Input
-                    placeholder={t['stepForm.channel.source.placeholder']}
-                  />
+                  <Input placeholder={t['stepForm.channel.source.placeholder']} />
                 </Form.Item>
                 <Form.Item
                   label={t['stepForm.channel.media']}
@@ -158,9 +152,7 @@ function StepForm() {
                     },
                   ]}
                 >
-                  <Input
-                    placeholder={t['stepForm.channel.media.placeholder']}
-                  />
+                  <Input placeholder={t['stepForm.channel.media.placeholder']} />
                 </Form.Item>
                 <Form.Item
                   label={t['stepForm.channel.keywords']}
@@ -193,9 +185,7 @@ function StepForm() {
                     },
                   ]}
                 >
-                  <Input.TextArea
-                    placeholder={t['stepForm.channel.content.placeholder']}
-                  />
+                  <Input.TextArea placeholder={t['stepForm.channel.content.placeholder']} />
                 </Form.Item>
               </Form.Item>
             )}
@@ -203,10 +193,7 @@ function StepForm() {
               <Form.Item label=" ">
                 <Space>
                   {current === 2 && (
-                    <Button
-                      size="large"
-                      onClick={() => setCurrent(current - 1)}
-                    >
+                    <Button size="large" onClick={() => setCurrent(current - 1)}>
                       {t['stepForm.prev']}
                     </Button>
                   )}
@@ -224,11 +211,7 @@ function StepForm() {
                   title={t['stepForm.created.success.title']}
                   subTitle={t['stepForm.created.success.desc']}
                   extra={[
-                    <Button
-                      key="reset"
-                      style={{ marginRight: 16 }}
-                      onClick={viewForm}
-                    >
+                    <Button key="reset" style={{ marginRight: 16 }} onClick={viewForm}>
                       {t['stepForm.created.success.view']}
                     </Button>,
                     <Button key="again" type="primary" onClick={reCreateForm}>

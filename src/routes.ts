@@ -23,9 +23,7 @@ export const routes: IRoute[] = [
       {
         name: 'menu.dashboard.monitor',
         key: 'dashboard/monitor',
-        requiredPermissions: [
-          { resource: 'menu.dashboard.monitor', actions: ['write'] },
-        ],
+        requiredPermissions: [{ resource: 'menu.dashboard.monitor', actions: ['write'] }],
       },
     ],
   },
@@ -36,9 +34,7 @@ export const routes: IRoute[] = [
       {
         name: 'menu.visualization.dataAnalysis',
         key: 'visualization/data-analysis',
-        requiredPermissions: [
-          { resource: 'menu.visualization.dataAnalysis', actions: ['read'] },
-        ],
+        requiredPermissions: [{ resource: 'menu.visualization.dataAnalysis', actions: ['read'] }],
       },
       {
         name: 'menu.visualization.multiDimensionDataAnalysis',
@@ -72,22 +68,32 @@ export const routes: IRoute[] = [
     ],
   },
   {
+    name: 'menu.weapons',
+    key: 'weapons',
+    children: [
+      {
+        name: 'menu.weapons.ammunition',
+        key: 'weapons/ammunition',
+      },
+      {
+        name: 'menu.weapons.artillery',
+        key: 'weapons/artillery',
+      },
+    ],
+  },
+  {
     name: 'menu.form',
     key: 'form',
     children: [
       {
         name: 'menu.form.group',
         key: 'form/group',
-        requiredPermissions: [
-          { resource: 'menu.form.group', actions: ['read', 'write'] },
-        ],
+        requiredPermissions: [{ resource: 'menu.form.group', actions: ['read', 'write'] }],
       },
       {
         name: 'menu.form.step',
         key: 'form/step',
-        requiredPermissions: [
-          { resource: 'menu.form.step', actions: ['read'] },
-        ],
+        requiredPermissions: [{ resource: 'menu.form.step', actions: ['read'] }],
       },
     ],
   },
@@ -153,7 +159,7 @@ export const routes: IRoute[] = [
 ];
 
 export const getName = (path: string, routes) => {
-  return routes.find((item) => {
+  return routes.find(item => {
     const itemPath = `/${item.key}`;
     if (path === itemPath) {
       return item.name;
@@ -166,9 +172,9 @@ export const getName = (path: string, routes) => {
 export const generatePermission = (role: string) => {
   const actions = role === 'admin' ? ['*'] : ['read'];
   const result = {};
-  routes.forEach((item) => {
+  routes.forEach(item => {
     if (item.children) {
-      item.children.forEach((child) => {
+      item.children.forEach(child => {
         result[child.name] = actions;
       });
     }

@@ -23,18 +23,18 @@ const judge = (actions: string[], perm: string[]) => {
     return true;
   }
 
-  return actions.every((action) => perm.includes(action));
+  return actions.every(action => perm.includes(action));
 };
 
 const auth = (params: Auth, userPermission: UserPermission) => {
   const { resource, actions = [] } = params;
   if (resource instanceof RegExp) {
     const permKeys = Object.keys(userPermission);
-    const matchPermissions = permKeys.filter((item) => item.match(resource));
+    const matchPermissions = permKeys.filter(item => item.match(resource));
     if (!matchPermissions.length) {
       return false;
     }
-    return matchPermissions.every((key) => {
+    return matchPermissions.every(key => {
       const perm = userPermission[key];
       return judge(actions, perm);
     });

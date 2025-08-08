@@ -21,7 +21,7 @@ export default function Block(props: BlockProps) {
     <div className={styles.block}>
       <h5 className={styles.title}>{title}</h5>
       {options &&
-        options.map((option) => {
+        options.map(option => {
           const type = option.type || 'switch';
 
           return (
@@ -31,7 +31,7 @@ export default function Block(props: BlockProps) {
                 <Switch
                   size="small"
                   checked={!!settings[option.value]}
-                  onChange={(checked) => {
+                  onChange={checked => {
                     const newSetting = {
                       ...settings,
                       [option.value]: checked,
@@ -55,7 +55,7 @@ export default function Block(props: BlockProps) {
                   style={{ width: 80 }}
                   size="small"
                   value={settings.menuWidth}
-                  onChange={(value) => {
+                  onChange={value => {
                     const newSetting = {
                       ...settings,
                       [option.value]: value,

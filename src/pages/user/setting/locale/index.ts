@@ -34,8 +34,7 @@ const i18n = {
     'userSetting.info.address': 'Specific address',
     'userSetting.info.address.placeholder': 'Please enter your address',
     'userSetting.info.profile': 'Personal profile',
-    'userSetting.info.profile.placeholder':
-      'Please enter your profile, no more than 200 words.',
+    'userSetting.info.profile.placeholder': 'Please enter your profile, no more than 200 words.',
     'userSetting.security.password': 'Login Password',
     'userSetting.security.password.tips':
       'Has been set. The password has at least 6 characters, supports numbers, letters and special characters except spaces, and must contain both numbers and uppercase and lowercase letters. ',
@@ -54,14 +53,11 @@ const i18n = {
     'userSetting.verified.label.isVerified': 'Authentication status',
     'userSetting.verified.label.verifiedTime': 'Authentication time',
     'userSetting.verified.label.legalPersonName': 'Legal Person name',
-    'userSetting.verified.label.certificateType':
-      'Type of legal person certificate',
-    'userSetting.verified.label.certificationNumber':
-      'Legal person certification number',
+    'userSetting.verified.label.certificateType': 'Type of legal person certificate',
+    'userSetting.verified.label.certificationNumber': 'Legal person certification number',
     'userSetting.verified.label.enterpriseName': 'Enterprise Name',
 
-    'userSetting.verified.label.enterpriseCertificateType':
-      'Enterprise certificate type',
+    'userSetting.verified.label.enterpriseCertificateType': 'Enterprise certificate type',
     'userSetting.verified.label.organizationCode': 'Organization Code',
 
     'userSetting.verified.authType': 'Authentication type',
@@ -109,8 +105,7 @@ const i18n = {
     'userSetting.info.address': '具体地址',
     'userSetting.info.address.placeholder': '请输入您的地址',
     'userSetting.info.profile': '个人简介',
-    'userSetting.info.profile.placeholder':
-      '请输入您的个人简介，最多不超过200字。',
+    'userSetting.info.profile.placeholder': '请输入您的个人简介，最多不超过200字。',
     'userSetting.security.password': '登陆密码',
     'userSetting.security.password.tips':
       '已设置。密码至少6位字符，支持数字、字母和除空格外的特殊字符，且必须同时包含数字和大小写字母。',

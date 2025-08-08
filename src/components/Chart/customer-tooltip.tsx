@@ -16,7 +16,7 @@ interface TooltipProps {
 }
 
 function CustomTooltip(props: TooltipProps) {
-  const { formatter = (value) => value, color, name } = props;
+  const { formatter = value => value, color, name } = props;
   return (
     <div className={styles['customer-tooltip']}>
       <div className={styles['customer-tooltip-title']}>

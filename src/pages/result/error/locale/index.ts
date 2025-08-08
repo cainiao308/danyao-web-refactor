@@ -3,8 +3,7 @@ const i18n = {
     'menu.result': 'Result',
     'menu.result.error': 'Error',
     'error.result.title': 'Submit Error',
-    'error.result.subTitle':
-      'Please check the modified information and try again',
+    'error.result.subTitle': 'Please check the modified information and try again',
     'error.result.goBack': 'GoBack',
     'error.result.retry': 'Retry',
     'error.detailTitle': 'Details of Error',

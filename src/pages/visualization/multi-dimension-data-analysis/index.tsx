@@ -25,11 +25,9 @@ function DataAnalysis() {
 
   const getInterval = async () => {
     setLoading(true);
-    const { data } = await axios
-      .get('/api/multi-dimension/activity')
-      .finally(() => {
-        setLoading(false);
-      });
+    const { data } = await axios.get('/api/multi-dimension/activity').finally(() => {
+      setLoading(false);
+    });
     setInterval(data);
   };
 
@@ -44,11 +42,9 @@ function DataAnalysis() {
 
   const getMultiPie = async () => {
     setMultiPieLoading(true);
-    const { data } = await axios
-      .get('/api/multi-dimension/content-source')
-      .finally(() => {
-        setMultiPieLoading(false);
-      });
+    const { data } = await axios.get('/api/multi-dimension/content-source').finally(() => {
+      setMultiPieLoading(false);
+    });
 
     setMultiPie(data);
   };
@@ -64,27 +60,17 @@ function DataAnalysis() {
       <Row gutter={20}>
         <Col span={16}>
           <Card>
-            <Title heading={6}>
-              {t['multiDAnalysis.card.title.dataOverview']}
-            </Title>
+            <Title heading={6}>{t['multiDAnalysis.card.title.dataOverview']}</Title>
             <DataOverview />
           </Card>
         </Col>
         <Col span={8}>
           <Card>
-            <Title heading={6}>
-              {t['multiDAnalysis.card.title.todayActivity']}
-            </Title>
-            <HorizontalInterval
-              data={interval}
-              loading={loading}
-              height={160}
-            />
+            <Title heading={6}>{t['multiDAnalysis.card.title.todayActivity']}</Title>
+            <HorizontalInterval data={interval} loading={loading} height={160} />
           </Card>
           <Card>
-            <Title heading={6}>
-              {t['multiDAnalysis.card.title.contentTheme']}
-            </Title>
+            <Title heading={6}>{t['multiDAnalysis.card.title.contentTheme']}</Title>
             <AreaPolar
               data={polar.list}
               fields={polar.fields}
@@ -102,14 +88,8 @@ function DataAnalysis() {
       <Row>
         <Col span={24}>
           <Card>
-            <Title heading={6}>
-              {t['multiDAnalysis.card.title.contentSource']}
-            </Title>
-            <FactMultiPie
-              loading={multiPieLoading}
-              data={multiPie}
-              height={240}
-            />
+            <Title heading={6}>{t['multiDAnalysis.card.title.contentSource']}</Title>
+            <FactMultiPie loading={multiPieLoading} data={multiPie} height={240} />
           </Card>
         </Col>
       </Row>

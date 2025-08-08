@@ -14,7 +14,7 @@ function PopularContent() {
     setLoading(true);
     axios
       .get('/api/workplace/content-percentage')
-      .then((res) => {
+      .then(res => {
         setData(res.data);
       })
       .finally(() => {
@@ -28,9 +28,7 @@ function PopularContent() {
 
   return (
     <Card>
-      <Typography.Title heading={6}>
-        {t['workplace.contentPercentage']}
-      </Typography.Title>
+      <Typography.Title heading={6}>{t['workplace.contentPercentage']}</Typography.Title>
       <Spin loading={loading} style={{ display: 'block' }}>
         <DonutChart
           autoFit
@@ -50,7 +48,7 @@ function PopularContent() {
           label={{
             visible: true,
             type: 'spider',
-            formatter: (v) => `${(v.percent * 100).toFixed(0)}%`,
+            formatter: v => `${(v.percent * 100).toFixed(0)}%`,
             style: {
               fill: '#86909C',
               fontSize: 14,
