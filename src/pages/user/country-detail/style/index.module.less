@@ -1,0 +1,365 @@
+.container {
+  padding: 24px;
+  background: #f5f7fa;
+  min-height: 100vh;
+}
+
+/* 主要内容区域 - 左右结构 */
+.mainContent {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+}
+
+/* 左侧内容 */
+.leftContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* 国家信息卡片 */
+.countryInfoCard {
+  border-radius: 0px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.countryHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.countryBasicInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.countryName {
+  margin: 0;
+  color: #1d2129;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.countryDescription {
+  color: #4e5969;
+  line-height: 1.8;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.countryMeta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.regionTag,
+.productsCountTag {
+  border-radius: 6px;
+  font-size: 12px;
+  padding: 4px 12px;
+}
+
+/* 产品卡片 */
+.productsCard {
+  border-radius: 0px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  margin-top: 5px;
+}
+
+.productCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  background: #f7f8fa;
+  border: 1px solid #e5e6eb;
+  border-radius: 0px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    // background: #e8f3ff;
+    // border-color: #165dff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(22, 93, 255, 0.15);
+  }
+}
+
+.productHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.productIcon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.productInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.productName {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1d2129;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.productType {
+  font-size: 12px;
+  color: #86909c;
+  margin-bottom: 2px;
+}
+
+.productManufacturer {
+  font-size: 12px;
+  color: #4e5969;
+  font-weight: 500;
+}
+
+.productDescription {
+  font-size: 12px;
+  color: #4e5969;
+  line-height: 1.6;
+}
+
+.productSpecs {
+  padding: 12px;
+  background: #fafbfc;
+  border-radius: 0cap;
+  border: 1px solid #e5e6eb;
+}
+
+.specItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.specLabel {
+  font-size: 12px;
+  color: #86909c;
+  font-weight: 500;
+}
+
+.specValue {
+  font-size: 12px;
+  color: #1d2129;
+  font-weight: 600;
+}
+
+/* 无产品状态 */
+.noProducts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px;
+  text-align: center;
+  background: #fafbfc;
+  border-radius: 8px;
+  border: 1px dashed #c9cdd4;
+}
+
+.noProductsText {
+  color: #86909c;
+  font-size: 16px;
+}
+
+/* 右侧内容 */
+.rightContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.manufacturersCard,
+.regionCard,
+.statsCard {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.manufacturersList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.manufacturerItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: #f7f8fa;
+  border-radius: 6px;
+  border: 1px solid #e5e6eb;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: #e8f3ff;
+  }
+}
+
+.manufacturerIcon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.manufacturerName {
+  font-size: 14px;
+  color: #1d2129;
+  font-weight: 500;
+}
+
+.noManufacturers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.noManufacturersText {
+  color: #86909c;
+  font-size: 14px;
+}
+
+.regionInfo {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.regionIcon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.regionDetails {
+  flex: 1;
+}
+
+.regionName {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1d2129;
+  margin-bottom: 8px;
+}
+
+.regionDescription {
+  font-size: 12px;
+  color: #86909c;
+  line-height: 1.6;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.statCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: #f7f8fa;
+  border-radius: 8px;
+  border: 1px solid #e5e6eb;
+}
+
+.statIcon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.statContent {
+  flex: 1;
+}
+
+.statNumber {
+  font-size: 24px;
+  font-weight: 700;
+  color: #165dff;
+  margin-bottom: 4px;
+}
+
+.statLabel {
+  font-size: 12px;
+  color: #86909c;
+  font-weight: 500;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .mainContent {
+    grid-template-columns: 1fr;
+  }
+
+  .rightContent {
+    order: -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .countryHeader {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .productGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .productCard {
+    padding: 12px;
+  }
+
+  .countryName {
+    font-size: 24px;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .countryMeta {
+    justify-content: center;
+  }
+
+  .productCard {
+    text-align: center;
+  }
+
+  .productHeader {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+}

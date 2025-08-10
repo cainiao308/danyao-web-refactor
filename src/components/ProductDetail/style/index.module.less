@@ -1,0 +1,489 @@
+.container {
+  padding: 24px;
+  background: #f5f7fa;
+  min-height: 100vh;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+.backButton {
+  border-radius: 6px;
+}
+
+/* 主要内容区域 - 左右结构 */
+.mainContent {
+  display: grid;
+  grid-template-columns: 1fr 520px;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+/* 左侧内容 - 上下结构 */
+.leftContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.productDetailCard {
+  border-radius: 0px;
+  // box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.mediaSection {
+  margin-bottom: 24px;
+}
+
+.mediaTabs {
+  :global(.arco-tabs-nav) {
+    margin-bottom: 16px;
+  }
+}
+
+.imageGallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.imageItem {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.galleryImage {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  // border-radius: 8px;
+  :global(.arco-image-img) {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+}
+
+.videoContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.videoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+.videoThumbnail {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  aspect-ratio: 16/9;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+
+    .videoThumbnailOverlay {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .videoPlayIcon {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.videoThumbnailOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+  z-index: 2;
+}
+
+.videoPlayIcon {
+  font-size: 48px;
+  color: white;
+  margin-bottom: 8px;
+  transition: transform 0.2s ease;
+}
+
+.videoIndex {
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.videoThumbnailVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.videoThumbnailInfo {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  z-index: 3;
+}
+
+.videoDuration {
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+// 视频模态框样式
+.videoModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.videoModalOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.videoModalContent {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.videoModalClose {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.9);
+  }
+}
+
+.videoModalVideo {
+  width: 100%;
+  height: 100%;
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+}
+
+.videoTabs {
+  width: 100%;
+
+  :global(.arco-tabs-nav) {
+    margin-bottom: 16px;
+  }
+
+  :global(.arco-tabs-tab) {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+.productVideo {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.noMedia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.defaultImage {
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.imageOverlay {
+  color: white;
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.noMediaText {
+  color: #86909c;
+  font-size: 16px;
+}
+
+.descriptionSection {
+  padding-top: 24px;
+  border-top: 1px solid #e5e6eb;
+}
+
+.sectionTitle {
+  margin-bottom: 16px;
+  color: #1d2129;
+}
+
+.description {
+  color: #4e5969;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+/* 技术参数卡片 */
+.specificationsCard {
+  border-radius: 0px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.specificationsTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.parameterCount {
+  color: #86909c;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.specificationsTable {
+  :global(.arco-table-th) {
+    background: #f7f8fa;
+    border-bottom: 1px solid #e5e6eb;
+    font-weight: 600;
+    color: #1d2129;
+  }
+
+  :global(.arco-table-td) {
+    border-bottom: 1px solid #f0f0f0;
+    padding: 12px 16px;
+  }
+
+  :global(.arco-table-tr:hover) {
+    background: #f7f8fa;
+  }
+
+  :global(.arco-table-tr:nth-child(even)) {
+    background: #fafbfc;
+  }
+}
+
+.parameterName {
+  font-weight: 600;
+  color: #1d2129;
+}
+
+.parameterValue {
+  color: #4e5969;
+  word-break: break-word;
+}
+
+.noSpecs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px;
+  text-align: center;
+  background: #fafbfc;
+  border-radius: 8px;
+  margin: 16px;
+}
+
+.noSpecsText {
+  color: #86909c;
+  font-size: 16px;
+  margin-top: 16px;
+}
+
+/* 右侧内容 - 关联图谱 */
+.rightContent {
+  // position: sticky;
+  // top: 24px;
+  height: fit-content;
+}
+
+.relationshipCard {
+  border-radius: 0px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.relationshipPlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // padding: 60px 20px;
+  text-align: center;
+  min-height: 400px;
+}
+
+.placeholderIcon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.placeholderTitle {
+  margin-bottom: 12px;
+  color: #1d2129;
+}
+
+.placeholderText {
+  margin-bottom: 8px;
+  color: #4e5969;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.placeholderSubtext {
+  color: #86909c;
+  font-size: 12px;
+}
+
+.actionsCard {
+  border-radius: 0px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.productHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.productInfo {
+  flex: 1;
+}
+
+.productName {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  color: #1d2129;
+}
+
+.productMeta {
+  margin-bottom: 20px;
+}
+
+.typeTag,
+.manufacturerTag,
+.countryTag {
+  border-radius: 6px;
+  font-size: 12px;
+  padding: 4px 8px;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .mainContent {
+    grid-template-columns: 1fr;
+  }
+
+  .rightContent {
+    position: static;
+    order: -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .navigation {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .productHeader {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .actionButtons {
+    justify-content: center;
+  }
+
+  .specificationsTable {
+    :global(.arco-table) {
+      font-size: 14px;
+    }
+
+    :global(.arco-table-th),
+    :global(.arco-table-td) {
+      padding: 8px 12px;
+    }
+  }
+
+  .imageGallery {
+    grid-template-columns: 1fr;
+  }
+}

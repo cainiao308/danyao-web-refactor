@@ -1,0 +1,174 @@
+.container {
+  min-height: 100vh;
+  padding: 20px 200px;
+}
+
+.header {
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.titleSection {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  margin: 0;
+  color: #1d2129;
+
+  :global(.arco-typography) {
+    font-size: 28px !important;
+    font-weight: 600;
+    margin: 0;
+  }
+}
+
+.subtitle {
+  color: #86909c;
+  font-size: 14px;
+
+  :global(.arco-typography) {
+    margin: 0;
+  }
+}
+
+.filterCard {
+  margin-bottom: 24px;
+  border-radius: 12px;
+  border: 1px solid #e5e8ef;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+  :global(.arco-card-body) {
+    padding: 16px 20px;
+  }
+}
+
+.filterSection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.clearButton {
+  padding: 6px 16px;
+  border: 1px solid #e5e8ef;
+  border-radius: 6px;
+  background: white;
+  color: #4e5969;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: #1890ff;
+    color: #1890ff;
+    background: #f0f9ff;
+  }
+}
+
+.gridSection {
+  background: white;
+  // border-radius: 12px;
+  border: 1px solid #e5e8ef;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.productCard {
+  height: 100%;
+}
+
+.paginationSection {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+  padding-top: 24px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.emptySection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .header {
+    margin-bottom: 16px;
+  }
+
+  .title {
+    :global(.arco-typography) {
+      font-size: 24px !important;
+    }
+  }
+
+  .filterCard {
+    margin-bottom: 16px;
+
+    :global(.arco-card-body) {
+      padding: 12px 16px;
+    }
+  }
+
+  .filterSection {
+    gap: 12px;
+
+    :global(.arco-input),
+    :global(.arco-select) {
+      width: 100% !important;
+      max-width: 200px;
+    }
+  }
+
+  .gridSection {
+    padding: 16px;
+  }
+
+  .paginationSection {
+    margin-top: 24px;
+    padding-top: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 12px;
+  }
+
+  .filterSection {
+    :global(.arco-input),
+    :global(.arco-select) {
+      max-width: 100%;
+    }
+  }
+
+  .gridSection {
+    padding: 12px;
+  }
+
+  .emptySection {
+    min-height: 200px;
+  }
+}
+
+.select {
+  width: 200px;
+  height: 40px;
+  :global(.arco-select-view) {
+    height: 40px !important;
+  }
+}

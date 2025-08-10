@@ -1,0 +1,315 @@
+.container {
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 40px 0 20px;
+}
+
+.title {
+  color: #1d2129;
+  margin: 0;
+
+  :global(.arco-typography) {
+    font-size: 32px !important;
+    font-weight: 600;
+  }
+}
+
+.searchSection {
+  max-width: 600px;
+  margin: 0 auto 30px;
+}
+
+.searchCard {
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e8ef;
+
+  :global(.arco-card-body) {
+    padding: 20px;
+  }
+}
+
+.searchInputGroup {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.searchInput {
+  flex: 1;
+
+  :global(.arco-input) {
+    height: 48px;
+    border-radius: 8px;
+    border: 1px solid #d9d9d9;
+    font-size: 15px;
+
+    &:focus {
+      border-color: #1890ff;
+      box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+    }
+  }
+}
+
+.searchButton {
+  min-width: 120px;
+  height: 48px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.selectedSection {
+  max-width: 800px;
+  margin: 0 auto 30px;
+}
+
+.selectedCard {
+  border-radius: 12px;
+  background: linear-gradient(135deg, #e6f7ff 0%, #f0f9ff 100%);
+  border: 1px solid #91d5ff;
+
+  :global(.arco-card-body) {
+    padding: 16px 20px;
+  }
+}
+
+.selectedCountry {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .flag {
+    font-size: 24px;
+  }
+
+  .name {
+    font-size: 16px;
+    font-weight: 500;
+    color: #1890ff;
+  }
+}
+
+.countryList {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.continentCard {
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e8ef;
+
+  :global(.arco-card-body) {
+    padding: 24px;
+  }
+}
+
+.continentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  // margin-bottom: 20px;
+  // padding-bottom: 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.continentTitle {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+
+  :global(.arco-typography) {
+    font-size: 20px !important;
+    font-weight: 600;
+    color: #1d2129;
+  }
+}
+
+.continentTitleEn {
+  font-size: 14px;
+  color: #86909c;
+  font-weight: 400;
+}
+
+.countTag {
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.countryGrid {
+  margin: 0;
+}
+
+.countryItem {
+  // background: white;
+  // border: 2px solid #f0f0f0;
+  // border-radius: 12px;
+  padding: 16px 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  &:hover {
+    border-color: #91d5ff;
+    box-shadow: 0 4px 12px rgba(24, 144, 255, 0.15);
+    transform: translateY(-2px);
+  }
+
+  &.selected {
+    border-color: #1890ff;
+    background: linear-gradient(135deg, #e6f7ff 0%, #f0f9ff 100%);
+    box-shadow: 0 4px 16px rgba(24, 144, 255, 0.2);
+  }
+}
+
+.flagSection {
+  .flag {
+    font-size: 32px;
+    display: block;
+    line-height: 1;
+  }
+}
+
+.nameSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  min-height: 60px;
+}
+
+.countryName {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1d2129;
+  line-height: 1.4;
+}
+
+.countryNameEn {
+  font-size: 12px;
+  color: #86909c;
+  line-height: 1.3;
+}
+
+.countryCode {
+  font-size: 11px;
+  color: #c9cdd4;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.noResultCard {
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 12px;
+  border: 1px solid #ffccc7;
+  background: #fff2f0;
+
+  :global(.arco-card-body) {
+    padding: 40px 20px;
+  }
+}
+
+.noResult {
+  text-align: center;
+
+  :global(.arco-typography) {
+    font-size: 16px;
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .header {
+    padding: 20px 0 16px;
+    margin-bottom: 20px;
+  }
+
+  .title {
+    :global(.arco-typography) {
+      font-size: 24px !important;
+    }
+  }
+
+  .searchSection {
+    margin-bottom: 20px;
+  }
+
+  .selectedSection {
+    margin-bottom: 20px;
+  }
+
+  .countryList {
+    gap: 16px;
+  }
+
+  .continentHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .countryItem {
+    padding: 12px 8px;
+
+    .flagSection .flag {
+      font-size: 24px;
+    }
+
+    .nameSection {
+      min-height: 50px;
+    }
+
+    .countryName {
+      font-size: 13px;
+    }
+
+    .countryNameEn {
+      font-size: 11px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .countryItem {
+    .flagSection .flag {
+      font-size: 20px;
+    }
+
+    .nameSection {
+      min-height: 45px;
+    }
+
+    .countryName {
+      font-size: 12px;
+    }
+
+    .countryNameEn {
+      font-size: 10px;
+    }
+
+    .countryCode {
+      font-size: 10px;
+    }
+  }
+}

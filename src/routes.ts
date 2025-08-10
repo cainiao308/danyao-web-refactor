@@ -154,6 +154,11 @@ export const routes: IRoute[] = [
         name: 'menu.user.setting',
         key: 'user/setting',
       },
+      {
+        name: 'menu.user.countryDetail',
+        key: 'user/country-detail/:id',
+        ignore: true,
+      },
     ],
   },
 ];

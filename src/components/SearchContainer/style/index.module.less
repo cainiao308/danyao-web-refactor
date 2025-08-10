@@ -1,22 +1,21 @@
 .container {
-  background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf0 100%);
   min-height: 100vh;
 }
 
+/* 搜索区域（大搜索框）的背景 */
 .searchArea {
   position: relative;
   width: 100%;
-  // background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf0 100%);
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf0 100%);
+  min-height: 100vh;
 }
 
 .resultsContainer {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 24px;
-  margin-top: -80px;
+  padding: 20px 24px 40px;
   position: relative;
   z-index: 10;
-  padding-bottom: 40px;
   background: transparent;
 }
 
@@ -55,31 +54,4 @@
 
 .resultsContent {
   background: transparent;
-}
-
-// 响应式设计
-@media (max-width: 768px) {
-  .resultsContainer {
-    padding: 0 20px;
-    margin-top: -40px;
-    max-width: 100%;
-    padding-bottom: 30px;
-  }
-
-  .quickFilterContent {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .resultSummary {
-    align-self: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .resultsContainer {
-    padding: 0 16px;
-    margin-top: -30px;
-    padding-bottom: 20px;
-  }
 }

@@ -86,7 +86,9 @@ function generateSuggestions<T extends Record<string, unknown>>(
 }
 
 // 国家搜索API
-export async function searchCountries(keyword: string): Promise<SearchResult> {
+export async function searchCountries(
+  keyword: string
+): Promise<SearchResult<Record<string, unknown>>> {
   return searchData(
     countryData,
     keyword,
@@ -96,7 +98,9 @@ export async function searchCountries(keyword: string): Promise<SearchResult> {
 }
 
 // 弹药搜索API
-export async function searchAmmunition(keyword: string): Promise<SearchResult> {
+export async function searchAmmunition(
+  keyword: string
+): Promise<SearchResult<Record<string, unknown>>> {
   return searchData(
     ammunitionData,
     keyword,
@@ -106,7 +110,9 @@ export async function searchAmmunition(keyword: string): Promise<SearchResult> {
 }
 
 // 火炮搜索API
-export async function searchArtillery(keyword: string): Promise<SearchResult> {
+export async function searchArtillery(
+  keyword: string
+): Promise<SearchResult<Record<string, unknown>>> {
   return searchData(
     artilleryData,
     keyword,
