@@ -8,6 +8,7 @@ import {
   Message,
   Modal,
   Pagination,
+  Drawer,
 } from '@arco-design/web-react';
 import { IconDownload, IconUpload } from '@arco-design/web-react/icon';
 import axios from 'axios';
@@ -17,25 +18,20 @@ import locale from './locale';
 import styles from './style/index.module.less';
 import './mock';
 import { getColumns, DocumentRecord } from './constants';
+import DocViewer, { DocViewerRenderers } from '@cyntler/react-doc-viewer';
+import '@cyntler/react-doc-viewer/dist/index.css';
 
 const { Title, Paragraph } = Typography;
 
 function Documents() {
   const t = useLocale(locale);
+  const [previewVisible, setPreviewVisible] = useState(false);
 
   const tableCallback = async (record: DocumentRecord, type: string) => {
     switch (type) {
       case 'preview':
-        try {
-          const response = await axios.get(`/api/user/documents/${record.id}/preview`);
-          if (response.data.code === 200) {
-            // 在实际项目中，这里可以打开一个预览模态框或新窗口
-            window.open(response.data.data.url, '_blank');
-            Message.success(t['documents.preview.success']);
-          }
-        } catch (error) {
-          Message.error('预览失败');
-        }
+        // 简单地打开预览模态框
+        setPreviewVisible(true);
         break;
       case 'download':
         try {
@@ -158,11 +154,8 @@ function Documents() {
         <Paragraph className={styles.description}>{t['documents.description']}</Paragraph>
       </div>
 
-      <div className={styles.searchForm}>
-        <SearchForm onSearch={handleSearch} onReset={handleReset} />
-      </div>
-
       <Card className={styles.tableCard}>
+        <SearchForm onSearch={handleSearch} onReset={handleReset} />
         <div className={styles.tableHeader}>
           <div className={styles.left}>
             <Typography.Text type="secondary">共 {pagination.total || 0} 条记录</Typography.Text>
@@ -198,6 +191,51 @@ function Documents() {
           />
         </div>
       </Card>
+
+      {/* 文档预览模态框 */}
+      <Drawer
+        width={700}
+        title={<span>Basic Information </span>}
+        visible={previewVisible}
+        onOk={() => {
+          setPreviewVisible(false);
+        }}
+        onCancel={() => {
+          setPreviewVisible(false);
+        }}
+      >
+        <DocViewer
+          pluginRenderers={DocViewerRenderers}
+          documents={[
+            {
+              uri: 'https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf',
+            },
+          ]}
+          config={{
+            pdfZoom: {
+              defaultZoom: 1,
+              zoomJump: 0.1,
+            },
+            pdfVerticalScrollByDefault: true,
+            header: {
+              disableHeader: true,
+              disableFileName: false,
+              retainURLParams: false,
+            },
+          }}
+          // style={{ height: 500 }}
+        />
+      </Drawer>
+      {/* <Modal
+        visible={previewVisible}
+        onCancel={() => setPreviewVisible(false)}
+        footer={null}
+        title="文档预览"
+      >
+       
+      </Modal> */}
+
+      {/* <DocxView /> */}
     </div>
   );
 }

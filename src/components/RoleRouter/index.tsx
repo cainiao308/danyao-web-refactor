@@ -10,11 +10,12 @@ function RoleRouter() {
   // 根据角色判断显示哪个布局
   // 如果是管理员角色，显示原有的管理后台
   // 如果是普通用户角色，显示新的搜索界面
-  if (role === 'admin') {
-    return <PageLayout />;
-  } else {
-    return <UserLayout />;
-  }
+  // if (role === 'admin') {
+  //   return <PageLayout />;
+  // } else {
+  //   return <UserLayout />;
+  // }
+  return <UserLayout />;
 }
 
 export default RoleRouter;

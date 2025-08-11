@@ -47,13 +47,13 @@ function Index() {
     });
   }
 
-  useEffect(() => {
-    if (checkLogin()) {
-      fetchUserInfo();
-    } else if (window.location.pathname.replace(/\//g, '') !== 'login') {
-      window.location.pathname = '/login';
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (checkLogin()) {
+  //     fetchUserInfo();
+  //   } else if (window.location.pathname.replace(/\//g, '') !== 'login') {
+  //     window.location.pathname = '/login';
+  //   }
+  // }, []);
 
   useEffect(() => {
     changeTheme(theme);
