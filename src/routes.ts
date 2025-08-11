@@ -159,6 +159,28 @@ export const routes: IRoute[] = [
         key: 'user/country-detail/:id',
         ignore: true,
       },
+      {
+        name: 'menu.user.documents',
+        key: 'user/documents',
+      },
+      {
+        name: 'menu.user.ammunitionDetail',
+        key: 'user/ammunition-detail/:id',
+        ignore: true,
+      },
+      {
+        name: 'menu.user.artilleryDetail',
+        key: 'user/artillery-detail/:id',
+        ignore: true,
+      },
+      {
+        name: 'menu.user.productCompare',
+        key: 'user/product-compare',
+      },
+      {
+        name: 'menu.user.aiChat',
+        key: 'user/ai-chat',
+      },
     ],
   },
 ];

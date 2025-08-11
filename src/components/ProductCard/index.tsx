@@ -34,7 +34,7 @@ function ProductCard({
     onClick?.(id);
   };
 
-  const handleViewDetails = (e: React.MouseEvent) => {
+  const handleViewDetails = (e: Event) => {
     e.stopPropagation();
     onClick?.(id);
   };

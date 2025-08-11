@@ -9,6 +9,7 @@ import AmmunitionDetail from '../../pages/user/ammunition-detail/index';
 import ArtilleryDetail from '../../pages/user/artillery-detail/index';
 import ProductCompare from '../../pages/user/product-compare/index';
 import AIChat from '../../pages/user/ai-chat/index';
+import Documents from '../../pages/user/documents/index';
 import styles from './style/index.module.less';
 import Navbar from '../NavBar';
 import cs from 'classnames';
@@ -36,8 +37,9 @@ function UserLayout() {
     if (path.includes('artillery-search')) return '3';
 
     // 其他页面
-    if (path.includes('product-compare')) return '4';
-    if (path.includes('ai-chat')) return '5';
+    if (path.includes('documents')) return '4';
+    if (path.includes('product-compare')) return '5';
+    if (path.includes('ai-chat')) return '6';
     if (path === '/user/home' || path === '/user' || path === '/user/') return '0';
 
     return '0'; // 默认首页
@@ -55,9 +57,12 @@ function UserLayout() {
         history.push('/user/artillery-search');
         break;
       case '4':
-        history.push('/user/product-compare');
+        history.push('/user/documents');
         break;
       case '5':
+        history.push('/user/product-compare');
+        break;
+      case '6':
         history.push('/user/ai-chat');
         break;
       default:
@@ -78,8 +83,9 @@ function UserLayout() {
           <MenuItem key="1">国家检索</MenuItem>
           <MenuItem key="2">弹药检索</MenuItem>
           <MenuItem key="3">火炮检索</MenuItem>
-          <MenuItem key="4">产品对比</MenuItem>
-          <MenuItem key="5">AI问答</MenuItem>
+          <MenuItem key="4">知识管理</MenuItem>
+          <MenuItem key="5">产品对比</MenuItem>
+          <MenuItem key="6">AI问答</MenuItem>
         </Menu>
       </div>
     </>
@@ -100,6 +106,7 @@ function UserLayout() {
           <Route exact path="/user/country-detail/:id" component={CountryDetail} />
           <Route exact path="/user/ammunition-search" component={AmmunitionSearch} />
           <Route exact path="/user/artillery-search" component={ArtillerySearch} />
+          <Route exact path="/user/documents" component={Documents} />
           <Route exact path="/user/ammunition-detail/:id" component={AmmunitionDetail} />
           <Route exact path="/user/artillery-detail/:id" component={ArtilleryDetail} />
           <Route exact path="/user/product-compare" component={ProductCompare} />
