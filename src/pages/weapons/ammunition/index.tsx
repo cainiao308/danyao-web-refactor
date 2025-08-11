@@ -1,21 +1,21 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import useLocale from '@/utils/useLocale';
 import {
-  Table,
-  Card,
-  PaginationProps,
   Button,
-  Space,
-  Typography,
+  Card,
   Message,
+  PaginationProps,
+  Space,
+  Table,
+  Typography,
 } from '@arco-design/web-react';
 import { IconDownload, IconPlus } from '@arco-design/web-react/icon';
 import axios from 'axios';
-import useLocale from '@/utils/useLocale';
+import { useEffect, useMemo, useState } from 'react';
+import { AmmunitionRecord, getColumns } from './constants';
 import SearchForm from './form';
 import locale from './locale';
-import styles from './style/index.module.less';
 import './mock';
-import { getColumns, AmmunitionRecord } from './constants';
+import styles from './style/index.module.less';
 
 const { Title } = Typography;
 

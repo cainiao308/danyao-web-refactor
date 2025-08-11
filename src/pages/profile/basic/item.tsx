@@ -13,7 +13,7 @@ interface ProfileItemProps {
 
 function ProfileItem(props: ProfileItemProps) {
   const t = useLocale(locale);
-  const { title, data, type, loading } = props;
+  const { data, type, loading } = props;
   const blockDataList: {
     title: string;
     data: {

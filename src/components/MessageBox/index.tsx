@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import { Avatar, Badge, Button, Spin, Tabs, Trigger } from '@arco-design/web-react';
+import {
+  IconCustomerService,
+  IconDesktop,
+  IconFile,
+  IconMessage,
+} from '@arco-design/web-react/icon';
 import axios from 'axios';
 import groupBy from 'lodash/groupBy';
-import { Trigger, Badge, Tabs, Avatar, Spin, Button } from '@arco-design/web-react';
-import {
-  IconMessage,
-  IconCustomerService,
-  IconFile,
-  IconDesktop,
-} from '@arco-design/web-react/icon';
+import { useEffect, useState } from 'react';
 import useLocale from '../../utils/useLocale';
 import MessageList, { MessageListType } from './list';
 import styles from './style/index.module.less';
@@ -90,7 +90,7 @@ function DropContent() {
           }
         >
           {tabList.map(item => {
-            const { key, title, avatar } = item;
+            const { key, title } = item;
             const data = groupData[key] || [];
             const unReadData = data.filter(item => !item.status);
             return (

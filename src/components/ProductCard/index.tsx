@@ -1,6 +1,5 @@
 import { Button, Card, Space, Tag, Typography } from '@arco-design/web-react';
 import { IconEye } from '@arco-design/web-react/icon';
-import React from 'react';
 import styles from './style/index.module.less';
 
 const { Title, Text } = Typography;
@@ -24,7 +23,6 @@ function ProductCard({
   type,
   manufacturer,
   country,
-  image,
   description,
   specifications,
   onClick,
@@ -38,15 +36,6 @@ function ProductCard({
     e.stopPropagation();
     onClick?.(id);
   };
-
-  // 生成默认图片（使用渐变背景）
-  const defaultImage = (
-    <div className={styles.defaultImage}>
-      <div className={styles.imageOverlay}>
-        <Text className={styles.productInitial}>{name.charAt(0).toUpperCase()}</Text>
-      </div>
-    </div>
-  );
 
   return (
     <Card

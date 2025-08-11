@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { Table, Card, PaginationProps, Button, Space, Typography } from '@arco-design/web-react';
 import PermissionWrapper from '@/components/PermissionWrapper';
+import useLocale from '@/utils/useLocale';
+import { Button, Card, PaginationProps, Space, Table, Typography } from '@arco-design/web-react';
 import { IconDownload, IconPlus } from '@arco-design/web-react/icon';
 import axios from 'axios';
-import useLocale from '@/utils/useLocale';
+import { useEffect, useMemo, useState } from 'react';
+import { getColumns } from './constants';
 import SearchForm from './form';
 import locale from './locale';
-import styles from './style/index.module.less';
 import './mock';
-import { getColumns } from './constants';
+import styles from './style/index.module.less';
 
 const { Title } = Typography;
 export const ContentType = ['图文', '横版短视频', '竖版短视频'];

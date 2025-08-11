@@ -1,10 +1,5 @@
-import { Card, Image, Space, Tabs, Tag, Typography, Table } from '@arco-design/web-react';
-import {
-  IconArrowLeft,
-  IconImage,
-  IconLeftCircle,
-  IconVideoCamera,
-} from '@arco-design/web-react/icon';
+import { Card, Image, Space, Table, Tabs, Tag, Typography } from '@arco-design/web-react';
+import { IconImage, IconLeftCircle, IconVideoCamera } from '@arco-design/web-react/icon';
 import { useEffect, useRef, useState } from 'react';
 import styles from './style/index.module.less';
 import { createGraph, data1 } from './test';

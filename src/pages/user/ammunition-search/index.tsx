@@ -1,8 +1,7 @@
-import React, { useMemo } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Message } from '@arco-design/web-react';
 import ProductGrid from '@/components/ProductGrid';
 import { ammunitionData } from '@/config/searchConfigs/ammunitionConfig';
+import { useMemo } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function AmmunitionSearch() {
   const history = useHistory();

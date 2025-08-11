@@ -39,7 +39,7 @@ function Navbar({ show, Menus }: { show: boolean; Menus?: any }) {
   const { userInfo, userLoading } = useSelector((state: GlobalState) => state);
   const dispatch = useDispatch();
 
-  const [_, setUserStatus] = useStorage('userStatus');
+  const [, setUserStatus] = useStorage('userStatus');
   const [role, setRole] = useStorage('userRole', 'admin');
 
   const { theme, setTheme } = useContext(GlobalContext);

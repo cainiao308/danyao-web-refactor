@@ -1,51 +1,36 @@
-import './style/global.less';
-import React, { useEffect } from 'react';
-import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
 import { ConfigProvider } from '@arco-design/web-react';
 import zhCN from '@arco-design/web-react/es/locale/zh-CN';
-import enUS from '@arco-design/web-react/es/locale/en-US';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import axios from 'axios';
-import rootReducer from './store';
-import { GlobalContext } from './context';
-import Login from './pages/login';
+import { useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { createStore } from 'redux';
 import RoleRouter from './components/RoleRouter';
-import checkLogin from './utils/checkLogin';
+import { GlobalContext } from './context';
+import './mock';
+import Login from './pages/login';
+import rootReducer from './store';
+import './style/global.less';
 import changeTheme from './utils/changeTheme';
 import useStorage from './utils/useStorage';
-import './mock';
 
 const store = createStore(rootReducer);
 
 function Index() {
-  const [lang] = useStorage('arco-lang', 'zh-CN');
   const [theme, setTheme] = useStorage('arco-theme', 'light');
 
-  function getArcoLocale() {
-    switch (lang) {
-      case 'zh-CN':
-        return zhCN;
-      case 'en-US':
-        return enUS;
-      default:
-        return zhCN;
-    }
-  }
-
-  function fetchUserInfo() {
-    store.dispatch({
-      type: 'update-userInfo',
-      payload: { userLoading: true },
-    });
-    axios.get('/api/user/userInfo').then(res => {
-      store.dispatch({
-        type: 'update-userInfo',
-        payload: { userInfo: res.data, userLoading: false },
-      });
-    });
-  }
+  // function fetchUserInfo() {
+  //   store.dispatch({
+  //     type: 'update-userInfo',
+  //     payload: { userLoading: true },
+  //   });
+  //   axios.get('/api/user/userInfo').then(res => {
+  //     store.dispatch({
+  //       type: 'update-userInfo',
+  //       payload: { userInfo: res.data, userLoading: false },
+  //     });
+  //   });
+  // }
 
   // useEffect(() => {
   //   if (checkLogin()) {
@@ -60,7 +45,6 @@ function Index() {
   }, [theme]);
 
   const contextValue = {
-    lang,
     theme,
     setTheme,
   };
@@ -68,7 +52,7 @@ function Index() {
   return (
     <BrowserRouter>
       <ConfigProvider
-        locale={getArcoLocale()}
+        locale={zhCN}
         componentConfig={{
           Card: {
             bordered: false,

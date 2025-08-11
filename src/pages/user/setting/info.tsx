@@ -1,22 +1,19 @@
-import React, { useContext } from 'react';
 import useLocale from '@/utils/useLocale';
-import locale from './locale';
-import { GlobalContext } from '@/context';
 import {
-  Input,
-  Select,
-  Cascader,
   Button,
+  Cascader,
   Form,
-  Space,
+  Input,
   Message,
+  Select,
   Skeleton,
+  Space,
 } from '@arco-design/web-react';
+import locale from './locale';
 
 function InfoForm({ loading }: { loading?: boolean }) {
   const t = useLocale(locale);
   const [form] = Form.useForm();
-  const { lang } = useContext(GlobalContext);
 
   const handleSave = async () => {
     try {
@@ -45,8 +42,8 @@ function InfoForm({ loading }: { loading?: boolean }) {
     <Form
       style={{ width: '500px', marginTop: '6px' }}
       form={form}
-      labelCol={{ span: lang === 'en-US' ? 7 : 6 }}
-      wrapperCol={{ span: lang === 'en-US' ? 17 : 18 }}
+      labelCol={{ span: 6 }}
+      wrapperCol={{ span: 18 }}
     >
       <Form.Item
         label={t['userSetting.info.email']}

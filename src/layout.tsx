@@ -1,32 +1,32 @@
-import React, { useState, useMemo, useRef, useEffect } from 'react';
-import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
-import { Layout, Menu, Breadcrumb, Spin } from '@arco-design/web-react';
-import cs from 'classnames';
+import useRoute, { IRoute } from '@/routes';
+import { Breadcrumb, Layout, Menu, Spin } from '@arco-design/web-react';
 import {
-  IconDashboard,
-  IconList,
-  IconSettings,
-  IconFile,
   IconApps,
   IconCheckCircle,
+  IconDashboard,
   IconExclamationCircle,
-  IconUser,
+  IconFile,
+  IconList,
   IconMenuFold,
   IconMenuUnfold,
+  IconSettings,
   IconThunderbolt,
+  IconUser,
 } from '@arco-design/web-react/icon';
-import { useSelector } from 'react-redux';
-import qs from 'query-string';
+import cs from 'classnames';
 import NProgress from 'nprogress';
-import Navbar from './components/NavBar';
+import qs from 'query-string';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import Footer from './components/Footer';
-import useRoute, { IRoute } from '@/routes';
-import { isArray } from './utils/is';
-import useLocale from './utils/useLocale';
-import getUrlParams from './utils/getUrlParams';
-import lazyload from './utils/lazyload';
+import Navbar from './components/NavBar';
 import { GlobalState } from './store';
 import styles from './style/layout.module.less';
+import getUrlParams from './utils/getUrlParams';
+import { isArray } from './utils/is';
+import lazyload from './utils/lazyload';
+import useLocale from './utils/useLocale';
 
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;

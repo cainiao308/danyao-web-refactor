@@ -1,21 +1,10 @@
-import React, { useMemo } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
-import {
-  Message,
-  Card,
-  Typography,
-  Space,
-  Tag,
-  Image,
-  Button,
-  Divider,
-  Tabs,
-  Grid,
-} from '@arco-design/web-react';
-import { IconArrowLeft, IconImage, IconVideoCamera, IconFire } from '@arco-design/web-react/icon';
-import { countryData } from '@/config/searchConfigs/countryConfig';
-import { artilleryData } from '@/config/searchConfigs/artilleryConfig';
 import { ammunitionData } from '@/config/searchConfigs/ammunitionConfig';
+import { artilleryData } from '@/config/searchConfigs/artilleryConfig';
+import { countryData } from '@/config/searchConfigs/countryConfig';
+import { Card, Grid, Message, Tabs, Tag, Typography } from '@arco-design/web-react';
+import { IconFire } from '@arco-design/web-react/icon';
+import { useMemo } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import styles from './style/index.module.less';
 
 const { Title, Text, Paragraph } = Typography;
@@ -127,22 +116,6 @@ function CountryDetail() {
     );
   };
 
-  // 获取国旗图片URL
-  const getFlagUrl = (countryName: string) => {
-    const flagUrls: { [key: string]: string } = {
-      中国: 'https://flagcdn.com/w320/cn.png',
-      美国: 'https://flagcdn.com/w320/us.png',
-      俄罗斯: 'https://flagcdn.com/w320/ru.png',
-      德国: 'https://flagcdn.com/w320/de.png',
-      法国: 'https://flagcdn.com/w320/fr.png',
-      英国: 'https://flagcdn.com/w320/gb.png',
-      以色列: 'https://flagcdn.com/w320/il.png',
-      韩国: 'https://flagcdn.com/w320/kr.png',
-    };
-
-    return flagUrls[countryName] || 'https://flagcdn.com/w320/xx.png';
-  };
-
   // 处理产品点击
   const handleProductClick = (product: ProductItem) => {
     if (product.category === 'artillery') {
@@ -150,11 +123,6 @@ function CountryDetail() {
     } else if (product.category === 'ammunition') {
       history.push(`/user/ammunition-detail/${product.id}`);
     }
-  };
-
-  // 处理返回
-  const handleBack = () => {
-    history.push('/user/country-search');
   };
 
   // 如果找不到国家数据

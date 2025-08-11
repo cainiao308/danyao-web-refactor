@@ -1,19 +1,15 @@
-import React, { useContext } from 'react';
-import dayjs from 'dayjs';
-import { Form, Input, Select, DatePicker, Button, Grid } from '@arco-design/web-react';
-import { GlobalContext } from '@/context';
-import locale from './locale';
 import useLocale from '@/utils/useLocale';
+import { Button, DatePicker, Form, Grid, Input, Select } from '@arco-design/web-react';
 import { IconRefresh, IconSearch } from '@arco-design/web-react/icon';
+import dayjs from 'dayjs';
 import { ContentType, FilterType, Status } from './constants';
+import locale from './locale';
 import styles from './style/index.module.less';
 
 const { Row, Col } = Grid;
 const { useForm } = Form;
 
 function SearchForm(props: { onSearch: (values: Record<string, any>) => void }) {
-  const { lang } = useContext(GlobalContext);
-
   const t = useLocale(locale);
   const [form] = useForm();
 
@@ -27,7 +23,7 @@ function SearchForm(props: { onSearch: (values: Record<string, any>) => void }) 
     props.onSearch({});
   };
 
-  const colSpan = lang === 'zh-CN' ? 8 : 12;
+  const colSpan = 8;
 
   return (
     <div className={styles['search-form-wrapper']}>

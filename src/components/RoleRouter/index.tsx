@@ -1,6 +1,6 @@
 import React from 'react';
 import useStorage from '@/utils/useStorage';
-import PageLayout from '@/layout'; // 管理员布局
+// import PageLayout from '@/layout'; // 管理员布局
 import UserLayout from '@/components/UserLayout'; // 普通用户布局
 
 function RoleRouter() {

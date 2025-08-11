@@ -1,8 +1,7 @@
-import React from 'react';
-import { Form, Input, Select, DatePicker, Button, Space, Grid } from '@arco-design/web-react';
-import { DocumentFormats, DocumentTypes, ResearchTypes, DocumentStatuses } from './constants';
-import styles from './style/index.module.less';
+import { Button, DatePicker, Form, Grid, Input, Select } from '@arco-design/web-react';
 import { IconRefresh, IconSearch } from '@arco-design/web-react/icon';
+import { DocumentFormats, DocumentStatuses, DocumentTypes, ResearchTypes } from './constants';
+import styles from './style/index.module.less';
 const { Row, Col } = Grid;
 
 const { RangePicker } = DatePicker;

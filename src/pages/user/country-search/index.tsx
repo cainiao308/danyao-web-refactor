@@ -1,14 +1,11 @@
 import CountrySelector from '@/components/CountrySelector';
-import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 function CountrySearch() {
-  const [showSearchResults, setShowSearchResults] = useState(false);
   const history = useHistory();
 
   const handleSearch = (value: string) => {
     console.log('Country search:', value);
-    setShowSearchResults(true);
   };
 
   const handleCountrySelect = (country: any) => {

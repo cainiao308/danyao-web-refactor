@@ -1,15 +1,6 @@
-import React, { useState } from 'react';
-import {
-  Card,
-  Typography,
-  Button,
-  Space,
-  Table,
-  Select,
-  Tag,
-  Divider,
-} from '@arco-design/web-react';
-import { IconPlus, IconDelete, IconSwap } from '@arco-design/web-react/icon';
+import { Card, Divider, Select, Space, Tag, Typography } from '@arco-design/web-react';
+import { IconSwap } from '@arco-design/web-react/icon';
+import { useState } from 'react';
 
 const { Title, Text } = Typography;
 const { Option } = Select;

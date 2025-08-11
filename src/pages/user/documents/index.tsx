@@ -1,25 +1,25 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import useLocale from '@/utils/useLocale';
 import {
-  Table,
-  Card,
-  PaginationProps,
   Button,
-  Typography,
+  Card,
+  Drawer,
   Message,
   Modal,
   Pagination,
-  Drawer,
+  PaginationProps,
+  Table,
+  Typography,
 } from '@arco-design/web-react';
 import { IconDownload, IconUpload } from '@arco-design/web-react/icon';
-import axios from 'axios';
-import useLocale from '@/utils/useLocale';
-import SearchForm from './form';
-import locale from './locale';
-import styles from './style/index.module.less';
-import './mock';
-import { getColumns, DocumentRecord } from './constants';
 import DocViewer, { DocViewerRenderers } from '@cyntler/react-doc-viewer';
 import '@cyntler/react-doc-viewer/dist/index.css';
+import axios from 'axios';
+import { useEffect, useMemo, useState } from 'react';
+import { DocumentRecord, getColumns } from './constants';
+import SearchForm from './form';
+import locale from './locale';
+import './mock';
+import styles from './style/index.module.less';
 
 const { Title, Paragraph } = Typography;
 
