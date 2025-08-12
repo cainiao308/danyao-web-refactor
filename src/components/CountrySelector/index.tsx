@@ -1,22 +1,13 @@
-import { Empty, Grid, Input, Tag, Typography } from '@arco-design/web-react';
+import { Button, Input, Grid, Tag, Typography, Empty } from '@arco-design/web-react';
 import { IconSearch } from '@arco-design/web-react/icon';
 import { useMemo, useState } from 'react';
+import { countryData } from '@/config/searchConfigs/countryConfig';
 import styles from './style/index.module.less';
 
 const { Title, Text } = Typography;
 const { Row, Col } = Grid;
 
-// 国家数据接口
-interface Country {
-  code: string;
-  name: string;
-  nameEn: string;
-  continent: string;
-  flag: string;
-  id?: string;
-}
-
-// 洲数据
+// 洲际信息
 const continents = {
   asia: { name: '亚洲', nameEn: 'Asia' },
   europe: { name: '欧洲', nameEn: 'Europe' },
@@ -25,49 +16,229 @@ const continents = {
   oceania: { name: '大洋洲', nameEn: 'Oceania' },
 };
 
-// 模拟国家数据
-const countries: Country[] = [
+// 将countryData转换为CountrySelector需要的格式
+console.log('原始countryData:', countryData);
+
+const countries = countryData.map(country => ({
+  id: country.id,
+  code: country.nameEn.substring(0, 2).toUpperCase(), // 从英文名生成代码
+  name: country.name,
+  nameEn: country.nameEn,
+  continent:
+    country.region === '亚洲'
+      ? 'asia'
+      : country.region === '欧洲'
+      ? 'europe'
+      : country.region === '北美洲'
+      ? 'america'
+      : country.region === '南美洲'
+      ? 'america'
+      : country.region === '非洲'
+      ? 'africa'
+      : country.region === '大洋洲'
+      ? 'oceania'
+      : 'asia',
+  flag: '🏳️', // 默认国旗，可以根据需要添加更多
+}));
+
+console.log('转换后的countries:', countries);
+
+// 为一些主要国家添加特定的国旗
+const flagMap: Record<string, string> = {
   // 亚洲
-  { code: 'CN', name: '中国', nameEn: 'China', continent: 'asia', flag: '🇨🇳', id: '1' },
-  { code: 'JP', name: '日本', nameEn: 'Japan', continent: 'asia', flag: '🇯🇵' },
-  { code: 'KR', name: '韩国', nameEn: 'South Korea', continent: 'asia', flag: '🇰🇷' },
-  { code: 'IN', name: '印度', nameEn: 'India', continent: 'asia', flag: '🇮🇳' },
-  { code: 'SG', name: '新加坡', nameEn: 'Singapore', continent: 'asia', flag: '🇸🇬' },
-  { code: 'TH', name: '泰国', nameEn: 'Thailand', continent: 'asia', flag: '🇹🇭' },
-  { code: 'ID', name: '印度尼西亚', nameEn: 'Indonesia', continent: 'asia', flag: '🇮🇩' },
-  { code: 'MY', name: '马来西亚', nameEn: 'Malaysia', continent: 'asia', flag: '🇲🇾' },
+  中国: '🇨🇳',
+  美国: '🇺🇸',
+  俄罗斯: '🇷🇺',
+  德国: '🇩🇪',
+  法国: '🇫🇷',
+  英国: '🇬🇧',
+  以色列: '🇮🇱',
+  韩国: '🇰🇷',
+  阿联酋: '🇦🇪',
+  日本: '🇯🇵',
+  印度: '🇮🇳',
+  新加坡: '🇸🇬',
+  泰国: '🇹🇭',
+  印度尼西亚: '🇮🇩',
+  马来西亚: '🇲🇾',
+  越南: '🇻🇳',
+  菲律宾: '🇵🇭',
+  孟加拉国: '🇧🇩',
+  巴基斯坦: '🇵🇰',
+  土耳其: '🇹🇷',
+  沙特阿拉伯: '🇸🇦',
+  伊朗: '🇮🇷',
+  伊拉克: '🇮🇶',
+  斯里兰卡: '🇱🇰',
+  缅甸: '🇲🇲',
+  柬埔寨: '🇰🇭',
+  老挝: '🇱🇦',
+  蒙古: '🇲🇳',
+  尼泊尔: '🇳🇵',
+  不丹: '🇧🇹',
+  马尔代夫: '🇲🇻',
+  约旦: '🇯🇴',
+  黎巴嫩: '🇱🇧',
+  叙利亚: '🇸🇾',
+  也门: '🇾🇪',
+  阿曼: '🇴🇲',
+  卡塔尔: '🇶🇦',
+  科威特: '🇰🇼',
+  巴林: '🇧🇭',
+  塞浦路斯: '🇨🇾',
+  亚美尼亚: '🇦🇲',
+  阿塞拜疆: '🇦🇿',
+  格鲁吉亚: '🇬🇪',
+  吉尔吉斯斯坦: '🇰🇬',
+  塔吉克斯坦: '🇹🇯',
+  土库曼斯坦: '🇹🇲',
+  乌兹别克斯坦: '🇺🇿',
+  哈萨克斯坦: '🇰🇿',
 
   // 欧洲
-  { code: 'US', name: '美国', nameEn: 'United States', continent: 'america', flag: '🇺🇸' },
-  { code: 'GB', name: '英国', nameEn: 'United Kingdom', continent: 'europe', flag: '🇬🇧' },
-  { code: 'DE', name: '德国', nameEn: 'Germany', continent: 'europe', flag: '🇩🇪' },
-  { code: 'FR', name: '法国', nameEn: 'France', continent: 'europe', flag: '🇫🇷' },
-  { code: 'IT', name: '意大利', nameEn: 'Italy', continent: 'europe', flag: '🇮🇹' },
-  { code: 'ES', name: '西班牙', nameEn: 'Spain', continent: 'europe', flag: '🇪🇸' },
-  { code: 'RU', name: '俄罗斯', nameEn: 'Russia', continent: 'europe', flag: '🇷🇺' },
-  { code: 'NL', name: '荷兰', nameEn: 'Netherlands', continent: 'europe', flag: '🇳🇱' },
-  { code: 'CH', name: '瑞士', nameEn: 'Switzerland', continent: 'europe', flag: '🇨🇭' },
-  { code: 'SE', name: '瑞典', nameEn: 'Sweden', continent: 'europe', flag: '🇸🇪' },
+  荷兰: '🇳🇱',
+  瑞士: '🇨🇭',
+  瑞典: '🇸🇪',
+  挪威: '🇳🇴',
+  丹麦: '🇩🇰',
+  芬兰: '🇫🇮',
+  波兰: '🇵🇱',
+  捷克: '🇨🇿',
+  奥地利: '🇦🇹',
+  比利时: '🇧🇪',
+  爱尔兰: '🇮🇪',
+  葡萄牙: '🇵🇹',
+  希腊: '🇬🇷',
+  匈牙利: '🇭🇺',
+  罗马尼亚: '🇷🇴',
+  保加利亚: '🇧🇬',
+  克罗地亚: '🇭🇷',
+  斯洛文尼亚: '🇸🇮',
+  斯洛伐克: '🇸🇰',
+  立陶宛: '🇱🇹',
+  拉脱维亚: '🇱🇻',
+  爱沙尼亚: '🇪🇪',
+  卢森堡: '🇱🇺',
+  马耳他: '🇲🇹',
+  冰岛: '🇮🇸',
+  阿尔巴尼亚: '🇦🇱',
+  北马其顿: '🇲🇰',
+  塞尔维亚: '🇷🇸',
+  黑山: '🇲🇪',
+  波斯尼亚和黑塞哥维那: '🇧🇦',
+  摩尔多瓦: '🇲🇩',
+  乌克兰: '🇺🇦',
+  白俄罗斯: '🇧🇾',
 
   // 美洲
-  { code: 'CA', name: '加拿大', nameEn: 'Canada', continent: 'america', flag: '🇨🇦' },
-  { code: 'MX', name: '墨西哥', nameEn: 'Mexico', continent: 'america', flag: '🇲🇽' },
-  { code: 'BR', name: '巴西', nameEn: 'Brazil', continent: 'america', flag: '🇧🇷' },
-  { code: 'AR', name: '阿根廷', nameEn: 'Argentina', continent: 'america', flag: '🇦🇷' },
+  加拿大: '🇨🇦',
+  墨西哥: '🇲🇽',
+  巴西: '🇧🇷',
+  阿根廷: '🇦🇷',
+  智利: '🇨🇱',
+  哥伦比亚: '🇨🇴',
+  秘鲁: '🇵🇪',
+  委内瑞拉: '🇻🇪',
+  乌拉圭: '🇺🇾',
+  厄瓜多尔: '🇪🇨',
+  玻利维亚: '🇧🇴',
+  巴拉圭: '🇵🇾',
+  危地马拉: '🇬🇹',
+  洪都拉斯: '🇭🇳',
+  萨尔瓦多: '🇸🇻',
+  尼加拉瓜: '🇳🇮',
+  哥斯达黎加: '🇨🇷',
+  巴拿马: '🇵🇦',
+  古巴: '🇨🇺',
+  牙买加: '🇯🇲',
+  海地: '🇭🇹',
+  多米尼加: '🇩🇴',
 
   // 非洲
-  { code: 'ZA', name: '南非', nameEn: 'South Africa', continent: 'africa', flag: '🇿🇦' },
-  { code: 'EG', name: '埃及', nameEn: 'Egypt', continent: 'africa', flag: '🇪🇬' },
-  { code: 'NG', name: '尼日利亚', nameEn: 'Nigeria', continent: 'africa', flag: '🇳🇬' },
+  南非: '🇿🇦',
+  埃及: '🇪🇬',
+  尼日利亚: '🇳🇬',
+  埃塞俄比亚: '🇪🇹',
+  肯尼亚: '🇰🇪',
+  坦桑尼亚: '🇹🇿',
+  乌干达: '🇺🇬',
+  加纳: '🇬🇭',
+  科特迪瓦: '🇨🇮',
+  塞内加尔: '🇸🇳',
+  马里: '🇲🇱',
+  马达加斯加: '🇲🇬',
+  毛里求斯: '🇲🇺',
+  塞舌尔: '🇸🇨',
+  科摩罗: '🇰🇲',
+  吉布提: '🇩🇯',
+  索马里: '🇸🇴',
+  厄立特里亚: '🇪🇷',
+  卢旺达: '🇷🇼',
+  布隆迪: '🇧🇮',
+  中非共和国: '🇨🇫',
+  刚果共和国: '🇨🇬',
+  刚果民主共和国: '🇨🇩',
+  加蓬: '🇬🇦',
+  赤道几内亚: '🇬🇶',
+  喀麦隆: '🇨🇲',
+  圣多美和普林西比: '🇸🇹',
+  佛得角: '🇨🇻',
+  冈比亚: '🇬🇲',
+  几内亚比绍: '🇬🇼',
+  几内亚: '🇬🇳',
+  塞拉利昂: '🇸🇱',
+  利比里亚: '🇱🇷',
+  多哥: '🇹🇬',
+  贝宁: '🇧🇯',
+  南苏丹: '🇸🇸',
 
   // 大洋洲
-  { code: 'AU', name: '澳大利亚', nameEn: 'Australia', continent: 'oceania', flag: '🇦🇺' },
-  { code: 'NZ', name: '新西兰', nameEn: 'New Zealand', continent: 'oceania', flag: '🇳🇿' },
-];
+  澳大利亚: '🇦🇺',
+  新西兰: '🇳🇿',
+  斐济: '🇫🇯',
+  巴布亚新几内亚: '🇵🇬',
+  新喀里多尼亚: '🇳🇨',
+  法属波利尼西亚: '🇵🇫',
+  瓦努阿图: '🇻🇺',
+  所罗门群岛: '🇸🇧',
+  汤加: '🇹🇴',
+  萨摩亚: '🇼🇸',
+  基里巴斯: '🇰🇮',
+  图瓦卢: '🇹🇻',
+  瑙鲁: '🇳🇷',
+  帕劳: '🇵🇼',
+  马绍尔群岛: '🇲🇭',
+  密克罗尼西亚: '🇫🇲',
+};
+
+// 更新国旗
+countries.forEach(country => {
+  if (flagMap[country.name]) {
+    country.flag = flagMap[country.name];
+  } else {
+    // 如果没有找到国旗，使用默认的
+    console.log(`未找到 ${country.name} 的国旗，使用默认国旗`);
+  }
+});
+
+// 调试：检查哪些国家没有国旗
+console.log(
+  '国家列表：',
+  countries.map(c => ({ name: c.name, flag: c.flag }))
+);
+
+interface Country {
+  id: number;
+  code: string;
+  name: string;
+  nameEn: string;
+  continent: string;
+  flag: string;
+}
 
 interface CountrySelectorProps {
   onSelect?: (country: Country) => void;
-  onSearch?: (keyword: string) => void;
+  onSearch?: (value: string) => void;
   title?: string;
 }
 

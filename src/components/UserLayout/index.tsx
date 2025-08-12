@@ -117,6 +117,9 @@ function UserLayout() {
           <Route path="/user">
             <Redirect to="/user/country-search" />
           </Route>
+          <Route path="/">
+            <Redirect to="/user/country-search" />
+          </Route>
         </Switch>
       </Content>
     </Layout>
