@@ -25,6 +25,7 @@ import vulcano76 from '../../../public/Vulcano 76.pdf';
 import patriaNemo from '../../../public/2_patria-nemo-brochure-lowres.pdf';
 import milner from '../../../public/4_Milner.pdf';
 import baeExcalibur from '../../../public/bae_pdf_excalibur.pdf';
+import docx from '../../../public/Procedure.docx';
 // 添加mammoth导入
 import mammoth from 'mammoth';
 
@@ -291,7 +292,7 @@ function Documents() {
         return baeExcalibur;
       case '1_120ER Loading Test Procedure  EN.docx':
         // 返回文件路径
-        return '/src/public/Procedure.docx';
+        return docx;
       default:
         return null;
     }
