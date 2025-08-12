@@ -8,6 +8,11 @@ declare module '*.less' {
   export default classes;
 }
 
+declare module '*.docx' {
+  const url: string;
+  export default url;
+}
+
 declare module '*/settings.json' {
   const value: {
     colorWeek: boolean;

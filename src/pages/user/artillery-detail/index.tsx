@@ -20,6 +20,9 @@ function ArtilleryDetail() {
   const product = useMemo(() => {
     if (!artilleryItem) return null;
 
+    // 获取兼容弹药信息
+    const compatibleAmmo = artilleryItem.compatibleAmmunition || [];
+
     return {
       id: artilleryItem.id,
       name: artilleryItem.name,
@@ -38,7 +41,21 @@ function ArtilleryDetail() {
         'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4',
         'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4',
       ],
-      description: `${artilleryItem.caliber} 火炮，射程 ${artilleryItem.range}km，${artilleryItem.mobility}。${artilleryItem.name}是一款${artilleryItem.type}火炮，具有${artilleryItem.muzzleVelocity}m/s的初速和${artilleryItem.barrelLength}m的身管长度，射角范围${artilleryItem.elevationRange}，射向范围${artilleryItem.traverseRange}。该火炮采用先进的火控系统和精确制导技术，能够在各种复杂战场环境下提供强大的火力支援，是现代陆军装备体系中的重要组成部分。`,
+      description: `${artilleryItem.caliber}mm ${artilleryItem.type}，射程 ${
+        artilleryItem.range
+      }km，${artilleryItem.mobility}。${artilleryItem.name}是一款现代化的${
+        artilleryItem.type
+      }，具有${artilleryItem.muzzleVelocity}m/s的初速和${
+        artilleryItem.barrelLength
+      }m的身管长度，射角范围${artilleryItem.elevationRange}，射向范围${
+        artilleryItem.traverseRange
+      }。该火炮采用先进的火控系统和精确制导技术，能够在各种复杂战场环境下提供强大的火力支援，是现代陆军装备体系中的重要组成部分。${
+        compatibleAmmo.length > 0
+          ? `该火炮兼容${compatibleAmmo.length}种弹药类型，包括${compatibleAmmo
+              .map(ammo => ammo.name)
+              .join('、')}等。`
+          : ''
+      }`,
       specifications: {
         火炮名称: artilleryItem.name,
         火炮口径: artilleryItem.caliber,
@@ -57,12 +74,41 @@ function ArtilleryDetail() {
         防护等级: 'NATO STANAG 4569',
         机动速度: '60km/h',
         战斗重量: '未知',
+        ...(compatibleAmmo.length > 0 && { 兼容弹药: `${compatibleAmmo.length}种` }),
       },
+      // 添加兼容弹药信息
+      relatedProducts:
+        compatibleAmmo.length > 0
+          ? {
+              title: '兼容弹药',
+              items: compatibleAmmo.map(ammo => ({
+                id: ammo.id,
+                name: ammo.name,
+                type: 'ammunition',
+                description: `${ammo.caliber}mm ${ammo.type}，${ammo.guidance}制导`,
+                specifications: {
+                  弹药名称: ammo.name,
+                  口径: ammo.caliber,
+                  类型: ammo.type,
+                  制导方式: ammo.guidance,
+                },
+              })),
+            }
+          : undefined,
     };
   }, [artilleryItem]);
 
   const handleBack = () => {
     history.push('/user/artillery-search');
+  };
+
+  // 处理关联产品点击
+  const handleRelatedProductClick = (product: { id: number; type: string }) => {
+    if (product.type === 'artillery') {
+      history.push(`/user/artillery-detail/${product.id}`);
+    } else if (product.type === 'ammunition') {
+      history.push(`/user/ammunition-detail/${product.id}`);
+    }
   };
 
   // 如果找不到产品数据
@@ -71,7 +117,13 @@ function ArtilleryDetail() {
     return null;
   }
 
-  return <ProductDetail product={product} onBack={handleBack} />;
+  return (
+    <ProductDetail
+      product={product}
+      onBack={handleBack}
+      onRelatedProductClick={handleRelatedProductClick}
+    />
+  );
 }
 
 export default ArtilleryDetail;

@@ -19,12 +19,23 @@ export interface ProductDetailProps {
     videos?: string[]; // 改为videos数组
     description?: string;
     specifications?: Record<string, any>;
+    relatedProducts?: {
+      title: string;
+      items: Array<{
+        id: number;
+        name: string;
+        type: string;
+        description: string;
+        specifications: Record<string, any>;
+      }>;
+    };
   };
   onBack?: () => void;
   className?: string;
+  onRelatedProductClick?: (product: { id: number; type: string }) => void;
 }
 
-function ProductDetail({ product, onBack, className }: ProductDetailProps) {
+function ProductDetail({ product, onBack, className, onRelatedProductClick }: ProductDetailProps) {
   const {
     name,
     type,
@@ -337,6 +348,61 @@ function ProductDetail({ product, onBack, className }: ProductDetailProps) {
               </div>
             )}
           </Card>
+
+          {/* 关联产品卡片 */}
+          {product.relatedProducts && product.relatedProducts.items.length > 0 && (
+            <Card
+              className={styles.relatedProductsCard}
+              title={
+                <div className={styles.relatedProductsTitle}>
+                  <span>{product.relatedProducts.title}</span>
+                  <span className={styles.relatedProductsCount}>
+                    ({product.relatedProducts.items.length} 项)
+                  </span>
+                </div>
+              }
+            >
+              <div className={styles.relatedProductsGrid}>
+                {product.relatedProducts.items.map((item, index) => (
+                  <div
+                    key={item.id}
+                    className={styles.relatedProductCard}
+                    onClick={() => onRelatedProductClick?.(item)}
+                  >
+                    <div className={styles.relatedProductHeader}>
+                      <div className={styles.relatedProductIcon}>
+                        {item.type === 'artillery' ? '🔥' : '💥'}
+                      </div>
+                      <div className={styles.relatedProductInfo}>
+                        <div className={styles.relatedProductName}>{item.name}</div>
+                        <div className={styles.relatedProductType}>
+                          {item.type === 'artillery' ? '火炮' : '弹药'}
+                        </div>
+                      </div>
+                    </div>
+                    <div className={styles.relatedProductDescription}>{item.description}</div>
+                    {item.specifications && Object.keys(item.specifications).length > 0 && (
+                      <div className={styles.relatedProductSpecs}>
+                        {Object.entries(item.specifications)
+                          .slice(0, 3)
+                          .map(([key, value]) => (
+                            <div key={key} className={styles.relatedProductSpec}>
+                              <span className={styles.specLabel}>{key}:</span>
+                              <span className={styles.specValue}>{value}</span>
+                            </div>
+                          ))}
+                        {Object.keys(item.specifications).length > 3 && (
+                          <div className={styles.moreSpecs}>
+                            还有 {Object.keys(item.specifications).length - 3} 项参数...
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </Card>
+          )}
         </div>
 
         {/* 右侧内容 - 关联图谱 */}

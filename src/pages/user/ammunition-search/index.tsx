@@ -14,7 +14,13 @@ function AmmunitionSearch() {
       type: item.type,
       manufacturer: item.manufacturer,
       country: item.country,
-      description: `${item.caliber} 口径弹药，射程 ${item.minRange}-${item.maxRange}km`,
+      description: `${item.caliber}mm ${item.type}，射程 ${item.minRange}-${item.maxRange}km，${
+        item.guidance
+      }制导。${
+        item.compatibleArtillery && item.compatibleArtillery.length > 0
+          ? `兼容${item.compatibleArtillery.length}种火炮。`
+          : ''
+      }`,
       specifications: {
         口径: item.caliber,
         重量: item.weight,
@@ -23,8 +29,25 @@ function AmmunitionSearch() {
         最大射程: item.maxRange,
         精度: item.accuracy,
         威力: item.power,
-        制导方式: item.guidanceControl,
+        制导方式: item.guidance,
+        ...(item.compatibleArtillery &&
+          item.compatibleArtillery.length > 0 && {
+            兼容火炮: `${item.compatibleArtillery.length}种`,
+          }),
       },
+      // 添加兼容火炮信息
+      relatedInfo:
+        item.compatibleArtillery && item.compatibleArtillery.length > 0
+          ? {
+              title: '兼容火炮',
+              items: item.compatibleArtillery.map((artillery: any) => ({
+                name: artillery.name,
+                type: artillery.type,
+                caliber: artillery.caliber,
+                country: artillery.country,
+              })),
+            }
+          : undefined,
     }));
   }, []);
 

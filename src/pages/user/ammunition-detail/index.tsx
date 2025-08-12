@@ -21,6 +21,9 @@ function AmmunitionDetail() {
   const product = useMemo(() => {
     if (!ammunitionItem) return null;
 
+    // 获取兼容火炮信息
+    const compatibleArtillery = ammunitionItem.compatibleArtillery || [];
+
     return {
       id: ammunitionItem.id,
       name: ammunitionItem.name,
@@ -43,7 +46,19 @@ function AmmunitionDetail() {
         'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4',
         'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_5mb.mp4',
       ],
-      description: `${ammunitionItem.caliber} 口径弹药，射程 ${ammunitionItem.minRange}-${ammunitionItem.maxRange}km。${ammunitionItem.name}是一款现代化的${ammunitionItem.type}，具有出色的精度和威力，采用${ammunitionItem.guidance}制导方式，适用于多种作战环境。该弹药采用先进的制导技术，能够在复杂战场环境下保持高精度打击能力，是现代军事装备的重要组成部分。`,
+      description: `${ammunitionItem.caliber}mm ${ammunitionItem.type}，射程 ${
+        ammunitionItem.minRange
+      }-${ammunitionItem.maxRange}km。${ammunitionItem.name}是一款现代化的${
+        ammunitionItem.type
+      }，具有出色的精度和威力，采用${
+        ammunitionItem.guidance
+      }制导方式，适用于多种作战环境。该弹药采用先进的制导技术，能够在复杂战场环境下保持高精度打击能力，是现代军事装备的重要组成部分。${
+        compatibleArtillery.length > 0
+          ? `该弹药兼容${compatibleArtillery.length}种火炮系统，包括${compatibleArtillery
+              .map(artillery => artillery.name)
+              .join('、')}等。`
+          : ''
+      }`,
       specifications: {
         口径: ammunitionItem.caliber,
         简称: ammunitionItem.abbreviation,
@@ -62,12 +77,41 @@ function AmmunitionDetail() {
         引信类型: '近炸引信',
         储存条件: '干燥通风',
         保质期: '15年',
+        ...(compatibleArtillery.length > 0 && { 兼容火炮: `${compatibleArtillery.length}种` }),
       },
+      // 添加兼容火炮信息
+      relatedProducts:
+        compatibleArtillery.length > 0
+          ? {
+              title: '兼容火炮',
+              items: compatibleArtillery.map(artillery => ({
+                id: artillery.id,
+                name: artillery.name,
+                type: 'artillery',
+                description: `${artillery.caliber}mm ${artillery.type}，${artillery.country}`,
+                specifications: {
+                  火炮名称: artillery.name,
+                  口径: artillery.caliber,
+                  类型: artillery.type,
+                  国家: artillery.country,
+                },
+              })),
+            }
+          : undefined,
     };
   }, [ammunitionItem]);
 
   const handleBack = () => {
     history.push('/user/ammunition-search');
+  };
+
+  // 处理关联产品点击
+  const handleRelatedProductClick = (product: { id: number; type: string }) => {
+    if (product.type === 'artillery') {
+      history.push(`/user/artillery-detail/${product.id}`);
+    } else if (product.type === 'ammunition') {
+      history.push(`/user/ammunition-detail/${product.id}`);
+    }
   };
 
   // 如果找不到产品数据
@@ -77,7 +121,13 @@ function AmmunitionDetail() {
     return null;
   }
 
-  return <ProductDetail product={product} onBack={handleBack} />;
+  return (
+    <ProductDetail
+      product={product}
+      onBack={handleBack}
+      onRelatedProductClick={handleRelatedProductClick}
+    />
+  );
 }
 
 export default AmmunitionDetail;

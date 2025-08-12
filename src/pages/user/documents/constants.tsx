@@ -12,9 +12,10 @@ export interface DocumentRecord {
   uploader: string;
   uploadTime: string;
   status: string;
+  fileSize?: string;
 }
 
-export const DocumentFormats = ['PDF', 'DOC', 'DOCX', 'XLS', 'XLSX', 'PPT', 'PPTX', 'TXT', '其他'];
+export const DocumentFormats = ['PDF', 'DOCX'];
 
 export const DocumentTypes = [
   '技术文档',
@@ -144,6 +145,12 @@ export const getColumns = (
       render: (value: string) => <Badge color={getStatusColor(value)} text={value} />,
       filters: DocumentStatuses.map(status => ({ text: status, value: status })),
       onFilter: (value: string, record: DocumentRecord) => record.status === value,
+    },
+    {
+      title: '文件大小',
+      dataIndex: 'fileSize',
+      width: 100,
+      render: (value: string) => <span style={{ color: '#666', fontSize: '12px' }}>{value}</span>,
     },
     {
       title: t['documents.columns.operations'],

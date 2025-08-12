@@ -8,69 +8,69 @@ import {
 } from '../constants';
 
 // 生成模拟文档数据
-function generateDocumentData(count: number): DocumentRecord[] {
-  const data: DocumentRecord[] = [];
-
-  for (let i = 1; i <= count; i++) {
-    data.push({
-      id: `DOC${String(i).padStart(4, '0')}`,
-      name:
-        Mock.Random.pick([
-          '产品技术规格说明书',
-          '研发项目可行性研究报告',
-          '生产工艺流程图',
-          '质量控制标准文档',
-          '产品测试报告',
-          '用户操作手册',
-          '维护保养指南',
-          '安全操作规程',
-          '技术培训材料',
-          '项目进度报告',
-          '成本分析报告',
-          '风险评估报告',
-          '环境影响评估',
-          '专利技术文档',
-          '竞品分析报告',
-        ]) + Mock.Random.string('upper', 1, 3),
-      format: Mock.Random.pick(DocumentFormats),
-      type: Mock.Random.pick(DocumentTypes),
-      researchType: Mock.Random.pick(ResearchTypes),
-      tags: Mock.Random.shuffle(
-        [
-          '技术文档',
-          '研究报告',
-          '产品设计',
-          '工艺改进',
-          '质量控制',
-          '安全评估',
-          '性能测试',
-          '成本控制',
-          '专利技术',
-          '竞品分析',
-          '用户手册',
-          '维护指南',
-          '培训材料',
-          '标准规范',
-          '项目报告',
-        ],
-        Mock.Random.integer(2, 5)
-      ),
-      uploader: Mock.Random.pick([
-        '张三',
-        '李四',
-        '王五',
-        '赵六',
-        '钱七',
-        '孙八',
-        '周九',
-        '吴十',
-        '郑十一',
-        '王十二',
-      ]),
-      uploadTime: Mock.Random.datetime('yyyy-MM-dd HH:mm:ss'),
-      status: Mock.Random.pick(DocumentStatuses),
-    });
-  }
+function generateDocumentData(): DocumentRecord[] {
+  const data: DocumentRecord[] = [
+    {
+      id: 'DOC0001',
+      name: 'Vulcano 76.pdf',
+      format: 'PDF',
+      type: '技术文档',
+      researchType: '武器装备',
+      tags: ['技术文档', '火炮系统', '意大利'],
+      uploader: '技术部',
+      uploadTime: '2024-01-15 10:30:00',
+      status: '已审核',
+      fileSize: '424KB',
+    },
+    {
+      id: 'DOC0002',
+      name: '2_patria-nemo-brochure-lowres.pdf',
+      format: 'PDF',
+      type: '产品手册',
+      researchType: '武器装备',
+      tags: ['产品手册', '迫击炮', '芬兰'],
+      uploader: '产品部',
+      uploadTime: '2024-12-14 14:20:00',
+      status: '已审核',
+      fileSize: '246KB',
+    },
+    {
+      id: 'DOC0003',
+      name: '4_Milner.pdf',
+      format: 'PDF',
+      type: '研究报告',
+      researchType: '军事技术',
+      tags: ['研究报告', '军事技术', '英国'],
+      uploader: '研究部',
+      uploadTime: '2024-12-13 09:15:00',
+      status: '已审核',
+      fileSize: '1.4MB',
+    },
+    {
+      id: 'DOC0004',
+      name: 'bae_pdf_excalibur.pdf',
+      format: 'PDF',
+      type: '技术文档',
+      researchType: '武器装备',
+      tags: ['技术文档', '精确制导', '美国'],
+      uploader: '技术部',
+      uploadTime: '2024-12-12 16:45:00',
+      status: '已审核',
+      fileSize: '126KB',
+    },
+    {
+      id: 'DOC0005',
+      name: '1_120ER Loading Test Procedure  EN.docx',
+      format: 'DOCX',
+      type: '操作手册',
+      researchType: '武器装备',
+      tags: ['操作手册', '测试程序', '英文'],
+      uploader: '培训部',
+      uploadTime: '2024-12-11 11:30:00',
+      status: '已审核',
+      fileSize: '31KB',
+    },
+  ];
 
   return data;
 }
@@ -92,7 +92,7 @@ Mock.mock(new RegExp('/api/user/documents'), 'get', (options: any) => {
   const uploadTime = searchParams.get('uploadTime');
 
   // 生成所有数据
-  let allData = generateDocumentData(100);
+  let allData = generateDocumentData();
 
   // 应用筛选条件
   if (name) {
@@ -138,18 +138,6 @@ Mock.mock(new RegExp('/api/user/documents'), 'get', (options: any) => {
       total: allData.length,
       page,
       pageSize,
-    },
-  };
-});
-
-// 模拟预览接口
-Mock.mock(new RegExp('/api/user/documents/.*/preview'), 'get', () => {
-  return {
-    code: 200,
-    message: 'success',
-    data: {
-      url: 'https://example.com/preview/document.pdf',
-      filename: 'document.pdf',
     },
   };
 });

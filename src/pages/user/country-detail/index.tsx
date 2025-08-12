@@ -35,71 +35,69 @@ function CountryDetail() {
     return countryData.find((item: any) => item.id.toString() === id);
   }, [id]);
 
-  // 获取该国家的火炮产品
+  // 获取该国家的火炮产品 - 使用新的关联数据
   const artilleryProducts = useMemo(() => {
-    if (!countryItem) return [];
-    return artilleryData
-      .filter((item: any) => item.country === countryItem.name)
-      .map((item: any) => ({
-        id: item.id,
-        name: item.name,
-        type: item.type,
-        country: item.country,
-        category: 'artillery' as const,
-        manufacturer: item.manufacturer,
-        description: `${item.caliber} 火炮，射程 ${item.range}km，${item.mobility}。${item.name}是一款${item.type}火炮，具有${item.muzzleVelocity}m/s的初速和${item.barrelLength}m的身管长度。`,
-        specifications: {
-          火炮名称: item.name,
-          火炮口径: item.caliber,
-          火炮类型: item.type,
-          运动方式: item.mobility,
-          火炮初速: item.muzzleVelocity,
-          火炮射程: item.range,
-          身管长度: item.barrelLength,
-          射角范围: item.elevationRange,
-          射向范围: item.traverseRange,
-          火炮厂商: item.manufacturer,
-          国家: item.country,
-        },
-      }));
+    if (!countryItem || !countryItem.artilleries) return [];
+    return countryItem.artilleries.map((item: any) => ({
+      id: item.id,
+      name: item.name,
+      type: item.type,
+      country: countryItem.name,
+      category: 'artillery' as const,
+      manufacturer: item.manufacturer,
+      description: `${item.caliber}mm ${item.type}，${item.mobility}，射程 ${item.range}km。${item.name}是一款现代化的${item.type}，具有出色的性能和可靠性。`,
+      specifications: {
+        火炮名称: item.name,
+        火炮口径: item.caliber,
+        火炮类型: item.type,
+        运动方式: item.mobility,
+        火炮射程: item.range,
+        火炮厂商: item.manufacturer,
+        国家: countryItem.name,
+        ...(item.muzzleVelocity && { 火炮初速: `${item.muzzleVelocity}m/s` }),
+        ...(item.barrelLength && { 身管长度: `${item.barrelLength}m` }),
+        ...(item.elevationRange && { 射角范围: item.elevationRange }),
+        ...(item.traverseRange && { 射向范围: item.traverseRange }),
+        ...(item.quantity && { 装备数量: item.quantity }),
+        ...(item.ammunition && { 配套弹药: item.ammunition }),
+      },
+    }));
   }, [countryItem]);
 
-  // 获取该国家的弹药产品
+  // 获取该国家的弹药产品 - 使用新的关联数据
   const ammunitionProducts = useMemo(() => {
-    if (!countryItem) return [];
-    return ammunitionData
-      .filter((item: any) => item.country === countryItem.name)
-      .map((item: any) => ({
-        id: item.id,
-        name: item.name,
-        type: item.type,
-        country: item.country,
-        category: 'ammunition' as const,
-        manufacturer: item.manufacturer,
-        description: `${item.caliber} 口径弹药，射程 ${item.minRange}-${item.maxRange}km。${item.name}是一款现代化的${item.type}，具有出色的精度和威力，采用${item.guidance}制导方式。`,
-        specifications: {
-          弹药名称: item.name,
-          简称: item.abbreviation,
-          口径: item.caliber,
-          重量: item.weight,
-          长度: item.length,
-          最小射程: item.minRange,
-          最大射程: item.maxRange,
-          精度: item.accuracy,
-          威力: item.power,
-          类型: item.type,
-          制导方式: item.guidance,
-          厂商: item.manufacturer,
-          生产国家: item.country,
-        },
-      }));
+    if (!countryItem || !countryItem.ammunitions) return [];
+    return countryItem.ammunitions.map((item: any) => ({
+      id: item.id,
+      name: item.name,
+      type: item.type,
+      country: countryItem.name,
+      category: 'ammunition' as const,
+      manufacturer: item.manufacturer,
+      description: `${item.caliber}mm ${item.type}，${item.guidance}制导。${item.name}是一款高性能的${item.type}，具有出色的精度和威力。`,
+      specifications: {
+        弹药名称: item.name,
+        简称: item.abbreviation,
+        口径: item.caliber,
+        类型: item.type,
+        制导方式: item.guidance,
+        厂商: item.manufacturer,
+        生产国家: countryItem.name,
+        ...(item.weight && { 重量: `${item.weight}kg` }),
+        ...(item.length && { 长度: `${item.length}mm` }),
+        ...(item.minRange && { 最小射程: `${item.minRange}km` }),
+        ...(item.maxRange && { 最大射程: `${item.maxRange}km` }),
+        ...(item.accuracy && { 精度: `${item.accuracy}m` }),
+        ...(item.power && { 威力: item.power }),
+      },
+    }));
   }, [countryItem]);
 
   // 生成国家简介
   const generateCountryDescription = (country: any) => {
     const descriptions: { [key: string]: string } = {
       阿联酋:
-        '阿联酋的武装力量共计6.3万人，包括陆军（4.4万人）、海军（0.25万人）、空军（0.4万人），总统卫队（1.2万人）。部队在海湾合作委员会所有国家中是训练最好、能力最强的。阿联酋执行多元化外交政策，拥有一个法国基地和一支小规模韩国驻军，同时与中国保持良好关系，但美国仍然是该国主要的防务合作伙伴。',
+        '1、概况\n阿联酋的武装力量共计6.3万人，包括陆军（4.4万人）、海军（0.25万人）、空军（0.4万人），总统卫队（1.2万人）。部队在海湾合作委员会所有国家中是训练最好、能力最强的。阿联酋执行多元化外交政策，拥有一个法国基地和一支小规模韩国驻军，同时与中国保持良好关系，但美国仍然是该国主要的防务合作伙伴。\n2、主要作战威胁\n由于霍尔木兹海峡领土争端等原因，阿联酋的主要作战假想敌为伊朗，其积极参与了也门冲突，2015年起，阿联酋开始对伊朗支持的胡塞武装作战，消耗大量财力物力，对国内经济发展造成影响的同时，也损害了阿联酋的国际形象，同时胡塞武装通过无人机频繁袭击阿联酋本土，因此在2019年底，阿联酋从也门临时首都亚丁撤出了主力作战部队，将控制权移交给了沙特部队。在此之后，阿联酋仅间接参与对胡塞武装作战。在巴以冲突方面，阿联酋支持巴勒斯坦，反对以色列，但态度较为温和，仅在外交舆论方面谴责以色列，并未直接参与。2020年8月，阿联酋同以色列达成《亚伯拉罕协议》，成为第3个与以色列建立正式关系的阿拉伯国家，体现了其多元自主的外交策略。\n3、国防工业\n该国最大的军工企业为EDGE集团，据其官方网站信息及防务展宣传，该公司已与具备制式迫弹生产研制能力以及陆地、空中无人装备的部分研制能力。EDGE公司自2019成立以来，收入和投资组合规模实现了显着增长，但除了向阿联酋武装部队销售之外，国际社会仍然普遍对这种增长的可持续性存在疑问。',
       中国: '中国是世界上最大的发展中国家，拥有完整的工业体系和强大的国防科技实力。在军事装备领域，中国在火炮、弹药、导弹等武器系统方面取得了显著成就，形成了具有自主知识产权的装备体系。',
       美国: '美国是全球军事技术最先进的国家之一，拥有世界领先的国防工业基础。在火炮系统、精确制导弹药、防空系统等领域处于世界领先地位，其装备以高精度、高可靠性著称。',
       俄罗斯:

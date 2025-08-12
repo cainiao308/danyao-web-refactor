@@ -39,6 +39,12 @@ const countries = countryData.map(country => ({
       ? 'oceania'
       : 'asia',
   flag: '🏳️', // 默认国旗，可以根据需要添加更多
+  // 添加装备数量信息
+  artilleryCount: country.artilleries ? country.artilleries.length : 0,
+  ammunitionCount: country.ammunitions ? country.ammunitions.length : 0,
+  totalEquipment:
+    (country.artilleries ? country.artilleries.length : 0) +
+    (country.ammunitions ? country.ammunitions.length : 0),
 }));
 
 console.log('转换后的countries:', countries);
@@ -234,6 +240,9 @@ interface Country {
   nameEn: string;
   continent: string;
   flag: string;
+  artilleryCount: number;
+  ammunitionCount: number;
+  totalEquipment: number;
 }
 
 interface CountrySelectorProps {
@@ -338,6 +347,16 @@ function CountrySelector({ onSelect, onSearch, title = '选择国家' }: Country
                       <div className={styles.countryName}>{country.name}</div>
                       <div className={styles.countryNameEn}>{country.nameEn}</div>
                       <div className={styles.countryCode}>{country.code}</div>
+                      {country.totalEquipment > 0 && (
+                        <div className={styles.equipmentInfo}>
+                          <span className={styles.equipmentCount}>
+                            🔥 {country.artilleryCount} 火炮
+                          </span>
+                          <span className={styles.equipmentCount}>
+                            💥 {country.ammunitionCount} 弹药
+                          </span>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </Col>

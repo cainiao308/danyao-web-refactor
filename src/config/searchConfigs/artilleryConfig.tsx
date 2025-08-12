@@ -18,6 +18,15 @@ export const artilleryData = [
     traverseRange: '360°',
     manufacturer: '中国北方工业公司',
     country: '中国',
+    compatibleAmmunition: [
+      {
+        id: 10,
+        name: '155mm榴弹',
+        caliber: 155,
+        type: '榴弹',
+        guidance: '无制导',
+      },
+    ],
   },
   {
     id: 2,
@@ -32,6 +41,31 @@ export const artilleryData = [
     traverseRange: '±25°',
     manufacturer: 'BAE系统',
     country: '美国',
+    compatibleAmmunition: [
+      {
+        id: 10,
+        name: '155mm榴弹',
+        caliber: 155,
+        type: '榴弹',
+        guidance: '无制导',
+      },
+      {
+        id: 9,
+        name: '鹰击-18反舰导弹',
+        abbreviation: 'YJ-18',
+        caliber: 533,
+        type: '反舰导弹',
+        weight: 1800,
+        length: 8000,
+        minRange: 10,
+        maxRange: 540,
+        accuracy: 12,
+        power: '极高',
+        guidance: '惯性+雷达制导',
+        manufacturer: '中国航天科工集团',
+        country: '中国',
+      },
+    ],
   },
   {
     id: 3,
@@ -120,6 +154,15 @@ export const artilleryData = [
     quantity: 87,
     ammunition: 'CS/BME1型120毫米卫星制导迫弹',
     description: '阿联酋自主研发的120毫米自行迫击炮，配备87门，具有高机动性和精确打击能力',
+    compatibleAmmunition: [
+      {
+        id: 26,
+        name: 'CS/BME1型120毫米卫星制导迫弹',
+        caliber: 120,
+        type: '迫击炮弹',
+        guidance: '卫星制导',
+      },
+    ],
   },
   {
     id: 9,
@@ -136,6 +179,15 @@ export const artilleryData = [
     country: '阿联酋',
     ammunition: 'CS/BME1型120毫米卫星制导迫弹',
     description: '阿联酋Ghannatha级快速巡逻艇配备的NEMO迫炮塔，使用120毫米迫击炮',
+    compatibleAmmunition: [
+      {
+        id: 26,
+        name: 'CS/BME1型120毫米卫星制导迫弹',
+        caliber: 120,
+        type: '迫击炮弹',
+        guidance: '卫星制导',
+      },
+    ],
   },
   {
     id: 10,
@@ -152,6 +204,15 @@ export const artilleryData = [
     country: '阿联酋',
     ammunition: 'CS/BME1型120毫米卫星制导迫弹',
     description: '法国Patria AMV模块化装甲车配备的NEMO迫炮塔，使用120毫米迫击炮',
+    compatibleAmmunition: [
+      {
+        id: 26,
+        name: 'CS/BME1型120毫米卫星制导迫弹',
+        caliber: 120,
+        type: '迫击炮弹',
+        guidance: '卫星制导',
+      },
+    ],
   },
   {
     id: 11,
@@ -168,6 +229,15 @@ export const artilleryData = [
     country: '阿联酋',
     ammunition: 'CS/BME3型81毫米卫星制导迫弹',
     description: '塞尔维亚制造的81毫米迫击炮，配备卫星制导迫弹，提高打击精度',
+    compatibleAmmunition: [
+      {
+        id: 27,
+        name: 'CS/BME3型81毫米卫星制导迫弹',
+        caliber: 81,
+        type: '迫击炮弹',
+        guidance: '卫星制导',
+      },
+    ],
   },
   {
     id: 12,
@@ -184,6 +254,15 @@ export const artilleryData = [
     country: '阿联酋',
     ammunition: 'CS/BME4型82毫米卫星制导迫弹',
     description: '塞尔维亚制造的82毫米迫击炮，配备卫星制导迫弹，增强火力支援能力',
+    compatibleAmmunition: [
+      {
+        id: 28,
+        name: 'CS/BME4型82毫米卫星制导迫弹',
+        caliber: 82,
+        type: '迫击炮弹',
+        guidance: '卫星制导',
+      },
+    ],
   },
   {
     id: 13,
@@ -232,6 +311,22 @@ export const artilleryData = [
     country: '阿联酋',
     ammunition: 'GP1型155毫米激光末制导炮弹、GP11型155毫米卫星制导炮弹',
     description: '美国制造的155毫米自行榴弹炮，配备精确制导炮弹，提高打击精度',
+    compatibleAmmunition: [
+      {
+        id: 29,
+        name: 'GP1型155毫米激光末制导炮弹',
+        caliber: 155,
+        type: '榴弹',
+        guidance: '激光末制导',
+      },
+      {
+        id: 30,
+        name: 'GP11型155毫米卫星制导炮弹',
+        caliber: 155,
+        type: '榴弹',
+        guidance: '卫星制导',
+      },
+    ],
   },
   {
     id: 16,
@@ -248,6 +343,22 @@ export const artilleryData = [
     country: '阿联酋',
     ammunition: 'GP1型155毫米激光末制导炮弹、GP11型155毫米卫星制导炮弹',
     description: '南非制造的155毫米车载榴弹炮，具有高机动性和远射程',
+    compatibleAmmunition: [
+      {
+        id: 29,
+        name: 'GP1型155毫米激光末制导炮弹',
+        caliber: 155,
+        type: '榴弹',
+        guidance: '激光末制导',
+      },
+      {
+        id: 30,
+        name: 'GP11型155毫米卫星制导炮弹',
+        caliber: 155,
+        type: '榴弹',
+        guidance: '卫星制导',
+      },
+    ],
   },
   {
     id: 17,
@@ -264,6 +375,22 @@ export const artilleryData = [
     country: '阿联酋',
     ammunition: 'GP1型155毫米激光末制导炮弹、GP11型155毫米卫星制导炮弹',
     description: '中国制造的155毫米轻型榴弹炮，重量轻、机动性强',
+    compatibleAmmunition: [
+      {
+        id: 29,
+        name: 'GP1型155毫米激光末制导炮弹',
+        caliber: 155,
+        type: '榴弹',
+        guidance: '激光末制导',
+      },
+      {
+        id: 30,
+        name: 'GP11型155毫米卫星制导炮弹',
+        caliber: 155,
+        type: '榴弹',
+        guidance: '卫星制导',
+      },
+    ],
   },
   {
     id: 18,
@@ -526,6 +653,38 @@ export const artilleryData = [
     traverseRange: '360°',
     manufacturer: '韩华系统',
     country: '韩国',
+  },
+  {
+    id: 36,
+    name: '国产SH15型155毫米车载加榴炮',
+    caliber: 155,
+    type: '车载榴弹炮',
+    mobility: '轮式',
+    muzzleVelocity: 900,
+    range: 40,
+    barrelLength: 7.5,
+    elevationRange: '-5°~+70°',
+    traverseRange: '±30°',
+    manufacturer: '中国北方工业公司',
+    country: '阿联酋',
+    ammunition: 'GP1型155毫米激光末制导炮弹、GP11型155毫米卫星制导炮弹',
+    description: '中国制造的155毫米车载榴弹炮，具有高机动性和精确打击能力',
+    compatibleAmmunition: [
+      {
+        id: 29,
+        name: 'GP1型155毫米激光末制导炮弹',
+        caliber: 155,
+        type: '榴弹',
+        guidance: '激光末制导',
+      },
+      {
+        id: 30,
+        name: 'GP11型155毫米卫星制导炮弹',
+        caliber: 155,
+        type: '榴弹',
+        guidance: '卫星制导',
+      },
+    ],
   },
 ];
 
